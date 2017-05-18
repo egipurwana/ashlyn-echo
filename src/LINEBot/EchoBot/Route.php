@@ -107,6 +107,15 @@ class Route
                     $logger->info('Non text message has come');
                     continue;
                 }
+                
+		    	$conn = $this->db;
+		    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText()."')";
+				if ($conn->query($sql) === TRUE) {
+					$logger->info('New record created successfully');
+				} else {
+					$logger->info("Error: " . $sql);
+				}
+                
                 /*$sql = "SELECT id, firstname, lastname FROM MyGuests";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) {
@@ -147,7 +156,7 @@ class Route
 				
                 $replyText = $event->getText();
                 $logger->info('Reply text: ' . $replyText);
-                $resp = $bot->replyText($event->getReplyToken(), $replyText);
+                $resp = $bot->replyText($event->getReplyToken(), $replyText.' *** sent from engine');
                 $logger->info($resp->getHTTPStatus() . ': ' . $resp->getRawBody());
             }
 

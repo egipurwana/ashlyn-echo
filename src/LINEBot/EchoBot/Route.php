@@ -33,6 +33,7 @@ class Route
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
 		    
+				/*
 				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$server = $url["host"];
 				$username = $url["user"];
@@ -46,6 +47,7 @@ class Route
 				} else {
 					//$logger->info("Error: " . $sql);
 				}
+				*/
 				//$conn->close();
 			
 				

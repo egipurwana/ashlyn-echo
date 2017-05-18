@@ -16,13 +16,12 @@
  * under the License.
  */
  
-use LINE\LINEBot\EchoBot\Connection;
 use LINE\LINEBot\EchoBot\Dependency;
 use LINE\LINEBot\EchoBot\Route;
 use LINE\LINEBot\EchoBot\Setting;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-
+require_once __DIR__ . '/../src/LINEBot/EchoBot/Connection.php';
 /*function connect_db() {
 	$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 	$server = $url["host"];

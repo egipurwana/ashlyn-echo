@@ -20,8 +20,21 @@ namespace LINE\LINEBot\EchoBot;
 
 use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;
+
+use LINE\LINEBot\Event\BeaconDetectionEvent;
+use LINE\LINEBot\Event\FollowEvent;
+use LINE\LINEBot\Event\JoinEvent;
+use LINE\LINEBot\Event\LeaveEvent;
 use LINE\LINEBot\Event\MessageEvent;
+use LINE\LINEBot\Event\MessageEvent\AudioMessage;
+use LINE\LINEBot\Event\MessageEvent\ImageMessage;
+use LINE\LINEBot\Event\MessageEvent\LocationMessage;
+use LINE\LINEBot\Event\MessageEvent\StickerMessage;
 use LINE\LINEBot\Event\MessageEvent\TextMessage;
+use LINE\LINEBot\Event\MessageEvent\VideoMessage;
+use LINE\LINEBot\Event\PostbackEvent;
+use LINE\LINEBot\Event\UnfollowEvent;
+
 use LINE\LINEBot\Exception\InvalidEventRequestException;
 use LINE\LINEBot\Exception\InvalidSignatureException;
 use LINE\LINEBot\Exception\UnknownEventTypeException;

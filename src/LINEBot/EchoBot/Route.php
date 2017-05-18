@@ -73,7 +73,7 @@ class Route
 				    }
 				} else {
 				    echo "0 results";
-				}
+				}*/
 				try {
 					$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 					$server = $url["host"];
@@ -81,7 +81,8 @@ class Route
 					$password = $url["pass"];
 					$db = substr($url["path"], 1);
 					$conn = new mysqli($server, $username, $password, $db);
-					$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
+					//$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
+					$sql = "INSERT INTO message (text) VALUES ('".$event->getText()."')";
 					if ($conn->query($sql) === TRUE) {
 						$logger->info('New record created successfully');
 					} else {
@@ -92,7 +93,7 @@ class Route
 					$replyText = $event->getText();
 	                $resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
 	            }
-				*/
+				
                 $replyText = $event->getText();
                 $logger->info('Reply text: ' . $replyText);
                 $resp = $bot->replyText($event->getReplyToken(), $replyText);

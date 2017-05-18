@@ -20,8 +20,15 @@ namespace LINE;
 
 use LINE\LINEBot\Event\Parser\EventRequestParser;
 use LINE\LINEBot\HTTPClient;
+
 use LINE\LINEBot\MessageBuilder;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
+use LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
+use LINE\LINEBot\MessageBuilder\LocationMessageBuilder;
+use LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
+
 use LINE\LINEBot\Response;
 use LINE\LINEBot\SignatureValidator;
 use ReflectionClass;

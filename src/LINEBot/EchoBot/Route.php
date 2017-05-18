@@ -82,7 +82,7 @@ class Route
 					$db = substr($url["path"], 1);
 					$conn = new mysqli($server, $username, $password, $db);
 					//$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
-					$sql = "INSERT INTO message (text) VALUES ('".$event->getText()."')";
+					$sql = "INSERT INTO message (text) VALUES ('huhuy')";
 					if ($conn->query($sql) === TRUE) {
 						$logger->info('New record created successfully');
 					} else {

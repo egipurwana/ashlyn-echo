@@ -21,7 +21,8 @@ use LINE\LINEBot\EchoBot\Route;
 use LINE\LINEBot\EchoBot\Setting;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once 'db.php';
+require_once __DIR__ . 'db.php';
+
 $setting = Setting::getSetting();
 $app = new Slim\App($setting);
 

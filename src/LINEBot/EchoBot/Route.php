@@ -74,15 +74,26 @@ class Route
 				} else {
 				    echo "0 results";
 				}*/
-				
-				$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
-				if ($conn->query($sql) === TRUE) {
-					$logger->info('New record created successfully');
-				} else {
-					$logger->info("Error: " . $sql);
-				}
+				try {
+					$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+					$server = $url["host"];
+					$username = $url["user"];
+					$password = $url["pass"];
+					$db = substr($url["path"], 1);
+					$conn = new mysqli($server, $username, $password, $db);
+					$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
+					if ($conn->query($sql) === TRUE) {
+						$logger->info('New record created successfully');
+					} else {
+						$logger->info("Error: " . $sql);
+					}
+					$conn->close();
+				}catch (InvalidEventRequestException $e) {
+					$replyText = $event->getText()." Tapi ada error di engine";
+	                $resp = $bot->replyText($event->getReplyToken(), $replyText);
+	            }
 
-                $replyText = $event->getText();
+                $replyText = $event->getText()." data berhasil masuk";
                 $logger->info('Reply text: ' . $replyText);
                 $resp = $bot->replyText($event->getReplyToken(), $replyText);
                 $logger->info($resp->getHTTPStatus() . ': ' . $resp->getRawBody());

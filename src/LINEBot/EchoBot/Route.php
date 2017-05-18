@@ -32,51 +32,10 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
-
-		    	echo 'haha';
-		    	
-		    	$conn = $this->db;
-		    	$sql = "INSERT INTO message (text) VALUES ('huhuy')";
-				if ($conn->query($sql) === TRUE) {
-					echo'haha';
-					//$logger->info('New record created successfully');
-				} else {
-					echo'huhu';
-					//$logger->info("Error: " . $sql);
-				}
-		    	
-		    	echo 'huhu';
-		    	/*$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
-				if ($conn->query($sql) === TRUE) {
-					echo'haha';//$logger->info('New record created successfully');
-				} else {
-					echo'huhu';
-					//$logger->info("Error: " . $sql);
-				}*/
-		    
-				/*
-				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-				$server = $url["host"];
-				$username = $url["user"];
-				$password = $url["pass"];
-				$db = substr($url["path"], 1);
-				$conn = new mysqli($server, $username, $password, $db);
-				//$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
-				$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
-				if ($conn->query($sql) === TRUE) {
-					//$logger->info('New record created successfully');
-				} else {
-					//$logger->info("Error: " . $sql);
-				}
-				*/
-				//$conn->close();
-			
-				
+							
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
-            /** @var \LINE\LINEBot $bot */
             $bot = $this->bot;
-            /** @var \Monolog\Logger $logger */
             $logger = $this->logger;
 
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
@@ -98,7 +57,63 @@ class Route
             }
 
             foreach ($events as $event) {
-                if (!($event instanceof MessageEvent)) {
+	            
+	            if ($event instanceof MessageEvent) {
+                    if ($event instanceof TextMessage) {
+						$conn = $this->db;
+				    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText()." ".$signature."')";
+						if ($conn->query($sql) === TRUE) {
+							$logger->info('New record created successfully');
+						} else {
+							$logger->info("Error: " . $sql);
+						}
+		                $replyText = $event->getText();                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                    } elseif ($event instanceof StickerMessage) {
+		                $replyText = "Kalo ga ngirim stiker 'absolutely state of the art' mending ga usah deh";                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                    } elseif ($event instanceof LocationMessage) {
+		                $replyText = "Lokasi apa nih?";                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                    } elseif ($event instanceof ImageMessage) {
+		                $replyText = "Kirim gambarnya yang lebih okei dong";                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                    } elseif ($event instanceof AudioMessage) {
+		                $replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                    } elseif ($event instanceof VideoMessage) {
+		                $replyText = "Duh kirimnya video yang lebih berguna dong";                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                    } else {
+                        // Just in case...
+                        $logger->info('Unknown message type has come');
+                        continue;
+                    }
+                } elseif ($event instanceof UnfollowEvent) {
+	                $replyText = "Kok Unfollow sih?"; ;                
+					$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                } elseif ($event instanceof FollowEvent) {
+	                $replyText = "Thanks udah follow!"; ;                
+					$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                } elseif ($event instanceof JoinEvent) {
+	                $replyText = "Thanks udah join!";               
+					$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                } elseif ($event instanceof LeaveEvent) {
+	                $replyText = "Kok Leave sih?";               
+					$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                } elseif ($event instanceof PostbackEvent) {
+	                $replyText = "Postback detected";                
+					$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                } elseif ($event instanceof BeaconDetectionEvent) {
+	                $replyText = "Beacon detected";                
+					$resp = $bot->replyText($event->getReplyToken(), $replyText);
+                } else {
+                    // Just in case...
+                    $logger->info('Unknown event type has come');
+                    continue;
+                }
+	            
+                /*if (!($event instanceof MessageEvent)) {
                     $logger->info('Non message event has come');
                     continue;
                 }
@@ -109,55 +124,15 @@ class Route
                 }
                 
 		    	$conn = $this->db;
-		    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText()."')";
+		    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText()." ".$signature."')";
 				if ($conn->query($sql) === TRUE) {
 					$logger->info('New record created successfully');
 				} else {
 					$logger->info("Error: " . $sql);
 				}
                 
-                /*$sql = "SELECT id, firstname, lastname FROM MyGuests";
-				$result = $conn->query($sql);
-				if ($result->num_rows > 0) {
-				    while($row = $result->fetch_assoc()) {
-				        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-				    }
-				} else {
-				    echo "0 results";
-				}
-				try {
-					$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-					$server = $url["host"];
-					$username = $url["user"];
-					$password = $url["pass"];
-					$db = substr($url["path"], 1);
-					$conn = new mysqli($server, $username, $password, $db);
-					//$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
-					$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
-					if ($conn->query($sql) === TRUE) {
-						//$logger->info('New record created successfully');
-					} else {
-						//$logger->info("Error: " . $sql);
-					}
-					//$conn->close();
-				}catch ($e) {
-					//$replyText = $event->getText();
-	                //$resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
-	            }
-				*/
-
-				/*$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-				$server = $url["host"];
-				$username = $url["user"];
-				$password = $url["pass"];
-				$db = substr($url["path"], 1);
-				$conn = new mysqli($server, $username, $password, $db);
-				*/
-				
-                $replyText = $event->getText();
-                $logger->info('Reply text: ' . $replyText);
-                $resp = $bot->replyText($event->getReplyToken(), $replyText.' *** sent from engine');
-                $logger->info($resp->getHTTPStatus() . ': ' . $resp->getRawBody());
+                $replyText = $event->getText();                
+                $resp = $bot->replyText($event->getReplyToken(), $replyText);*/
             }
 
             $res->write('OK');

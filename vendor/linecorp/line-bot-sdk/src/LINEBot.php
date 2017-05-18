@@ -144,6 +144,7 @@ class LINEBot
         ]);
     }
 
+
     /**
      * Sends arbitrary message to multi destinations.
      *

@@ -35,6 +35,14 @@ use LINE\LINEBot\Event\MessageEvent\VideoMessage;
 use LINE\LINEBot\Event\PostbackEvent;
 use LINE\LINEBot\Event\UnfollowEvent;
 
+use LINE\LINEBot\MessageBuilder;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
+use LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
+use LINE\LINEBot\MessageBuilder\LocationMessageBuilder;
+use LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
+
 use LINE\LINEBot\Exception\InvalidEventRequestException;
 use LINE\LINEBot\Exception\InvalidSignatureException;
 use LINE\LINEBot\Exception\UnknownEventTypeException;
@@ -80,6 +88,7 @@ class Route
 						} else {
 							$logger->info("Error: " . $sql);
 						}
+						
 		                $replyText = $event->getText();                
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof StickerMessage) {
@@ -91,6 +100,11 @@ class Route
                     } elseif ($event instanceof ImageMessage) {
 		                $replyText = "Kirim gambarnya yang lebih okei dong";                
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+
+				        $ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\ImageMessageBuilder');
+				        $imageMessageBuilder = $ref->newInstanceArgs(array_merge('https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg','https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg'));
+						$resp = $bot->replyMessage($event->getReplyToken(),$imageMessageBuilder)
+                    
                     } elseif ($event instanceof AudioMessage) {
 		                $replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);

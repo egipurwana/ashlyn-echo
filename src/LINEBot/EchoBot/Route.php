@@ -104,7 +104,7 @@ class Route
 				
                 $replyText = $event->getText();
                 $logger->info('Reply text: ' . $replyText);
-                $resp = $bot->replyText($event->getReplyToken(), $replyText.' '.$url);
+                $resp = $bot->replyText($event->getReplyToken(), $replyText.' '.$server);
                 $logger->info($resp->getHTTPStatus() . ': ' . $resp->getRawBody());
             }
 

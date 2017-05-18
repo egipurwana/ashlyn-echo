@@ -84,14 +84,14 @@ class Route
 					//$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
 					$sql = "INSERT INTO message (text) VALUES ('huhuy')";
 					if ($conn->query($sql) === TRUE) {
-						$logger->info('New record created successfully');
+						//$logger->info('New record created successfully');
 					} else {
-						$logger->info("Error: " . $sql);
+						//$logger->info("Error: " . $sql);
 					}
-					$conn->close();
-				}catch (InvalidEventRequestException $e) {
-					$replyText = $event->getText();
-	                $resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
+					//$conn->close();
+				}catch ($e) {
+					//$replyText = $event->getText();
+	                //$resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
 	            }
 				
                 $replyText = $event->getText();

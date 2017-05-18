@@ -102,7 +102,7 @@ class Route
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
 
 				        $ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\ImageMessageBuilder');
-				        $imageMessageBuilder = $ref->newInstanceArgs(array_merge('https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg','https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg'));
+				        $imageMessageBuilder = $ref->newInstanceArgs('https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg','https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$imageMessageBuilder)
                     
                     } elseif ($event instanceof AudioMessage) {

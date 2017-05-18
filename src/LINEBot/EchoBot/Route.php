@@ -94,9 +94,17 @@ class Route
 	                //$resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
 	            }
 				*/
+
+				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+				$server = $url["host"];
+				$username = $url["user"];
+				$password = $url["pass"];
+				$db = substr($url["path"], 1);
+				$conn = new mysqli($server, $username, $password, $db);
+				
                 $replyText = $event->getText();
                 $logger->info('Reply text: ' . $replyText);
-                $resp = $bot->replyText($event->getReplyToken(), $replyText);
+                $resp = $bot->replyText($event->getReplyToken(), $replyText.' '.$url);
                 $logger->info($resp->getHTTPStatus() . ': ' . $resp->getRawBody());
             }
 

@@ -89,12 +89,12 @@ class Route
 					}
 					$conn->close();
 				}catch (InvalidEventRequestException $e) {
-					$replyText = $event->getText()." Tapi ada error di engine";
-	                $resp = $bot->replyText($event->getReplyToken(), $replyText);
+					$replyText = $event->getText();
+	                $resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
 	            }
 
-                $replyText = $event->getText()." data berhasil masuk";
-                $logger->info('Reply text: ' . $replyText);
+                $replyText = $event->getText();
+                $logger->info('Reply text: ' . $replyText." data berhasil masuk");
                 $resp = $bot->replyText($event->getReplyToken(), $replyText);
                 $logger->info($resp->getHTTPStatus() . ': ' . $resp->getRawBody());
             }

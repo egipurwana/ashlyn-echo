@@ -65,6 +65,22 @@ class Route
                     $logger->info('Non text message has come');
                     continue;
                 }
+                /*$sql = "SELECT id, firstname, lastname FROM MyGuests";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+				    while($row = $result->fetch_assoc()) {
+				        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+				    }
+				} else {
+				    echo "0 results";
+				}*/
+				
+				$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
+				if ($conn->query($sql) === TRUE) {
+					$logger->info('New record created successfully');
+				} else {
+					$logger->info("Error: " . $sql);
+				}
 
                 $replyText = $event->getText();
                 $logger->info('Reply text: ' . $replyText);

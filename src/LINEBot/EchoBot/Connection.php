@@ -15,30 +15,22 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
- 
-use LINE\LINEBot\EchoBot\Connection;
-use LINE\LINEBot\EchoBot\Dependency;
-use LINE\LINEBot\EchoBot\Route;
-use LINE\LINEBot\EchoBot\Setting;
 
-require_once __DIR__ . '/../vendor/autoload.php';
 
-/*function connect_db() {
-	$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-	$server = $url["host"];
-	$username = $url["user"];
-	$password = $url["pass"];
-	$db = substr($url["path"], 1);
-	$conn = new mysqli($server, $username, $password, $db);
-	
-	return $conn;
-}*/
-
-$setting = Setting::getSetting();
-$app = new Slim\App($setting);
-
-(new Connection())->register($app);
-(new Dependency())->register($app);
-(new Route())->register($app);
-
-$app->run();
+class Connection
+{
+    public function register(\Slim\App $app)
+    {
+        $container = $app->getContainer();
+        
+        $container['db'] = function ($c) {
+	        $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+			$server = $url["host"];
+			$username = $url["user"];
+			$password = $url["pass"];
+			$db = substr($url["path"], 1);
+			$conn = new mysqli($server, $username, $password, $db);
+	        return $conn;
+        };
+    }
+}

@@ -37,9 +37,6 @@ class Route
 		    	
 		    	$conn = $this->db;
 		    	
-		    	//$db = connect_db();
-		    	//echo $db;
-		    	
 		    	echo 'huhu';
 		    	/*$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
 				if ($conn->query($sql) === TRUE) {

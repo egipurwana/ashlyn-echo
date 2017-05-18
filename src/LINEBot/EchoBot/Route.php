@@ -34,13 +34,13 @@ class Route
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
 
 		    	echo 'haha';
-		    	$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
+		    	/*$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
 				if ($conn->query($sql) === TRUE) {
 					echo'haha';//$logger->info('New record created successfully');
 				} else {
 					echo'huhu';
 					//$logger->info("Error: " . $sql);
-				}
+				}*/
 		    
 				/*
 				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));

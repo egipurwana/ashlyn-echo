@@ -32,7 +32,7 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
-		    try {
+		    
 				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$server = $url["host"];
 				$username = $url["user"];
@@ -47,10 +47,7 @@ class Route
 					//$logger->info("Error: " . $sql);
 				}
 				//$conn->close();
-			}catch ($e) {
-				//$replyText = $event->getText();
-                //$resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
-            }
+			
 				
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {

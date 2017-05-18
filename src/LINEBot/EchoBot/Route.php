@@ -31,6 +31,28 @@ class Route
 {
     public function register(\Slim\App $app)
     {
+	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
+		    try {
+				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+				$server = $url["host"];
+				$username = $url["user"];
+				$password = $url["pass"];
+				$db = substr($url["path"], 1);
+				$conn = new mysqli($server, $username, $password, $db);
+				//$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('".$event->getText()."')";
+				$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
+				if ($conn->query($sql) === TRUE) {
+					//$logger->info('New record created successfully');
+				} else {
+					//$logger->info("Error: " . $sql);
+				}
+				//$conn->close();
+			}catch ($e) {
+				//$replyText = $event->getText();
+                //$resp = $bot->replyText($event->getReplyToken(), $replyText." Tapi ada error di engine");
+            }
+				
+	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             /** @var \LINE\LINEBot $bot */
             $bot = $this->bot;
@@ -95,12 +117,13 @@ class Route
 	            }
 				*/
 
-				$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+				/*$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$server = $url["host"];
 				$username = $url["user"];
 				$password = $url["pass"];
 				$db = substr($url["path"], 1);
 				$conn = new mysqli($server, $username, $password, $db);
+				*/
 				
                 $replyText = $event->getText();
                 $logger->info('Reply text: ' . $replyText);

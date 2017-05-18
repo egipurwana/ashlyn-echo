@@ -37,6 +37,8 @@ class Route
 		    	
 		    	$db = connect_db();
 		    	echo $db;
+		    	
+		    	echo 'huhu';
 		    	/*$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
 				if ($conn->query($sql) === TRUE) {
 					echo'haha';//$logger->info('New record created successfully');

@@ -36,6 +36,7 @@ class Route
 		    	echo 'haha';
 		    	
 		    	$conn = $this->db;
+		    	echo $conn;
 		    	
 		    	echo 'huhu';
 		    	/*$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";

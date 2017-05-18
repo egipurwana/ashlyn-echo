@@ -22,7 +22,7 @@ use LINE\LINEBot\EchoBot\Setting;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function connect_db() {
+/*function connect_db() {
 	$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 	$server = $url["host"];
 	$username = $url["user"];
@@ -31,7 +31,7 @@ function connect_db() {
 	$conn = new mysqli($server, $username, $password, $db);
 	
 	return $conn;
-}
+}*/
 
 $setting = Setting::getSetting();
 $app = new Slim\App($setting);

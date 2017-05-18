@@ -36,7 +36,14 @@ class Route
 		    	echo 'haha';
 		    	
 		    	$conn = $this->db;
-		    	echo $conn;
+		    	$sql = "INSERT INTO message (text) VALUES ('huhuy')";
+				if ($conn->query($sql) === TRUE) {
+					echo'haha';
+					//$logger->info('New record created successfully');
+				} else {
+					echo'huhu';
+					//$logger->info("Error: " . $sql);
+				}
 		    	
 		    	echo 'huhu';
 		    	/*$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";

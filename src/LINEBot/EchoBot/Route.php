@@ -102,7 +102,7 @@ class Route
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
 
 				        $ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\ImageMessageBuilder');
-				        $imageMessageBuilder = $ref->newInstanceArgs('https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg','https://pbs.twimg.com/media/CoHbJ5LW8AAwfRG.jpg');
+				        $imageMessageBuilder = $ref->newInstanceArgs('http://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','http://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$imageMessageBuilder);
                     
                     } elseif ($event instanceof AudioMessage) {

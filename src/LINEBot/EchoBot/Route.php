@@ -32,6 +32,7 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
+
 		    	echo 'haha';
 		    	$sql = "INSERT INTO heroku_4d31cca975d0dde.message (text) VALUES ('huhuy')";
 				if ($conn->query($sql) === TRUE) {

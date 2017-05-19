@@ -78,10 +78,11 @@ class Route
                 return $res->withStatus(400, "Invalid event request");
             }
 
-			//$src = $events;
-			$src = print_r($events,true);
+			//$src = print_r($events,true);
 
             foreach ($events as $event) {
+	            
+	            $src = print_r($event,true);
 	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {

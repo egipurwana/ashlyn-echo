@@ -86,7 +86,6 @@ class Route
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						$conn = $this->db;
-						//".$signature."'
 				    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText().")";
 						if ($conn->query($sql) === TRUE) {
 							$logger->info('New record created successfully');
@@ -98,21 +97,28 @@ class Route
 						$result = $conn->query($sql);						
 						if ($result->num_rows > 0) {
 						    while($row = $result->fetch_assoc()) {
-
-							    //$resp = $bot->replyText($event->getReplyToken(), $row["id"]);
-
 						        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
 								$result1 = $conn->query($sql1);						
 								if ($result1->num_rows > 0) {
 								    while($row1 = $result1->fetch_assoc()) {
-									    
-									    //$resp = $bot->replyText($event->getReplyToken(), $row1["idanswer"]);
-									    
 								        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
 										$result2 = $conn->query($sql2);						
 										if ($result2->num_rows > 0) {
 										    while($row2 = $result2->fetch_assoc()) {
-											    $resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+											    if($row2["phrase"] == '|time|'){
+												    $resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
+												}else{
+													if (strpos($row2["phrase"], '|name|') !== false) {
+														$response = $bot->getProfile($event->getUserId());
+														if ($response->isSucceeded()) {
+														    $profile = $response->getJSONDecodedBody();
+														    str_replace("world",$profile['displayName'],$row2["phrase"]);
+														    $resp = $bot->replyText($event->getReplyToken(), ));
+														}
+													}else{
+														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);	
+													}
+											    }
 										    }
 										} else {
 											$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 3');

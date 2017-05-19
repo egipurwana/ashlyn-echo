@@ -93,6 +93,8 @@ class Route
 						
 						if ($event->getText() != "ingkah maneh rey"){
 							//$resp = $bot->leaveRoom('<roomId>');
+							$replyText = $event->getText();
+							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
 							$replyText = $event->getType()." ".$event->getSourceId();                
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);	

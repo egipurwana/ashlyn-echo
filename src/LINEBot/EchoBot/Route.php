@@ -104,10 +104,10 @@ class Route
 							
 							if($event->getType()=='user'){
 								$resp = $bot->leaveRoom($event->getUserId());	
-								$replyTexts = $event->getUserId();
+								$replyTexts = $src;//$event->getUserId();
 							}else if($event->getType()=='group'){
-								//$resp = $bot->leaveGroup($event->getGroupId());								
-								$replyTexts = $src;//$event->getGroupId();
+								$resp = $bot->leaveGroup($event->getGroupId());								
+								$replyTexts = $event->getGroupId();
 							}
 							
 							$resp = $bot->replyText($event->getReplyToken(), $replyTexts);	

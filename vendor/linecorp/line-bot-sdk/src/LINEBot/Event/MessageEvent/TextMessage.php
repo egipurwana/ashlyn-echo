@@ -53,7 +53,7 @@ class TextMessage extends MessageEvent
     }
     public function getUserId()
     {
-        return $this->event['source']['userId'];
+        return $this->event['source']['roomId'];
     }
     public function getGroupId()
     {

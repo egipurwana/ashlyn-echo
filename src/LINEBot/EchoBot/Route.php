@@ -80,8 +80,6 @@ class Route
 
             foreach ($events as $event) {
 	            
-	            $src = $event[0]['source']->type." huhu";
-	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						$conn = $this->db;
@@ -95,10 +93,10 @@ class Route
 						
 						if ($event->getText() != "ingkah maneh rey"){
 							//$resp = $bot->leaveRoom('<roomId>');
-							$replyText = $event->getText()." ".$src;
+							$replyText = $event->getText();
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
-							$replyTexts = $event->getTypes()." ".$event->getSourceIds();                
+							$replyTexts = json_encode($event);//$event->getTypes()." ".$event->getSourceIds();                
 							$resp = $bot->replyText($event->getReplyToken(), $replyTexts);	
 						}
                     } elseif ($event instanceof StickerMessage) {

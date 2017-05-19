@@ -81,7 +81,7 @@ class Route
 
             foreach ($events as $event) {
 	            
-	            $src = print_r($event,true);
+	            //$src = print_r($event,true);
 	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
@@ -104,7 +104,7 @@ class Route
 							
 							if($event->getType()=='user'){
 								$resp = $bot->leaveRoom($event->getUserId());	
-								$replyTexts = $src;//$event->getUserId();
+								$replyTexts = $event->getUserId();
 							}else if($event->getType()=='group'){
 								$resp = $bot->leaveGroup($event->getGroupId());								
 								$replyTexts = $event->getGroupId();

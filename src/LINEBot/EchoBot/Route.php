@@ -105,9 +105,7 @@ class Route
 										$result2 = $conn->query($sql2);						
 										if ($result2->num_rows > 0) {
 										    while($row2 = $result2->fetch_assoc()) {
-											    if($row2["phrase"] == '|time|'){
-												    $resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
-												}else{
+											    if($row2["phrase"] != '|time|'){
 													if (strpos($row2["phrase"], '|name|') !== false) {
 														$response = $bot->getProfile($event->getUserId());
 														if ($response->isSucceeded()) {
@@ -120,6 +118,8 @@ class Route
 													}else{
 														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
 													}
+												}else{
+													$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
 											    }
 										    }
 										} else {
@@ -136,8 +136,9 @@ class Route
 						
 						if ($event->getText() != "ingkah maneh rey"){
 							//$resp = $bot->leaveRoom('<roomId>');
-							$replyText = $event->getText();
-							$resp = $bot->replyText($event->getReplyToken(), $replyText);
+							//normal
+							//$replyText = $event->getText();
+							//$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
 							//$replyTexts = $src;
 							//$replyTexts = $event->getType()." ".$event->getUserId()." ".$event->getGroupId();

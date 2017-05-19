@@ -108,19 +108,23 @@ class Route
 											    if($row2["phrase"] != '|time|'){
 													if (strpos($row2["phrase"], '|name|') == false) {
 														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
-													}if (strpos($row2["phrase"], 'ya?') == true) {
+													}else if (strpos($row2["phrase"], 'ya?') == true) {
 														$resp = $bot->replyText($event->getReplyToken(), 'hehe, kok tau sih?');
 													}else{
-														$src = print_r($event,true);
-														$resp = $bot->replyText($event->getReplyToken(), $src);
-														/*$resp = $bot->getProfile($event->getUserId());
-														if ($resp->isSucceeded()) {
-														    $profile = $resp->getJSONDecodedBody();
-														    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
-														    $resp = $bot->replyText($event->getReplyToken(), $kata);
+														//$src = print_r($event,true);
+														//$resp = $bot->replyText($event->getReplyToken(), $src);
+														if($event->getType()!='group'){
+															$resp = $bot->getProfile($event->getUserId());
+															if ($resp->isSucceeded()) {
+															    $profile = $resp->getJSONDecodedBody();
+															    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
+															    $resp = $bot->replyText($event->getReplyToken(), $kata);
+															}else{
+																$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+															}
 														}else{
 															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
-														}*/														
+														}											
 													}
 												}else{
 													$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));

@@ -16,6 +16,8 @@
  * under the License.
  */
  
+date_default_timezone_set('Asia/Jakarta');
+ 
 use LINE\LINEBot\EchoBot\Dependency;
 use LINE\LINEBot\EchoBot\Route;
 use LINE\LINEBot\EchoBot\Setting;

@@ -93,28 +93,35 @@ class Route
 		                $replyText = $event->getText();                
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof StickerMessage) {
-		                $replyText = "Kalo ga ngirim stiker 'absolutely state of the art' mending ga usah deh";                
-						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+	                    $stickerBuilder = new LocationMessageBuilder($event->getPackageId(), $event->getStickerId());
+		                $resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);
+		                
+		                //$replyText = "Kalo ga ngirim stiker 'absolutely state of the art' mending ga usah deh";                
+						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof LocationMessage) {
-		                $replyText = "Lokasi apa nih?";                
-						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+		                $locBuilder = new LocationMessageBuilder('DenganSenangHati HQ', 'Jl. Bojong Wetan', '-6.891063', '107.632794');
+		                $resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
+		                
+		                //$replyText = "Lokasi apa nih?";                
+						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof ImageMessage) {
 		                $imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$imgBuilder);
 		                
-		                $replyText = "Kirim gambarnya yang lebih okei dong";                
-						$resp = $bot->replyText($event->getReplyToken(), $replyText);
-						
-				        $ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\ImageMessageBuilder');
-				        $imageMessageBuilder = $ref->newInstanceArgs('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
-						$resp = $bot->replyMessage($event->getReplyToken(),$imageMessageBuilder);
-                    
+			            //$replyText = "Kirim gambarnya yang lebih okei dong";                
+						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof AudioMessage) {
-		                $replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
-						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);
+						$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);
+		                
+		                //$replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
+						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof VideoMessage) {
-		                $replyText = "Duh kirimnya video yang lebih berguna dong";                
-						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
+						$resp = $bot->replyMessage($event->getReplyToken(),$vidBuilder);
+		                
+		                //$replyText = "Duh kirimnya video yang lebih berguna dong";                
+						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } else {
                         // Just in case...
                         $logger->info('Unknown message type has come');

@@ -78,7 +78,7 @@ class Route
                 return $res->withStatus(400, "Invalid event request");
             }
 
-			$src = json_encode($events);
+			$src = $events;
 
             foreach ($events as $event) {
 	            

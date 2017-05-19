@@ -94,6 +94,32 @@ class Route
 							$logger->info("Error: " . $sql);
 						}
 						
+						$sql = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
+						$result = $conn->query($sql);						
+						if ($result->num_rows > 0) {
+						    while($row = $result->fetch_assoc()) {
+						        $sql = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
+								$result = $conn->query($sql);						
+								if ($result->num_rows > 0) {
+								    while($row = $result->fetch_assoc()) {
+								        $sql = "SELECT * FROM answer where idphrase = '".$row["idanswer"]."'";
+										$result = $conn->query($sql);						
+										if ($result->num_rows > 0) {
+										    while($row = $result->fetch_assoc()) {
+											    $resp = $bot->replyText($event->getReplyToken(), $row["phrase"]);
+										    }
+										} else {
+											$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :(');
+										}
+								    }
+								} else {
+									$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :(');
+								}
+						    }
+						} else {
+							$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :(');
+						}
+						
 						if ($event->getText() != "ingkah maneh rey"){
 							//$resp = $bot->leaveRoom('<roomId>');
 							$replyText = $event->getText();
@@ -110,7 +136,7 @@ class Route
 								$replyTexts = $event->getGroupId();
 							}
 							
-							$resp = $bot->replyText($event->getReplyToken(), $replyTexts);	
+								
 						}
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());

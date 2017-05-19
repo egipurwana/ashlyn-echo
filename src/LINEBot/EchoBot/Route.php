@@ -83,7 +83,8 @@ class Route
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						$conn = $this->db;
-				    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText()." ".$signature."')";
+						//".$signature."'
+				    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText().")";
 						if ($conn->query($sql) === TRUE) {
 							$logger->info('New record created successfully');
 						} else {
@@ -117,7 +118,7 @@ class Route
 		                //$replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
 						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof VideoMessage) {
-		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://s6.favim.com/orig/150331/acacia-brinley-acacia-clark-icon-icons-Favim.com-2610856.png');
+		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$vidBuilder);
 		                
 		                //$replyText = "Duh kirimnya video yang lebih berguna dong";                

@@ -106,7 +106,7 @@ class Route
 								$resp = $bot->leaveRoom($event->getUserId());	
 								$replyTexts = $event->getUserId();
 							}else if($event->getType()=='group'){
-								$resp = $bot->leaveGroup($event->getGroupId());								
+								//$resp = $bot->leaveGroup($event->getGroupId());								
 								$replyTexts = $src;//$event->getGroupId();
 							}
 							

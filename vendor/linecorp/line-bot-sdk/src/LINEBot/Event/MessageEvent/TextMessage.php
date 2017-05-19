@@ -51,4 +51,8 @@ class TextMessage extends MessageEvent
     {
         return $this->event['source']['type'];
     }
+    public function getUserId()
+    {
+        return $this->event['source']['userId'];
+    }
 }

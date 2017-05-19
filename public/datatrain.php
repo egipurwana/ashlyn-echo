@@ -69,6 +69,7 @@
 
 <!--
 <?php
+/*
 if(!empty($_POST))
 {
 	//database settings
@@ -95,4 +96,5 @@ if(!empty($_POST))
 } else {
 	echo "Invalid Requests";
 }
+*/
 -->

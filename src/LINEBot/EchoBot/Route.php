@@ -99,9 +99,12 @@ class Route
 		                $replyText = "Lokasi apa nih?";                
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof ImageMessage) {
-		                //$replyText = "Kirim gambarnya yang lebih okei dong";                
-						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
-
+		                $imgBuilder = new ImageMessageBuilder('http://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','http://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
+						$resp = $bot->replyMessage($event->getReplyToken(),$imgBuilder);
+		                
+		                $replyText = "Kirim gambarnya yang lebih okei dong";                
+						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+						
 				        $ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\ImageMessageBuilder');
 				        $imageMessageBuilder = $ref->newInstanceArgs('http://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','http://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$imageMessageBuilder);

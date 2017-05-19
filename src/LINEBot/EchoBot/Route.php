@@ -112,7 +112,8 @@ class Route
 														$response = $bot->getProfile($event->getUserId());
 														if ($response->isSucceeded()) {
 														    $profile = $response->getJSONDecodedBody();
-														    $resp = $bot->replyText($event->getReplyToken(), str_replace("|name|",$profile['displayName'],$row2["phrase"]));
+														    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
+														    $resp = $bot->replyText($event->getReplyToken(), $kata);
 														}
 													}else{
 														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);	
@@ -120,15 +121,15 @@ class Route
 											    }
 										    }
 										} else {
-											$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 3');
+											//$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 3');
 										}
 								    }
 								} else {
-									$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 2');
+									//$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 2');
 								}
 						    }
 						} else {
-							$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 1');
+							//$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 1');
 						}
 						
 						if ($event->getText() != "ingkah maneh rey"){

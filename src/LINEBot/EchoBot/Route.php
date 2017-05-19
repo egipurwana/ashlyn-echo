@@ -106,7 +106,9 @@ class Route
 										if ($result2->num_rows > 0) {
 										    while($row2 = $result2->fetch_assoc()) {
 											    if($row2["phrase"] != '|time|'){
-													if (strpos($row2["phrase"], '|name|') !== false) {
+													if (strpos($row2["phrase"], '|name|') == false) {
+														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+													}else{
 														$response = $bot->getProfile($event->getUserId());
 														if ($response->isSucceeded()) {
 														    $profile = $response->getJSONDecodedBody();
@@ -114,9 +116,7 @@ class Route
 														    $resp = $bot->replyText($event->getReplyToken(), $kata);
 														}else{
 															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
-														}
-													}else{
-														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+														}														
 													}
 												}else{
 													$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));

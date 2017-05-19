@@ -108,9 +108,11 @@ class Route
 											    if($row2["phrase"] != '|time|'){
 													if (strpos($row2["phrase"], '|name|') == false) {
 														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
-													}else if (strpos($row2["phrase"], 'ya?') == true) {
-														$resp = $bot->replyText($event->getReplyToken(), 'hehe, kok tau sih?');
-													}else{
+													}
+													//else if (strpos($row2["phrase"], 'ya?') == true) {
+													//	$resp = $bot->replyText($event->getReplyToken(), 'hehe, kok tau sih?');
+													//}
+													else{
 														//$src = print_r($event,true);
 														//$resp = $bot->replyText($event->getReplyToken(), $src);
 														if($event->getType()!='group'){
@@ -120,7 +122,8 @@ class Route
 															    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
 															    $resp = $bot->replyText($event->getReplyToken(), $kata);
 															}else{
-																$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+																$kata = str_replace("|name|",'kamu',$row2["phrase"]);   
+															    $resp = $bot->replyText($event->getReplyToken(), $kata);
 															}
 														}else{
 															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);

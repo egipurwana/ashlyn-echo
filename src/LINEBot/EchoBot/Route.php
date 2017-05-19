@@ -78,6 +78,8 @@ class Route
                 return $res->withStatus(400, "Invalid event request");
             }
 
+			$src = json_encode($events);
+
             foreach ($events as $event) {
 	            
 	            if ($event instanceof MessageEvent) {
@@ -96,7 +98,7 @@ class Route
 							$replyText = $event->getText();
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
-							$replyTexts = implode('|',$event);//json_encode($event);//$event->getTypes()." ".$event->getSourceIds();                
+							$replyTexts = $src;//$event->getTypes()." ".$event->getSourceIds();                
 							$resp = $bot->replyText($event->getReplyToken(), $replyTexts);	
 						}
                     } elseif ($event instanceof StickerMessage) {

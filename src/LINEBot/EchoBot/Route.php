@@ -94,7 +94,7 @@ class Route
 						if ($event->getText() != "ingkah maneh rey"){
 							//$resp = $bot->leaveRoom('<roomId>');
 						}else{
-							$replyText = $event['source']['type'];//$event->getText();                
+							$replyText = $event->getType()." ".$event->getSourceId();                
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);	
 						}
                     } elseif ($event instanceof StickerMessage) {

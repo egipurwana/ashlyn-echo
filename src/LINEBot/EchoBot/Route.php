@@ -93,7 +93,7 @@ class Route
 		                $replyText = $event->getText();                
 						$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof StickerMessage) {
-	                    $stickerBuilder = new LocationMessageBuilder($event->getPackageId(), $event->getStickerId());
+	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());
 		                $resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);
 		                
 		                //$replyText = "Kalo ga ngirim stiker 'absolutely state of the art' mending ga usah deh";                

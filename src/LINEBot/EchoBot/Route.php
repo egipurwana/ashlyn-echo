@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 LINE Corporation
  *
@@ -104,8 +103,10 @@ class Route
 							//$replyTexts = $event->getType()." ".$event->getUserId()." ".$event->getGroupId();
 							
 							if($event->getType()=='user'){
+								$resp = $bot->leaveRoom($event->getUserId());	
 								$replyTexts = $event->getUserId();
 							}else if($event->getType()=='group'){
+								$resp = $bot->leaveGroup($event->getGroupId());								
 								$replyTexts = $event->getGroupId();
 							}
 							
@@ -197,3 +198,22 @@ class Route
         });
     }
 }
+
+/*
+keywords
+32 hi
+33 hello
+34 hey
+
+responses
+1009 hi, how r u
+1037 hey, nice to meet you
+
+keyword_responses
+32 1009
+32 1039
+33 1009
+33 1039
+34 1009
+34 1039
+*/

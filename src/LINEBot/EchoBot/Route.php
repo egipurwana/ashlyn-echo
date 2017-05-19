@@ -94,11 +94,14 @@ class Route
 							$logger->info("Error: " . $sql);
 						}
 						
-						$sql = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
+						$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
 						$result = $conn->query($sql);						
 						if ($result->num_rows > 0) {
 						    while($row = $result->fetch_assoc()) {
-						        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
+
+							    $resp = $bot->replyText($event->getReplyToken(), $row["id"]);
+
+						        /*$sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
 								$result1 = $conn->query($sql1);						
 								if ($result1->num_rows > 0) {
 								    while($row1 = $result1->fetch_assoc()) {
@@ -114,7 +117,7 @@ class Route
 								    }
 								} else {
 									$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 2');
-								}
+								}*/
 						    }
 						} else {
 							$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 1');

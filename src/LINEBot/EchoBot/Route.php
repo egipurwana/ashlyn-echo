@@ -55,6 +55,9 @@ class Route
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
 							
 	    });
+	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
+			require_once '../../../public/datatrain.php';			
+	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;
             $logger = $this->logger;

@@ -100,7 +100,8 @@ class Route
 							$replyText = $event->getText();
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
-							$replyTexts = $src;//$event->getTypes()." ".$event->getSourceIds();                
+							//$replyTexts = $src;
+							$replyTexts = $event->getType();
 							$resp = $bot->replyText($event->getReplyToken(), $replyTexts);	
 						}
                     } elseif ($event instanceof StickerMessage) {

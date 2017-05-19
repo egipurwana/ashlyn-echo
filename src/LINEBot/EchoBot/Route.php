@@ -109,9 +109,9 @@ class Route
 													if (strpos($row2["phrase"], '|name|') == false) {
 														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
 													}else{
-														$response = $bot->getProfile($event->getUserId());
-														if ($response->isSucceeded()) {
-														    $profile = $response->getJSONDecodedBody();
+														$resp = $bot->getProfile($event->getUserId());
+														if ($resp->isSucceeded()) {
+														    $profile = $resp->getJSONDecodedBody();
 														    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
 														    $resp = $bot->replyText($event->getReplyToken(), $kata);
 														}else{

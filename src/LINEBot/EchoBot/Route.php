@@ -79,7 +79,9 @@ class Route
             }
 
             foreach ($events as $event) {
-	            $src = $event['source']['type'];
+	            
+	            $src = $event['source']->type." huhu";
+	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						$conn = $this->db;

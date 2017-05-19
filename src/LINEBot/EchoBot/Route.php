@@ -79,7 +79,7 @@ class Route
             }
 
             foreach ($events as $event) {
-	            
+	            $src = $event['source']['type'];
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						$conn = $this->db;
@@ -93,7 +93,7 @@ class Route
 						
 						if ($event->getText() != "ingkah maneh rey"){
 							//$resp = $bot->leaveRoom('<roomId>');
-							$replyText = $event->getText();
+							$replyText = $event->getText()." ".$src;
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
 							$replyTexts = $event->getTypes()." ".$event->getSourceIds();                

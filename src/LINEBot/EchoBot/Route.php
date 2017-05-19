@@ -80,7 +80,7 @@ class Route
 
             foreach ($events as $event) {
 	            
-	            $src = $event['source']->type." huhu";
+	            $src = $event[0]['source']->type." huhu";
 	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {

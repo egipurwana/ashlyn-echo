@@ -97,7 +97,7 @@ class Route
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
 							$src = $event['source'];
-							$srctype = $src['type']
+							$srctype = $src['type'];
 							$replyText = $srctype." ".$event->getType()." ".$event->getSourceId();                
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);	
 						}

@@ -82,7 +82,7 @@ class Route
 
             foreach ($events as $event) {
 	            
-	            $src = print_r($event,true);
+	            //$src = print_r($event,true);
 	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
@@ -101,7 +101,14 @@ class Route
 							$resp = $bot->replyText($event->getReplyToken(), $replyText);
 						}else{
 							//$replyTexts = $src;
-							$replyTexts = $event->getType()." ".$event->getUserId();
+							//$replyTexts = $event->getType()." ".$event->getUserId()." ".$event->getGroupId();
+							
+							if($event->getType()=='user'){
+								$replyTexts = $event->getUserId();
+							}else if($event->getType()=='group'){
+								$replyTexts = $event->getGroupId();
+							}
+							
 							$resp = $bot->replyText($event->getReplyToken(), $replyTexts);	
 						}
                     } elseif ($event instanceof StickerMessage) {

@@ -112,8 +112,7 @@ class Route
 														$response = $bot->getProfile($event->getUserId());
 														if ($response->isSucceeded()) {
 														    $profile = $response->getJSONDecodedBody();
-														    str_replace("world",$profile['displayName'],$row2["phrase"]);
-														    $resp = $bot->replyText($event->getReplyToken(), ));
+														    $resp = $bot->replyText($event->getReplyToken(), str_replace("world",$profile['displayName'],$row2["phrase"]);));
 														}
 													}else{
 														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);	

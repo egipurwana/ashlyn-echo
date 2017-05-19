@@ -114,9 +114,11 @@ class Route
 														    $profile = $response->getJSONDecodedBody();
 														    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
 														    $resp = $bot->replyText($event->getReplyToken(), $kata);
+														}else{
+															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
 														}
 													}else{
-														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);	
+														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
 													}
 											    }
 										    }

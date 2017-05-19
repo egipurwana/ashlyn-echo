@@ -117,7 +117,7 @@ class Route
 		                //$replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
 						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof VideoMessage) {
-		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
+		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://s6.favim.com/orig/150331/acacia-brinley-acacia-clark-icon-icons-Favim.com-2610856.png');
 						$resp = $bot->replyMessage($event->getReplyToken(),$vidBuilder);
 		                
 		                //$replyText = "Duh kirimnya video yang lebih berguna dong";                

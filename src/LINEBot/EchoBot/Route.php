@@ -102,22 +102,22 @@ class Route
 								$result = $conn->query($sql);						
 								if ($result->num_rows > 0) {
 								    while($row = $result->fetch_assoc()) {
-								        $sql = "SELECT * FROM answer where idphrase = '".$row["idanswer"]."'";
+								        $sql = "SELECT * FROM answer where id = '".$row["idanswer"]."'";
 										$result = $conn->query($sql);						
 										if ($result->num_rows > 0) {
 										    while($row = $result->fetch_assoc()) {
 											    $resp = $bot->replyText($event->getReplyToken(), $row["phrase"]);
 										    }
 										} else {
-											$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :(');
+											$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 3');
 										}
 								    }
 								} else {
-									$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :(');
+									$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 2');
 								}
 						    }
 						} else {
-							$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :(');
+							$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 1');
 						}
 						
 						if ($event->getText() != "ingkah maneh rey"){

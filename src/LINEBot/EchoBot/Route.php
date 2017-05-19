@@ -91,8 +91,12 @@ class Route
 							$logger->info("Error: " . $sql);
 						}
 						
-		                $replyText = $event->getText();                
-						$resp = $bot->replyText($event->getReplyToken(), $replyText);
+						if ($event->getText() != "ingkah maneh rey"){
+							//$resp = $bot->leaveRoom('<roomId>');
+						}else{
+							$replyText = $event->source['type'];//$event->getText();                
+							$resp = $bot->replyText($event->getReplyToken(), $replyText);	
+						}
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());
 		                $resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);

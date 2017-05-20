@@ -82,8 +82,8 @@ class Route
 			    ->withHttpOnly(true)
 			;
 			
-			$setCookie = FigResponseCookies::get($res, 'theme');
-			echo $setCookie;
+			//$setCookie = FigResponseCookies::get($res, 'theme');
+			//echo $setCookie;
 			$setCookie1 = FigResponseCookies::get($res, 'theme1', 'simple');
 			echo $setCookie1;
 			
@@ -100,17 +100,28 @@ class Route
 		    //echo $cookie->getValue();
 		    //echo $cookie->getName();
 		    
-		    $cookiexc = FigResponseCookies::get($res, 'theme1');
-		    echo $cookiexc."<br>";
-		    echo $cookiexc->getValue()."<br>";
-		    echo $cookiexc->getName()."<br>";
+		    //$cookiexc = FigResponseCookies::get($res, 'theme1');
+		    //echo $cookiexc."<br>";
+		    //echo $cookiexc->getValue()."<br>";
+		    //echo $cookiexc->getName()."<br>";
 		    
 		    //$cookiex = FigResponseCookies::get($res, 'theme');
 		    //echo $cookiex->getValue();
 		    //echo $cookiex->getName();
 		    
-		    //$cookie1 = FigRequestCookies::get($req, 'theme');
-			//echo $cookie->getName();
+		    $setCookie = SetCookie::create('lu')
+			    ->withValue('Rg3vHJZnehYLjVg7qi3bZjzg')
+			    ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
+			    ->withMaxAge(500)
+			    ->rememberForever()
+			    ->withPath('/')
+			    ->withDomain('.herokuapp.com')
+			    ->withSecure(true)
+			    ->withHttpOnly(true)
+			;
+		    
+		    $cookie1 = FigRequestCookies::get($req, 'theme1');
+			echo $cookie1->getValue();
 			
 			
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			

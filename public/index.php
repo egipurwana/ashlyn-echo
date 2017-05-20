@@ -27,6 +27,11 @@ require_once __DIR__ . '/../src/LINEBot/EchoBot/Connection.php';
 
 $setting = Setting::getSetting();
 $app = new Slim\App($setting);
+$app->add(new \Slim\Middleware\Session([
+  'name' => 'dummy_session',
+  'autorefresh' => true,
+  'lifetime' => '1 hour'
+]));
 
 (new Connection())->register($app);
 (new Dependency())->register($app);

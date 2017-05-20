@@ -4,9 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86b2e78adde28513c798eb95f4c962d7",
-    "content-hash": "fb78a472ae5680bf7a39f0c3231d512f",
+    "hash": "f659643ddfb580595e7c6cd47e11b144",
+    "content-hash": "97cd1cb4edc70e98dda2c62ac81c2867",
     "packages": [
+        {
+            "name": "bryanjhv/slim-session",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bryanjhv/slim-session.git",
+                "reference": "e4864c1b8d92b2c6d5f472f7004f8301f770fcb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/e4864c1b8d92b2c6d5f472f7004f8301f770fcb1",
+                "reference": "e4864c1b8d92b2c6d5f472f7004f8301f770fcb1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "slim/slim": "^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bryan Horna",
+                    "email": "bryanjhv@gmail.com",
+                    "homepage": "https://bryanjhv.github.io",
+                    "role": "developer"
+                }
+            ],
+            "description": "Session middleware and helper for Slim framework 3.",
+            "homepage": "https://github.com/bryanjhv/slim-session",
+            "keywords": [
+                "helper",
+                "middleware",
+                "session",
+                "slim"
+            ],
+            "time": "2017-05-08 15:01:54"
+        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -37,58 +86,6 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14 19:40:03"
-        },
-        {
-            "name": "dflydev/fig-cookies",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dflydev/dflydev-fig-cookies.git",
-                "reference": "883233c159d00d39e940bd12cfe42c0d23420c1c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-fig-cookies/zipball/883233c159d00d39e940bd12cfe42c0d23420c1c",
-                "reference": "883233c159d00d39e940bd12cfe42c0d23420c1c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "psr/http-message": "~1.0"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "~0.1@dev",
-                "phpunit/phpunit": "~4.5",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dflydev\\FigCookies\\": "src/Dflydev/FigCookies"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Beau Simensen",
-                    "email": "beau@dflydev.com"
-                }
-            ],
-            "description": "Cookies for PSR-7 HTTP Message Interface.",
-            "keywords": [
-                "cookies",
-                "psr-7",
-                "psr7"
-            ],
-            "time": "2016-03-28 09:10:18"
         },
         {
             "name": "linecorp/line-bot-sdk",

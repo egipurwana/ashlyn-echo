@@ -37,10 +37,6 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
         array (
             'FastRoute\\' => 10,
         ),
-        'D' => 
-        array (
-            'Dflydev\\FigCookies\\' => 19,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -77,10 +73,10 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
         ),
-        'Dflydev\\FigCookies\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dflydev/fig-cookies/src/Dflydev/FigCookies',
-        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/bryanjhv/slim-session/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -98,6 +94,7 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit78742abb76263d5f338bfe87a28169a8::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit78742abb76263d5f338bfe87a28169a8::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit78742abb76263d5f338bfe87a28169a8::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit78742abb76263d5f338bfe87a28169a8::$prefixesPsr0;
 
         }, null, ClassLoader::class);

@@ -35,6 +35,10 @@ class Dependency
             return $logger;
         };
         
+		$container['session'] = function ($c) {
+		  return new \SlimSession\Helper;
+		};
+        
         $container['bot'] = function ($c) {
             $settings = $c->get('settings');
             $channelSecret = $settings['bot']['channelSecret'];

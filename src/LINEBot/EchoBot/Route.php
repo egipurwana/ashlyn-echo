@@ -17,16 +17,6 @@
 
 namespace LINE\LINEBot\EchoBot;
 
-use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
-use Dflydev\FigCookies\Cookie;
-use Dflydev\FigCookies\Cookies;
-use Dflydev\FigCookies\SetCookie;
-use Dflydev\FigCookies\FigRequestCookies;
-use Dflydev\FigCookies\FigResponseCookies;
-
 use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;
 
@@ -62,68 +52,44 @@ class Route
 {
     public function register(\Slim\App $app)
     {
+	    
+	    /*
+		// Check if variable exists
+		$exists = $session->exists('my_key');
+		$exists = isset($session->my_key);
+		$exists = isset($session['my_key']);
+		
+		// Get variable value
+		$my_value = $session->get('my_key', 'default');
+		$my_value = $session->my_key;
+		$my_value = $session['my_key'];
+		
+		// Set variable value
+		$app->session->set('my_key', 'my_value');
+		$session->my_key = 'my_value';
+		$session['my_key'] = 'my_value';
+		
+		// Delete variable
+		$session->delete('my_key');
+		unset($session->my_key);
+		unset($session['my_key']);
+		
+		// Destroy session
+		$session::destroy();
+		
+		// Get session id
+		$id = $this->session::id();
+		*/
+		
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-			//$cookies = Cookies::fromRequest($req);
-			//$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
-			//echo $response;
-			
-			//$cookie = FigRequestCookies::get($req, 'color', 'red');
-		    //echo $cookie->getValue();
-		    //echo $cookie->getName();
-		    
-			$setCookie = SetCookie::create('lu')
-			    ->withValue('Rg3vHJZnehYLjVg7qi3bZjzg')
-			    ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
-			    ->withMaxAge(500)
-			    ->rememberForever()
-			    ->withPath('/')
-			    ->withDomain('.herokuapp.com')
-			    ->withSecure(true)
-			    ->withHttpOnly(true)
-			;
-			
-			//$setCookie = FigResponseCookies::get($res, 'theme');
-			//echo $setCookie;
-			$setCookie1 = FigResponseCookies::get($res, 'theme1', 'simple');
-			echo $setCookie1;
-			
-			//$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
-		    //echo $cookie2;
-			
-			//$cookie = Cookie::create('theme', 'blue');
-			//$responseq = FigRequestCookies::set($req, $cookie);
-			//echo $responseq;
+		    $session = $this->session;
+		    $session->color = 'blue';
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    //$cookies = Cookies::fromRequest($req);
-		    //$cookie = FigRequestCookies::get($req, 'color');
-		    //echo $cookie->getValue();
-		    //echo $cookie->getName();
+		    $session = $this->session;
+		    $my_value = $session->color;
+		    echo $my_value;
 		    
-		    //$cookiexc = FigResponseCookies::get($res, 'theme1');
-		    //echo $cookiexc."<br>";
-		    //echo $cookiexc->getValue()."<br>";
-		    //echo $cookiexc->getName()."<br>";
-		    
-		    //$cookiex = FigResponseCookies::get($res, 'theme');
-		    //echo $cookiex->getValue();
-		    //echo $cookiex->getName();
-		    
-		    $setCookie = SetCookie::create('lu')
-			    ->withValue('Rg3vHJZnehYLjVg7qi3bZjzg')
-			    ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
-			    ->withMaxAge(500)
-			    ->rememberForever()
-			    ->withPath('/')
-			    ->withDomain('.herokuapp.com')
-			    ->withSecure(true)
-			    ->withHttpOnly(true)
-			;
-		    
-		    $cookie1 = FigRequestCookies::get($req, 'theme1');
-			echo $cookie1->getValue();
-			
-			
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

@@ -35,11 +35,6 @@ class Dependency
             return $logger;
         };
         
-		$container['cookies'] = function ($c) { 
-			$cookies = new \Slim\Http\Cookies();
-			return $cookies; 
-		};
-
         $container['bot'] = function ($c) {
             $settings = $c->get('settings');
             $channelSecret = $settings['bot']['channelSecret'];

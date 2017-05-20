@@ -57,8 +57,7 @@ class Route
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    
-		    $request = FigRequestCookies::set($req, Cookie::create('theme', 'blue'));
-			
+		    $req = FigRequestCookies::set($req, Cookie::create('theme', 'blue'));
 			$cookie = FigRequestCookies::get($req, 'theme');
 			echo $cookie;
 

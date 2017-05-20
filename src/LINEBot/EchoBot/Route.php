@@ -125,6 +125,13 @@ class Route
             $logger = $this->logger;
             $session = $this->session;
 			$conn = $this->db;
+			
+			if (!isset($session->training)){
+				$session->training = false;
+				$session->trainerid = 0;
+				$session->ask = true;
+			}
+			
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
             if (empty($signature)) {
                 return $res->withStatus(400, 'Bad Request');
@@ -189,14 +196,14 @@ class Route
 							unset($session->trainerid);							
 							$session::destroy();							
 							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
-						}else if ($event->getText() == "join trainer"){
+						}/*else if ($event->getText() == "join trainer"){
 							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId().")";
 							if ($conn->query($sql) === TRUE) {
 								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
-						}
+						}*/
 						
 						if($session->training == true){
 							if($session->ask == true){
@@ -307,12 +314,11 @@ class Route
 	                $replyText = "Beacon detected";                
 					$resp = $bot->replyText($event->getReplyToken(), $replyText);
                 } else {
-                    // Just in case...
                     $logger->info('Unknown event type has come');
                     continue;
                 }
-            }
-
+			}
+		   
             $res->write('OK');
             return $res;
         });

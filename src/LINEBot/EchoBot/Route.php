@@ -22,6 +22,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 use Dflydev\FigCookies\Cookies;
+use Dflydev\FigCookies\SetCookie;
 use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
 

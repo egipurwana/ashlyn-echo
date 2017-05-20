@@ -64,8 +64,10 @@ class Route
 			echo $cookie;
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $req = FigRequestCookies::set($req, Cookie::create('theme', 'blue'));
-		    $cookie = FigRequestCookies::get($req, 'theme', 'default-theme');
+			$request = FigRequestCookies::set($req, Cookie::create('theme', 'blue1'));
+		    $req = FigRequestCookies::set($req, Cookie::create('theme', 'blue2'));
+		    $cookie = FigRequestCookies::get($req, 'theme', 'blue3');
+		    $cookies = Cookie::create('theme', 'blue4');
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

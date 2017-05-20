@@ -35,7 +35,7 @@ class Dependency
             return $logger;
         };
         
-		$container['cookie'] = function ($c) { 
+		$container['cookies'] = function ($c) { 
 		  return new \Slim\Http\Cookies; 
 		};
 

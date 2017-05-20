@@ -64,7 +64,7 @@ class Route
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			$cookies = Cookies::fromRequest($req);
-			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue')->rememberForever());
+			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
 			echo $response;
 			
 			$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
@@ -77,14 +77,10 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $cookies = Cookies::fromRequest($req);
 		    $cookie = FigRequestCookies::get($req, 'theme');
-		    echo $cookie;
+		    echo $cookie->getValue();
 		    
 		    $cookie1 = FigRequestCookies::get($req, 'theme');
-			echo $cookie1;
-			
-		    
-		    $cookiex = FigResponseCookies::get($res, 'theme');
-		    echo $cookiex;
+			echo $cookie1->getName();
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

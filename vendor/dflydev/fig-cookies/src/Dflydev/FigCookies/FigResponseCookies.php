@@ -18,7 +18,7 @@ class FigResponseCookies
     {
         $setCookies = SetCookies::fromResponse($response);
         if ($setCookies->has($name)) {
-            return $setCookies->get($name);
+            return $setCookies->get($value);
         }
 
         return SetCookie::create($name, $value);

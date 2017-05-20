@@ -34,6 +34,10 @@ class Dependency
             $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], \Monolog\Logger::DEBUG));
             return $logger;
         };
+        
+		$container['cookie'] = function ($c) { 
+		  return new \Slim\Http\Cookies; 
+		};
 
         $container['bot'] = function ($c) {
             $settings = $c->get('settings');

@@ -52,11 +52,11 @@ class Route
 {
     public function register(\Slim\App $app)
     {
-	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use($app){
-			$app->setCookie('foo', 'bar', '2 days');		
+	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+			$this->cookie->set('foo', 'bar');
 	    });
-	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use($app){
-		    $cookies = $app->getCookie('foo');
+	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+		    $cookies = $this->cookie->get('foo');
 			require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

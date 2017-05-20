@@ -18,6 +18,7 @@
 namespace LINE\LINEBot\EchoBot;
 
 use Dflydev\FigCookies\Cookie;
+use Dflydev\FigCookies\Cookies;
 use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
 
@@ -57,14 +58,17 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $res = FigResponseCookies::remove($res, 'theme');
+		    //$res = FigResponseCookies::remove($res, 'theme');
+		    
 		    //$req = FigRequestCookies::set($req, Cookie::create('theme', 'blue'));
 			//$cookie = FigRequestCookies::get($req, 'theme');
 			//echo $cookie;
 
-			//$cookie = Cookie::create('theme', 'blue');
+			$cookie = Cookie::create('theme', 'blue');
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+		    $cookies = Cookies::get('theme');
+		    echo $cookies;
 		    //$cookie = FigRequestCookies::get($req, 'theme');
 			//echo $cookie;
 		    

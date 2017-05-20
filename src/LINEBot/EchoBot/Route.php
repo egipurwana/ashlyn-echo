@@ -209,7 +209,7 @@ class Route
 						}*/
 						
 						
-						
+						/*
 						if($session->training == true){
 							if($session->ask == true){
 								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText()."')";
@@ -279,7 +279,7 @@ class Route
 							} else {
 								//not found
 							}
-						}
+						}*/
 						
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());

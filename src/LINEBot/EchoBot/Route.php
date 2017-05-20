@@ -17,6 +17,7 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Dflydev\FigCookies\Cookies;
 use Dflydev\FigCookies\FigRequestCookies;
 use Dflydev\FigCookies\FigResponseCookies;
 

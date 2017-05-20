@@ -17,6 +17,7 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -60,7 +61,7 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-			$cookies = Cookies::fromRequest($request);
+			$cookies = Cookies::fromRequest($res);
 			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue')->rememberForever());
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){

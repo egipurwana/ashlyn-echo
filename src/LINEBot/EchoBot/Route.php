@@ -68,7 +68,6 @@ class Route
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $cookies = Cookies::fromRequest($req);
-		    echo $cookies;
 		    $cookie = FigRequestCookies::get($req, 'theme');
 		    echo $cookie;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			

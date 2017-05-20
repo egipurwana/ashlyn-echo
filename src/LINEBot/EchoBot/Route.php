@@ -245,7 +245,7 @@ class Route
 									}
 							    }
 							} else {
-								$resp = $bot->replyText($event->getReplyToken(),$session->training." ".$session->get('training', 'default'));
+								$resp = $bot->replyText($event->getReplyToken(),$session->training);
 								//not found
 							}
 						}
@@ -254,8 +254,6 @@ class Route
 							$session->trainerid = $event->getUserId();
 							$session->training = true;
 							$session->ask = true;
-							
-							$app->session->set('training', true);
 							
 							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
 						}else if ($event->getText() == "training end"){

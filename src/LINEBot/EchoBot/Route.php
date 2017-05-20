@@ -179,23 +179,7 @@ class Route
 						if ($event->getText() == "training start"){
 							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
 							$session->trainerid = $event->getUserId();
-							/*if (isset($session->training){
-								if (isset($event->getUserId())){
-									$session->training = true;
-									$session->trainerid = $event->getUserId();
-									$session->ask = true;
-								}
-							}*/
-							/*if(!isset($session->training)){
-								if (isset($event->getUserId())){
-									$session->training = true;
-									$session->trainerid = $event->getUserId();
-									$session->ask = true;
-								}
-							}else{
-								$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
-							}*/
-						}/*else if ($event->getText() == "training end"){
+						}else if ($event->getText() == "training end"){
 							$session->training = false;
 							$session->ask = true;
 
@@ -215,7 +199,7 @@ class Route
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
-						}*/
+						}
 						
 						
 						/*

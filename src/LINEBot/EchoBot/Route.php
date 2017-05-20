@@ -196,24 +196,24 @@ class Route
 							unset($session->trainerid);							
 							$session::destroy();							
 							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
-						}/*else if ($event->getText() == "join trainer"){
+						}else if ($event->getText() == "join trainer"){
 							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId().")";
 							if ($conn->query($sql) === TRUE) {
 								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
-						}*/
+						}
 						
 						if($session->training == true){
 							if($session->ask == true){
 								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText().")";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT ROW_COUNT FROM phrase";
-									$result = $conn->query($sql);
+									$result = $conn->query($sqltrain);
 									$src = print_r($result->fetch_assoc(),true);
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$src);
-									$session->ask == false;
+									$session->ask = false;
 								} else {
 									$logger->info("Error: " . $sqlxxx);
 								}
@@ -221,10 +221,10 @@ class Route
 								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText().")";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT ROW_COUNT FROM phrase";
-									$result = $conn->query($sql);
+									$result = $conn->query($sqltrain);
 									$src = print_r($result->fetch_assoc(),true);
 									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$src);
-									$session->ask == false;
+									$session->ask = true;
 								} else {
 									$logger->info("Error: " . $sqlxxx);
 								}

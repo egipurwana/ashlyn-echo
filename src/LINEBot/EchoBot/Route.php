@@ -176,7 +176,7 @@ class Route
 							}
 						}
 						
-						if ($event->getText() == "training start"){
+						/*if ($event->getText() == "training start"){
 							if(!isset($session->training)){
 								if (isset($event->getUserId())){
 									$session->training = true;
@@ -186,7 +186,7 @@ class Route
 							}else{
 								$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
 							}
-						}/*else if ($event->getText() == "training end"){
+						}else if ($event->getText() == "training end"){
 							$session->training = false;
 							$session->ask = true;
 

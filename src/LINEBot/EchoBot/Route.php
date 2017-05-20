@@ -64,8 +64,8 @@ class Route
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//$cookies = Cookies::fromRequest($req);
-			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
-			echo $response;
+			//$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
+			//echo $response;
 			
 			$cookie = FigRequestCookies::get($req, 'color', 'red');
 		    echo $cookie->getValue();
@@ -80,17 +80,18 @@ class Route
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    //$cookies = Cookies::fromRequest($req);
-		    $cookie = FigRequestCookies::get($req, 'color');
-		    echo $cookie->getValue();
-		    echo $cookie->getName();
+		    //$cookie = FigRequestCookies::get($req, 'color');
+		    //echo $cookie->getValue();
+		    //echo $cookie->getName();
 		    
-		     $cookiexc = FigResponseCookies::get($res, 'color');
-		    echo $cookiexc->getValue();
-		    echo $cookiexc->getName();
+		    $cookiexc = FigResponseCookies::get($res, 'color');
+		    echo $cookiexc."<br>";
+		    echo $cookiexc->getValue()."<br>";
+		    echo $cookiexc->getName()."<br>";
 		    
-		    $cookiex = FigResponseCookies::get($res, 'theme');
-		    echo $cookiex->getValue();
-		    echo $cookiex->getName();
+		    //$cookiex = FigResponseCookies::get($res, 'theme');
+		    //echo $cookiex->getValue();
+		    //echo $cookiex->getName();
 		    
 		    //$cookie1 = FigRequestCookies::get($req, 'theme');
 			//echo $cookie->getName();

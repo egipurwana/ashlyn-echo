@@ -177,6 +177,13 @@ class Route
 						}
 						
 						if ($event->getText() == "training start"){
+							if (!isset($session->training){
+								if (isset($event->getUserId())){
+									$session->training = true;
+									$session->trainerid = $event->getUserId();
+									$session->ask = true;
+								}
+							}
 							/*if(!isset($session->training)){
 								if (isset($event->getUserId())){
 									$session->training = true;

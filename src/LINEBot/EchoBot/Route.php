@@ -58,6 +58,34 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
 			require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
+		/*
+		if(!empty($_POST))
+		{
+			//database settings
+			include "db_config.php";
+			foreach($_POST as $field_name => $val)
+			{
+				//clean post values
+				$field_userid = strip_tags(trim($field_name));
+				$val = strip_tags(trim(mysql_real_escape_string($val)));
+		
+				//from the fieldname:user_id we need to get user_id
+				$split_data = explode(':', $field_userid);
+				$user_id = $split_data[1];
+				$field_name = $split_data[0];
+				if(!empty($user_id) && !empty($field_name) && !empty($val))
+				{
+					//update the values
+					mysql_query("UPDATE user_details SET $field_name = '$val' WHERE user_id = $user_id") or mysql_error();
+					echo "Updated";
+				} else {
+					echo "Invalid Requests";
+				}
+			}
+		} else {
+			echo "Invalid Requests";
+		}
+		*/
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;
             $logger = $this->logger;
@@ -118,18 +146,18 @@ class Route
 													else{
 														//$src = print_r($event,true);
 														//$resp = $bot->replyText($event->getReplyToken(), $src);
-														if($event->getType()!='group'){
+														if($event->getType() != 'group'){
 															$resp = $bot->getProfile($event->getUserId());
 															if ($resp->isSucceeded()) {
 															    $profile = $resp->getJSONDecodedBody();
 															    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
-															    $resp = $bot->replyText($event->getReplyToken(), $kata);
+															    $resp = $bot->replyText($event->getReplyToken(), $kata." ".$event->getType());
 															}else{
-																$kata = str_replace("|name|",'kamu',$row2["phrase"]);   
-															    $resp = $bot->replyText($event->getReplyToken(), $kata);
+																$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
+															    $resp = $bot->replyText($event->getReplyToken(), $kata2." ".$event->getType());
 															}
 														}else{
-															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]." ".$event->getType());
 														}											
 													}
 												}else{
@@ -253,22 +281,3 @@ class Route
         });
     }
 }
-
-/*
-keywords
-32 hi
-33 hello
-34 hey
-
-responses
-1009 hi, how r u
-1037 hey, nice to meet you
-
-keyword_responses
-32 1009
-32 1039
-33 1009
-33 1039
-34 1009
-34 1039
-*/

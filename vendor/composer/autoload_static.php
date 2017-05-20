@@ -37,6 +37,10 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
         array (
             'FastRoute\\' => 10,
         ),
+        'D' => 
+        array (
+            'Dflydev\\FigCookies\\' => 19,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -72,6 +76,10 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Dflydev\\FigCookies\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dflydev/fig-cookies/src/Dflydev/FigCookies',
         ),
     );
 

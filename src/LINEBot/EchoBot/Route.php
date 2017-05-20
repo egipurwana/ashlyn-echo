@@ -21,6 +21,7 @@ use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+use Dflydev\FigCookies\Cookie;
 use Dflydev\FigCookies\Cookies;
 use Dflydev\FigCookies\SetCookie;
 use Dflydev\FigCookies\FigRequestCookies;
@@ -65,13 +66,16 @@ class Route
 			$cookies = Cookies::fromRequest($req);
 			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue')->rememberForever());
 			echo $response;
-			$responseq = FigRequestCookies::set($req, SetCookie::create('theme')->withValue('blue')->rememberForever());
+			
+			$cookie = Cookie::create('theme', 'blue');
+			$responseq = FigRequestCookies::set($req, $cookie);
 			echo $responseq;
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $cookies = Cookies::fromRequest($req);
 		    $cookie = FigRequestCookies::get($req, 'theme');
 		    echo $cookie;
+		    
 		    $cookiex = FigResponseCookies::get($res, 'theme');
 		    echo $cookiex;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			

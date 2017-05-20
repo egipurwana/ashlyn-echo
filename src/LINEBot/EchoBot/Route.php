@@ -63,24 +63,27 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-			$cookies = Cookies::fromRequest($req);
+			//$cookies = Cookies::fromRequest($req);
 			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
 			echo $response;
 			
-			$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
-		    echo $cookie2;
+			//$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
+		    //echo $cookie2;
 			
-			$cookie = Cookie::create('theme', 'blue');
-			$responseq = FigRequestCookies::set($req, $cookie);
-			echo $responseq;
+			//$cookie = Cookie::create('theme', 'blue');
+			//$responseq = FigRequestCookies::set($req, $cookie);
+			//echo $responseq;
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $cookies = Cookies::fromRequest($req);
+		    //$cookies = Cookies::fromRequest($req);
 		    $cookie = FigRequestCookies::get($req, 'theme');
 		    echo $cookie->getValue();
+		    echo $cookie->getName();
 		    
-		    $cookie1 = FigRequestCookies::get($req, 'theme');
-			echo $cookie1->getName();
+		    //$cookie1 = FigRequestCookies::get($req, 'theme');
+			//echo $cookie->getName();
+			
+			
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

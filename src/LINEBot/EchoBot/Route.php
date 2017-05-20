@@ -188,6 +188,7 @@ class Route
 						}else if ($event->getText() == "training end"){
 							$session->training = false;
 							$session->ask = true;
+
 							$session->delete('ask');
 							unset($session->ask);
 							$session->delete('training');
@@ -204,7 +205,7 @@ class Route
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
 						}
-						
+						/*
 						if($session->training == true){
 							if($session->ask == true){
 								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText().")";
@@ -230,7 +231,7 @@ class Route
 								}
 							}
 						}else{
-							$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
+						*/	$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
 							$result = $conn->query($sql);						
 							if ($result->num_rows > 0) {
 							    while($row = $result->fetch_assoc()) {
@@ -274,7 +275,7 @@ class Route
 							} else {
 								//not found
 							}
-						}
+						//}
 						
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());

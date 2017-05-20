@@ -84,6 +84,10 @@ class Route
 		    echo $cookie->getValue();
 		    echo $cookie->getName();
 		    
+		     $cookiexc = FigResponseCookies::get($res, 'color');
+		    echo $cookiexc->getValue();
+		    echo $cookiexc->getName();
+		    
 		    $cookiex = FigResponseCookies::get($res, 'theme');
 		    echo $cookiex->getValue();
 		    echo $cookiex->getName();

@@ -53,9 +53,10 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
-							
+			$app->setCookie('foo', 'bar', '2 days');		
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
+		    $app->getCookie('foo');
 			require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*
@@ -146,18 +147,16 @@ class Route
 													else{
 														//$src = print_r($event,true);
 														//$resp = $bot->replyText($event->getReplyToken(), $src);
-														if($event->getType() != 'group'){
+														if($event->getType() == "user"){
 															$resp = $bot->getProfile($event->getUserId());
 															if ($resp->isSucceeded()) {
 															    $profile = $resp->getJSONDecodedBody();
 															    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
 															    $resp = $bot->replyText($event->getReplyToken(), $kata." ".$event->getType());
-															}else{
-																$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
-															    $resp = $bot->replyText($event->getReplyToken(), $kata2." ".$event->getType());
 															}
 														}else{
-															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]." ".$event->getType());
+															$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
+														    $resp = $bot->replyText($event->getReplyToken(), $kata2);
 														}											
 													}
 												}else{

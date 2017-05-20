@@ -19,6 +19,7 @@ namespace LINE\LINEBot\EchoBot;
 
 use Dflydev\FigCookies\Cookie;
 use Dflydev\FigCookies\FigRequestCookies;
+use Dflydev\FigCookies\FigResponseCookies;
 
 use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;

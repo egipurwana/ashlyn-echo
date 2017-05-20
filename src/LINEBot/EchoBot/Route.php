@@ -17,6 +17,9 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Dflydev\FigCookies\Cookie;
+use Dflydev\FigCookies\FigRequestCookies;
+
 use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;
 
@@ -53,9 +56,18 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+		    
+		    $request = FigRequestCookies::set($req, Cookie::create('theme', 'blue'));
+			
+			$cookie = FigRequestCookies::get($req, 'theme');
+			echo $cookie;
 
+			//$cookie = Cookie::create('theme', 'blue');
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+		    $cookie = FigRequestCookies::get($req, 'theme');
+			echo $cookie;
+		    
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

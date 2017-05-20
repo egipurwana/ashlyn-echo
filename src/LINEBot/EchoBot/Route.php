@@ -123,7 +123,8 @@ class Route
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;
             $logger = $this->logger;
-
+            $session = $this->session;
+			$conn = $this->db;
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
             if (empty($signature)) {
                 return $res->withStatus(400, 'Bad Request');
@@ -150,115 +151,140 @@ class Route
 	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
-						$conn = $this->db;
-				    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText().")";
-						if ($conn->query($sql) === TRUE) {
+						
+				    	$sqlxxx = "INSERT INTO message (text) VALUES ('".$event->getText().")";
+						if ($conn->query($sqlxxx) === TRUE) {
 							$logger->info('New record created successfully');
 						} else {
-							$logger->info("Error: " . $sql);
+							$logger->info("Error: " . $sqlxxx);
 						}
 						
-						$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
-						$result = $conn->query($sql);						
-						if ($result->num_rows > 0) {
-						    while($row = $result->fetch_assoc()) {
-						        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
-								$result1 = $conn->query($sql1);						
-								if ($result1->num_rows > 0) {
-								    while($row1 = $result1->fetch_assoc()) {
-								        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
-										$result2 = $conn->query($sql2);						
-										if ($result2->num_rows > 0) {
-										    while($row2 = $result2->fetch_assoc()) {
-											    if($row2["phrase"] != '|time|'){
-													if (strpos($row2["phrase"], '|name|') == false) {
-														$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
-													}
-													//else if (strpos($row2["phrase"], 'ya?') == true) {
-													//	$resp = $bot->replyText($event->getReplyToken(), 'hehe, kok tau sih?');
-													//}
-													else{
-														//$src = print_r($event,true);
-														//$resp = $bot->replyText($event->getReplyToken(), $src);
-														if($event->getType() == "user"){
-															$resp = $bot->getProfile($event->getUserId());
-															if ($resp->isSucceeded()) {
-															    $profile = $resp->getJSONDecodedBody();
-															    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
-															    $resp = $bot->replyText($event->getReplyToken(), $kata." ".$event->getType());
-															}
-														}else{
-															$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
-														    $resp = $bot->replyText($event->getReplyToken(), $kata2);
-														}											
-													}
-												}else{
-													$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
-											    }
-										    }
-										} else {
-											//$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 3');
-										}
-								    }
-								} else {
-									//$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 2');
-								}
-						    }
-						} else {
-							//$resp = $bot->replyText($event->getReplyToken(), 'Aduh aku belum bisa jawab, pertanyaannya terlalu berat kak :( 1');
-						}
-						
-						if ($event->getText() != "ingkah maneh rey"){
-							//$resp = $bot->leaveRoom('<roomId>');
-							//normal
-							//$replyText = $event->getText();
-							//$resp = $bot->replyText($event->getReplyToken(), $replyText);
-						}else{
-							//$replyTexts = $src;
-							//$replyTexts = $event->getType()." ".$event->getUserId()." ".$event->getGroupId();
-							
-							if($event->getType()=='user'){
-								$resp = $bot->leaveRoom($event->getUserId());	
-								$replyTexts = $event->getUserId();
-							}else if($event->getType()=='group'){
+						//leave group
+						//training mode
+						if ($event->getText() == "keluar kamu ashlyn"){
+							if($event->getType()=='group'){
 								$resp = $bot->leaveGroup($event->getGroupId());								
 								$replyTexts = $event->getGroupId();
 							}
-							
-								
 						}
+						
+						if ($event->getText() == "training start"){
+							if(!isset($session->training)){
+								if (isset($event->getUserId())){
+									$session->training = true;
+									$session->trainerid = $event->getUserId();
+									$session->ask = true;
+								}
+							}else{
+								$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
+							}
+						}else if ($event->getText() == "training end"){
+							$session->training = false;
+							$session->ask = true;
+							$session->delete('ask');
+							unset($session->ask);
+							$session->delete('training');
+							unset($session->training);
+							$session->delete('trainerid');
+							unset($session->trainerid);							
+							$session::destroy();							
+							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
+						}else if ($event->getText() == "join trainer"){
+							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId().")";
+							if ($conn->query($sql) === TRUE) {
+								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
+							} else {
+								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
+							}
+						}
+						
+						if($session->training == true){
+							if($session->ask == true){
+								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText().")";
+								if ($conn->query($sqlxxx) === TRUE) {
+									$sqltrain = "SELECT ROW_COUNT FROM phrase";
+									$result = $conn->query($sql);
+									$src = print_r($result->fetch_assoc(),true);
+									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$src);
+									$session->ask == false;
+								} else {
+									$logger->info("Error: " . $sqlxxx);
+								}
+							}else if($session->ask == false){
+								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText().")";
+								if ($conn->query($sqlxxx) === TRUE) {
+									$sqltrain = "SELECT ROW_COUNT FROM phrase";
+									$result = $conn->query($sql);
+									$src = print_r($result->fetch_assoc(),true);
+									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$src);
+									$session->ask == false;
+								} else {
+									$logger->info("Error: " . $sqlxxx);
+								}
+							}
+						}else{
+							$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
+							$result = $conn->query($sql);						
+							if ($result->num_rows > 0) {
+							    while($row = $result->fetch_assoc()) {
+							        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
+									$result1 = $conn->query($sql1);						
+									if ($result1->num_rows > 0) {
+									    while($row1 = $result1->fetch_assoc()) {
+									        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
+											$result2 = $conn->query($sql2);						
+											if ($result2->num_rows > 0) {
+											    while($row2 = $result2->fetch_assoc()) {
+												    if($row2["phrase"] != '|time|'){
+														if (strpos($row2["phrase"], '|name|') == false) {
+															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+														}
+														else{
+															if($event->getType() == "user"){
+																$resp = $bot->getProfile($event->getUserId());
+																if ($resp->isSucceeded()) {
+																    $profile = $resp->getJSONDecodedBody();
+																    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
+																    $resp = $bot->replyText($event->getReplyToken(), $kata." ".$event->getType());
+																}
+															}else{
+																$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
+															    $resp = $bot->replyText($event->getReplyToken(), $kata2);
+															}											
+														}
+													}else{
+														$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
+												    }
+											    }
+											} else {
+												//not found
+											}
+									    }
+									} else {
+										//not found
+									}
+							    }
+							} else {
+								//not found
+							}
+						}
+						
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());
 		                $resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);
-		                
-		                //$replyText = "Kalo ga ngirim stiker 'absolutely state of the art' mending ga usah deh";                
-						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof LocationMessage) {
 		                $locBuilder = new LocationMessageBuilder('DenganSenangHati HQ', 'Jl. Bojong Wetan', '-6.891063', '107.632794');
 		                $resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
-		                
-		                //$replyText = "Lokasi apa nih?";                
-						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof ImageMessage) {
 		                $imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$imgBuilder);
-		                
-			            //$replyText = "Kirim gambarnya yang lebih okei dong";                
-						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);
 						$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);
-		                
-		                //$replyText = "Suaranya bagus, tapi lebih bagus diem deh kayanya";                
-						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } elseif ($event instanceof VideoMessage) {
 		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),$vidBuilder);
-		                
-		                //$replyText = "Duh kirimnya video yang lebih berguna dong";                
-						//$resp = $bot->replyText($event->getReplyToken(), $replyText);
                     } else {
-                        // Just in case...
                         $logger->info('Unknown message type has come');
                         continue;
                     }
@@ -285,27 +311,6 @@ class Route
                     $logger->info('Unknown event type has come');
                     continue;
                 }
-	            
-                /*if (!($event instanceof MessageEvent)) {
-                    $logger->info('Non message event has come');
-                    continue;
-                }
-
-                if (!($event instanceof TextMessage)) {
-                    $logger->info('Non text message has come');
-                    continue;
-                }
-                
-		    	$conn = $this->db;
-		    	$sql = "INSERT INTO message (text) VALUES ('".$event->getText()." ".$signature."')";
-				if ($conn->query($sql) === TRUE) {
-					$logger->info('New record created successfully');
-				} else {
-					$logger->info("Error: " . $sql);
-				}
-                
-                $replyText = $event->getText();                
-                $resp = $bot->replyText($event->getReplyToken(), $replyText);*/
             }
 
             $res->write('OK');

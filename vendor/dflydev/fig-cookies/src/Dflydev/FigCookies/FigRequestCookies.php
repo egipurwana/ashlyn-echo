@@ -18,7 +18,7 @@ class FigRequestCookies
     {
         $cookies = Cookies::fromRequest($request);
         if ($cookies->has($name)) {
-            return $cookies->get($name);
+            return $cookies->get($value);
         }
 
         return Cookie::create($name, $value);

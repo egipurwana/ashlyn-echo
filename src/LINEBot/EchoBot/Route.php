@@ -81,17 +81,6 @@ class Route
 		$id = $this->session::id();
 		*/
 		
-	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $session = $this->session;
-		    $session->color = 'blue';
-	    });
-	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $session = $this->session;
-		    $my_value = $session->color;
-		    echo $my_value;
-		    
-			//require_once(__DIR__ . '/../../../public/datatrain.php');			
-	    });
 		/*
 		if(!empty($_POST))
 		{
@@ -120,6 +109,18 @@ class Route
 			echo "Invalid Requests";
 		}
 		*/
+		
+	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+		    $session = $this->session;
+		    $session->color = 'blue';
+	    });
+	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
+		    $session = $this->session;
+		    $my_value = $session->color;
+		    echo $my_value;
+		    
+			//require_once(__DIR__ . '/../../../public/datatrain.php');			
+	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;
             $logger = $this->logger;
@@ -159,7 +160,7 @@ class Route
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						
-				    	$sqlxxx = "INSERT INTO message (text) VALUES ('".$event->getText().")";
+				    	$sqlxxx = "INSERT INTO message (text) VALUES ('".$event->getText()."')";
 						if ($conn->query($sqlxxx) === TRUE) {
 							$logger->info('New record created successfully');
 						} else {
@@ -174,7 +175,7 @@ class Route
 								$replyTexts = $event->getGroupId();
 							}
 						}
-						/*
+						
 						if ($event->getText() == "training start"){
 							if(!isset($session->training)){
 								if (isset($event->getUserId())){
@@ -190,27 +191,28 @@ class Route
 							$session->ask = true;
 
 							$session->delete('ask');
-							unset($session->ask);
+							//unset($session->ask);
 							$session->delete('training');
-							unset($session->training);
+							//unset($session->training);
 							$session->delete('trainerid');
-							unset($session->trainerid);							
+							//unset($session->trainerid);							
 							$session::destroy();							
+							
 							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
 						}else if ($event->getText() == "join trainer"){
-							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId().")";
+							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
 							if ($conn->query($sql) === TRUE) {
 								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
 						}
-						*/
+						
 						
 						/*
 						if($session->training == true){
 							if($session->ask == true){
-								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText().")";
+								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT ROW_COUNT FROM phrase";
 									$result = $conn->query($sqltrain);
@@ -221,7 +223,7 @@ class Route
 									$logger->info("Error: " . $sqlxxx);
 								}
 							}else if($session->ask == false){
-								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText().")";
+								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT ROW_COUNT FROM phrase";
 									$result = $conn->query($sqltrain);

@@ -67,9 +67,25 @@ class Route
 			//$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
 			//echo $response;
 			
-			$cookie = FigRequestCookies::get($req, 'color', 'red');
-		    echo $cookie->getValue();
-		    echo $cookie->getName();
+			//$cookie = FigRequestCookies::get($req, 'color', 'red');
+		    //echo $cookie->getValue();
+		    //echo $cookie->getName();
+		    
+			$setCookie = SetCookie::create('lu')
+			    ->withValue('Rg3vHJZnehYLjVg7qi3bZjzg')
+			    ->withExpires('Tue, 15-Jan-2013 21:47:38 GMT')
+			    ->withMaxAge(500)
+			    ->rememberForever()
+			    ->withPath('/')
+			    ->withDomain('.herokuapp.com')
+			    ->withSecure(true)
+			    ->withHttpOnly(true)
+			;
+			
+			$setCookie = FigResponseCookies::get($res, 'theme');
+			echo $setCookie;
+			$setCookie1 = FigResponseCookies::get($res, 'theme', 'simple');
+			echo $setCookie1;
 			
 			//$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
 		    //echo $cookie2;

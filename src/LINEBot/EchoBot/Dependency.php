@@ -36,7 +36,8 @@ class Dependency
         };
         
 		$container['cookies'] = function ($c) { 
-		  return new \Slim\Http\Cookies; 
+			$cookies = new \Slim\Http\Cookies();
+			return $cookies; 
 		};
 
         $container['bot'] = function ($c) {

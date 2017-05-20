@@ -84,7 +84,7 @@ class Route
 			
 			$setCookie = FigResponseCookies::get($res, 'theme');
 			echo $setCookie;
-			$setCookie1 = FigResponseCookies::get($res, 'theme', 'simple');
+			$setCookie1 = FigResponseCookies::get($res, 'theme1', 'simple');
 			echo $setCookie1;
 			
 			//$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
@@ -100,7 +100,7 @@ class Route
 		    //echo $cookie->getValue();
 		    //echo $cookie->getName();
 		    
-		    $cookiexc = FigResponseCookies::get($res, 'color');
+		    $cookiexc = FigResponseCookies::get($res, 'theme1');
 		    echo $cookiexc."<br>";
 		    echo $cookiexc->getValue()."<br>";
 		    echo $cookiexc->getName()."<br>";

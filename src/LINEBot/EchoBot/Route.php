@@ -67,6 +67,10 @@ class Route
 			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue1')->rememberForever());
 			echo $response;
 			
+			$cookie = FigRequestCookies::get($req, 'color', 'red');
+		    echo $cookie->getValue();
+		    echo $cookie->getName();
+			
 			//$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
 		    //echo $cookie2;
 			
@@ -76,7 +80,7 @@ class Route
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    //$cookies = Cookies::fromRequest($req);
-		    $cookie = FigRequestCookies::get($req, 'theme');
+		    $cookie = FigRequestCookies::get($req, 'color');
 		    echo $cookie->getValue();
 		    echo $cookie->getName();
 		    

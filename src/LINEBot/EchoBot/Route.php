@@ -58,20 +58,11 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    //$res = FigResponseCookies::remove($res, 'theme');
-		    
-		    //$req = FigRequestCookies::set($req, Cookie::create('theme', 'blue'));
-			//$cookie = FigRequestCookies::get($req, 'theme');
-			//echo $cookie;
-
-			$cookie = Cookie::create('theme', 'blue');
+			$setCookie = FigResponseCookies::get($response, 'theme', 'simple');
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $cookies = Cookies::get('theme');
-		    echo $cookies;
-		    //$cookie = FigRequestCookies::get($req, 'theme');
-			//echo $cookie;
-		    
+			$setCookie = FigResponseCookies::get($response, 'theme');
+			echo $setCookie;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

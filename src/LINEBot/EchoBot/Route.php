@@ -17,6 +17,7 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Dflydev\FigCookies\SetCookie;
 use Dflydev\FigCookies\Cookie;
 use Dflydev\FigCookies\Cookies;
 use Dflydev\FigCookies\FigRequestCookies;
@@ -62,12 +63,17 @@ class Route
 			echo $setCookie;
 			$cookie = FigRequestCookies::get($req, 'theme');
 			echo $cookie;
+			$setCookiex = FigResponseCookies::get($res, 'theme');
+			echo $setCookiex;
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			$request = FigRequestCookies::set($req, Cookie::create('theme', 'blue1'));
 		    $req = FigRequestCookies::set($req, Cookie::create('theme', 'blue2'));
 		    $cookie = FigRequestCookies::get($req, 'theme', 'blue3');
 		    $cookies = Cookie::create('theme', 'blue4');
+		    $response = FigResponseCookies::set($res, SetCookie::create('theme')
+			    ->withValue('a9s87dfz978a9')
+			);
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

@@ -175,42 +175,14 @@ class Route
 							}
 						}
 						
-						if ($event->getText() == "training start"){
-							$session->trainerid = $event->getUserId();
-							$session->training = true;
-							$session->ask = true;
-							
-							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
-						}else if ($event->getText() == "training end"){
-							$session->training = false;
-							$session->ask = true;
-
-							$session->delete('ask');
-							unset($session->ask);
-							$session->delete('training');
-							unset($session->training);
-							$session->delete('trainerid');
-							unset($session->trainerid);							
-							$session::destroy();							
-							
-							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
-						}else if ($event->getText() == "join trainer"){
-							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
-							if ($conn->query($sql) === TRUE) {
-								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
-							} else {
-								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
-							}
-						}
-						
 						if($session->training == true){
 							if($session->ask == true){
 								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
-									$sqltrain = "SELECT ROW_COUNT FROM phrase";
+									$sqltrain = "SELECT COUNT(*) FROM phrase";
 									$result = $conn->query($sqltrain);
-									$src = print_r($result->fetch_assoc(),true);
-									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$src);
+									$row = $result->fetch_row();
+									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row[0]);
 									$session->ask = false;
 								} else {
 									$logger->info("Error: " . $sqlxxx);
@@ -218,10 +190,10 @@ class Route
 							}else if($session->ask == false){
 								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
-									$sqltrain = "SELECT ROW_COUNT FROM phrase";
+									$sqltrain = "SELECT COUNT(*) FROM answer";
 									$result = $conn->query($sqltrain);
-									$src = print_r($result->fetch_assoc(),true);
-									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$src);
+									$row = $result->fetch_row();
+									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row[0]);
 									$session->ask = true;
 								} else {
 									$logger->info("Error: " . $sqlxxx);
@@ -271,6 +243,34 @@ class Route
 							    }
 							} else {
 								//not found
+							}
+						}
+						
+						if ($event->getText() == "training start"){
+							$session->trainerid = $event->getUserId();
+							$session->training = true;
+							$session->ask = true;
+							
+							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
+						}else if ($event->getText() == "training end"){
+							$session->training = false;
+							$session->ask = true;
+
+							$session->delete('ask');
+							unset($session->ask);
+							$session->delete('training');
+							unset($session->training);
+							$session->delete('trainerid');
+							unset($session->trainerid);							
+							$session::destroy();							
+							
+							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
+						}else if ($event->getText() == "join trainer"){
+							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
+							if ($conn->query($sql) === TRUE) {
+								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
+							} else {
+								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
 						}
 						

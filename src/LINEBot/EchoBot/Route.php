@@ -52,12 +52,10 @@ class Route
 {
     public function register(\Slim\App $app)
     {
-	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
-		    $app = \Slim\Slim::getInstance();
+	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use($app){
 			$app->setCookie('foo', 'bar', '2 days');		
 	    });
-	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
-		    $app = \Slim\Slim::getInstance();
+	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use($app){
 		    $cookies = $app->getCookie('foo');
 			require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });

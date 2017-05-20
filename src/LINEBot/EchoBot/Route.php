@@ -17,6 +17,8 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Slim\Http\Cookies;
+
 use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;
 

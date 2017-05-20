@@ -54,10 +54,13 @@ class Route
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			$this->cookie->set('foo', 'bar');
+			$cookies = $this->cookie->get('foo');
+		    echo $cookies;
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $cookies = $this->cookie->get('foo');
-			require_once(__DIR__ . '/../../../public/datatrain.php');			
+		    echo $cookies;
+			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*
 		if(!empty($_POST))

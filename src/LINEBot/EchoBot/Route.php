@@ -255,7 +255,7 @@ class Route
 							$session->training = true;
 							$session->ask = true;
 							
-							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
+							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING ".$session->training);
 						}else if ($event->getText() == "training end"){
 							$session->training = false;
 							$session->ask = true;

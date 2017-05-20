@@ -67,6 +67,9 @@ class Route
 			$response = FigResponseCookies::set($res, SetCookie::create('theme')->withValue('blue')->rememberForever());
 			echo $response;
 			
+			$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme-1');
+		    echo $cookie2;
+			
 			$cookie = Cookie::create('theme', 'blue');
 			$responseq = FigRequestCookies::set($req, $cookie);
 			echo $responseq;
@@ -78,8 +81,7 @@ class Route
 		    
 		    $cookie1 = FigRequestCookies::get($req, 'theme');
 			echo $cookie1;
-			$cookie2 = FigRequestCookies::get($req, 'theme', 'default-theme');
-		    echo $cookie2;
+			
 		    
 		    $cookiex = FigResponseCookies::get($res, 'theme');
 		    echo $cookiex;

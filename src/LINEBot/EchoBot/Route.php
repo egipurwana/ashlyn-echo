@@ -70,6 +70,8 @@ class Route
 		    $cookies = Cookies::fromRequest($req);
 		    $cookie = FigRequestCookies::get($req, 'theme');
 		    echo $cookie;
+		    $cookiex = FigResponseCookies::get($res, 'theme');
+		    echo $cookiex;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

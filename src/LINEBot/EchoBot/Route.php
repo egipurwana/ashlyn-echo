@@ -196,7 +196,7 @@ class Route
 							//unset($session->training);
 							$session->delete('trainerid');
 							//unset($session->trainerid);							
-							$session::destroy();							
+							//$session::destroy();							
 							
 							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
 						}else if ($event->getText() == "join trainer"){

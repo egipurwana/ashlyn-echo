@@ -177,7 +177,7 @@ class Route
 						}
 						
 						if ($event->getText() == "training start"){
-							if(!isset($session->training)){
+							/*if(!isset($session->training)){
 								if (isset($event->getUserId())){
 									$session->training = true;
 									$session->trainerid = $event->getUserId();
@@ -185,18 +185,18 @@ class Route
 								}
 							}else{
 								$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
-							}
-						}else if ($event->getText() == "training end"){
+							}*/
+						}/*else if ($event->getText() == "training end"){
 							$session->training = false;
 							$session->ask = true;
 
 							$session->delete('ask');
-							//unset($session->ask);
+							unset($session->ask);
 							$session->delete('training');
-							//unset($session->training);
+							unset($session->training);
 							$session->delete('trainerid');
-							//unset($session->trainerid);							
-							//$session::destroy();							
+							unset($session->trainerid);							
+							$session::destroy();							
 							
 							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
 						}else if ($event->getText() == "join trainer"){
@@ -206,7 +206,7 @@ class Route
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
-						}
+						}*/
 						
 						
 						/*

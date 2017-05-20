@@ -53,12 +53,10 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-			$this->cookie->set('foo', 'bar');
-			$cookies = $this->cookie->get('foo');
-		    echo $cookies;
+			$app->setCookie('foo', 'bar', '2 days');
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $cookies = $this->cookie->get('foo');
+		    $cookies = $app->getCookie('foo');
 		    echo $cookies;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });

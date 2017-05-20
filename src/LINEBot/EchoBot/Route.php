@@ -174,7 +174,7 @@ class Route
 								$replyTexts = $event->getGroupId();
 							}
 						}
-						
+						/*
 						if ($event->getText() == "training start"){
 							if(!isset($session->training)){
 								if (isset($event->getUserId())){
@@ -205,6 +205,8 @@ class Route
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
 						}
+						*/
+						
 						/*
 						if($session->training == true){
 							if($session->ask == true){

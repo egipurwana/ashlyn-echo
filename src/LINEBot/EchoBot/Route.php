@@ -168,7 +168,6 @@ class Route
 						}
 						
 						//leave group
-						//training mode
 						if ($event->getText() == "keluar kamu ashlyn"){
 							if($event->getType()=='group'){
 								$resp = $bot->leaveGroup($event->getGroupId());								
@@ -177,8 +176,11 @@ class Route
 						}
 						
 						if ($event->getText() == "training start"){
-							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
 							$session->trainerid = $event->getUserId();
+							$session->training = true;
+							$session->ask = true;
+							
+							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
 						}else if ($event->getText() == "training end"){
 							$session->training = false;
 							$session->ask = true;

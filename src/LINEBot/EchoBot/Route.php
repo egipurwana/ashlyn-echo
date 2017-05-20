@@ -53,7 +53,7 @@ class Route
     public function register(\Slim\App $app)
     {
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-			//$this->$app->setCookie('foo', 'bar', '2 days');
+			$app->setCookie('foo', 'bar', '2 days');
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    //$cookies = $this->$app->getCookie('foo');

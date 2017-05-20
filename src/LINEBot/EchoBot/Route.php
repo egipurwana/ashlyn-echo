@@ -182,10 +182,13 @@ class Route
 									$sqltrain = "SELECT COUNT(*) FROM phrase";
 									$result = $conn->query($sqltrain);
 									$row = $result->fetch_row();
+									
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row[0]);
+									
 									$session->ask = false;
 								} else {
-									$logger->info("Error: " . $sqlxxx);
+									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk, idnya ".$sqlxxx);
+									//$logger->info("Error: " . $sqlxxx);
 								}
 							}else if($session->ask == false){
 								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText()."')";
@@ -242,6 +245,7 @@ class Route
 									}
 							    }
 							} else {
+								$resp = $bot->replyText($event->getReplyToken(),$session->training." ".$session->get('training', 'default'));
 								//not found
 							}
 						}
@@ -250,6 +254,8 @@ class Route
 							$session->trainerid = $event->getUserId();
 							$session->training = true;
 							$session->ask = true;
+							
+							$app->session->set('training', true);
 							
 							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING");
 						}else if ($event->getText() == "training end"){

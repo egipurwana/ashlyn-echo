@@ -27,17 +27,6 @@ require_once __DIR__ . '/../src/LINEBot/EchoBot/Connection.php';
 
 $setting = Setting::getSetting();
 $app = new Slim\App($setting);
-$app->add(new \Slim\Middleware\SessionCookie(array(
-    'expires' => '20 minutes',
-    'path' => '/',
-    'domain' => null,
-    'secure' => false,
-    'httponly' => false,
-    'name' => 'slim_session',
-    'secret' => 'cucurucucu123456',
-    'cipher' => MCRYPT_RIJNDAEL_256,
-    'cipher_mode' => MCRYPT_MODE_CBC
-)));
 
 (new Connection())->register($app);
 (new Dependency())->register($app);

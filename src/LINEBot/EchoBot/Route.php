@@ -56,7 +56,7 @@ class Route
 			$app->setCookie('foo', 'bar', '2 days');		
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res){
-		    $app->getCookie('foo');
+		    $cookies = $app->getCookie('foo');
 			require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });
 		/*

@@ -15,6 +15,9 @@
 		</style>
 	</head>
 	<body>
+		<?
+		echo $cookies.' ini adalah cookies';
+		?>
 		<table class="table">
 	    <thead>
 	      <tr>

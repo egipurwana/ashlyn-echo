@@ -128,9 +128,9 @@ class Route
 			$conn = $this->db;
 			
 			if (!isset($session->training)){
-				$session->training = false;
+				$session->training = 0;
 				$session->trainerid = 0;
-				$session->ask = true;
+				$session->ask = 0;
 			}
 			
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
@@ -175,8 +175,8 @@ class Route
 							}
 						}
 						
-						if($session->training == true){
-							if($session->ask == true){
+						if($session->training == 1){
+							if($session->ask == 1){
 								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT COUNT(*) FROM phrase";
@@ -185,19 +185,19 @@ class Route
 									
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row[0]);
 									
-									$session->ask = false;
+									$session->ask = 0;
 								} else {
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk, idnya ".$sqlxxx);
 									//$logger->info("Error: " . $sqlxxx);
 								}
-							}else if($session->ask == false){
+							}else if($session->ask == 0){
 								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT COUNT(*) FROM answer";
 									$result = $conn->query($sqltrain);
 									$row = $result->fetch_row();
 									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row[0]);
-									$session->ask = true;
+									$session->ask = 1;
 								} else {
 									$logger->info("Error: " . $sqlxxx);
 								}
@@ -252,13 +252,13 @@ class Route
 						
 						if ($event->getText() == "training start"){
 							$session->trainerid = $event->getUserId();
-							$session->training = true;
-							$session->ask = true;
+							$session->training = 1;
+							$session->ask = 1;
 							
 							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING ".$session->training);
 						}else if ($event->getText() == "training end"){
-							$session->training = false;
-							$session->ask = true;
+							$session->training = 0;
+							$session->ask = 0;
 
 							$session->delete('ask');
 							unset($session->ask);

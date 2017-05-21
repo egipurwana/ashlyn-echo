@@ -173,6 +173,15 @@ class Route
 							}
 						}
 						
+						if ($event->getText() == "training start"){
+							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
+							if ($conn->query($sql) === TRUE) {
+								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku mas, ayo mulai dengan pertanyaan pertama!");
+							} else {
+								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
+							}
+						}
+						
 						$sql = "SELECT * FROM trainer where iduser = '".$event->getUserId()."'";
 						$result = $conn->query($sql);						
 						if ($result->num_rows > 0) {
@@ -245,7 +254,7 @@ class Route
 								}
 							}
 						}else{
-							$sql = "SELECT * FROM phrase where phrase like '%".mysqli_real_escape_string($event->getText())."%'";
+							$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
 							$result = $conn->query($sql);						
 							if ($result->num_rows > 0) {
 							    while($row = $result->fetch_assoc()) {
@@ -290,15 +299,6 @@ class Route
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(),$session->training);
 								//not found
-							}
-						}
-						
-						if ($event->getText() == "training start"){
-							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
-							if ($conn->query($sql) === TRUE) {
-								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku mas, ayo mulai dengan pertanyaan pertama!");
-							} else {
-								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}
 						}
 						

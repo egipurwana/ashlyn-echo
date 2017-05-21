@@ -173,15 +173,6 @@ class Route
 							}
 						}
 						
-						if ($event->getText() == "training start"){
-							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
-							if ($conn->query($sql) === TRUE) {
-								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku mas, ayo mulai dengan pertanyaan pertama!");
-							} else {
-								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
-							}
-						}
-						
 						$sql = "SELECT * FROM trainer where iduser = '".$event->getUserId()."'";
 						$result = $conn->query($sql);						
 						if ($result->num_rows > 0) {
@@ -254,51 +245,60 @@ class Route
 								}
 							}
 						}else{
-							$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
-							$result = $conn->query($sql);						
-							if ($result->num_rows > 0) {
-							    while($row = $result->fetch_assoc()) {
-							        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
-									$result1 = $conn->query($sql1);						
-									if ($result1->num_rows > 0) {
-									    while($row1 = $result1->fetch_assoc()) {
-									        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
-											$result2 = $conn->query($sql2);						
-											if ($result2->num_rows > 0) {
-											    while($row2 = $result2->fetch_assoc()) {
-												    if($row2["phrase"] != '|time|'){
-														if (strpos($row2["phrase"], '|name|') == false) {
-															$my_value = $session->color;
-															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]." ".$my_value);
-														}
-														else{
-															if($event->getType() == "user"){
-																$resp = $bot->getProfile($event->getUserId());
-																if ($resp->isSucceeded()) {
-																    $profile = $resp->getJSONDecodedBody();
-																    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
-																    $resp = $bot->replyText($event->getReplyToken(), $kata);
-																}
-															}else{
-																$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
-															    $resp = $bot->replyText($event->getReplyToken(), $kata2);
-															}											
-														}
-													}else{
-														$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
+							if ($event->getText() != "training start"){
+								$sql = "SELECT * FROM phrase where phrase like '%".$event->getText()."%'";
+								$result = $conn->query($sql);						
+								if ($result->num_rows > 0) {
+								    while($row = $result->fetch_assoc()) {
+								        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
+										$result1 = $conn->query($sql1);						
+										if ($result1->num_rows > 0) {
+										    while($row1 = $result1->fetch_assoc()) {
+										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
+												$result2 = $conn->query($sql2);						
+												if ($result2->num_rows > 0) {
+												    while($row2 = $result2->fetch_assoc()) {
+													    if($row2["phrase"] != '|time|'){
+															if (strpos($row2["phrase"], '|name|') == false) {
+																$my_value = $session->color;
+																$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]." ".$my_value);
+															}
+															else{
+																if($event->getType() == "user"){
+																	$resp = $bot->getProfile($event->getUserId());
+																	if ($resp->isSucceeded()) {
+																	    $profile = $resp->getJSONDecodedBody();
+																	    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
+																	    $resp = $bot->replyText($event->getReplyToken(), $kata);
+																	}
+																}else{
+																	$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
+																    $resp = $bot->replyText($event->getReplyToken(), $kata2);
+																}											
+															}
+														}else{
+															$resp = $bot->replyText($event->getReplyToken(), 'Sekarang jam '.date("h:i:sa"));
+													    }
 												    }
-											    }
-											} else {
-												//not found
-											}
-									    }
-									} else {
-										//not found
-									}
-							    }
-							} else {
-								$resp = $bot->replyText($event->getReplyToken(),$session->training);
-								//not found
+												} else {
+													//not found
+												}
+										    }
+										} else {
+											//not found
+										}
+								    }
+								} else {
+									$resp = $bot->replyText($event->getReplyToken(),$session->training);
+									//not found
+								}
+							}else{
+								$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
+								if ($conn->query($sql) === TRUE) {
+									$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku mas, ayo mulai dengan pertanyaan pertama!");
+								} else {
+									$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
+								}
 							}
 						}
 						

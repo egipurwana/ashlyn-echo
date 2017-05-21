@@ -216,7 +216,7 @@ class Route
 											$result = $conn->query($sqlxxy);
 											
 											$imgBuilder = new TextMessageBuilder('Terus Jawabannya Apaan?');
-											$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);		
+											$resp = $bot->pushMessage($trainerid,$imgBuilder);		
 										}
 									}
 									$row = $result->fetch_row();
@@ -239,7 +239,7 @@ class Route
 											$sqlxxxx = "INSERT INTO relation (idphrase,idanswer) VALUES (".$questionid.",".$row['id'].")";
 											if ($conn->query($sqlxxxx) === TRUE) {
 												$imgBuilder = new TextMessageBuilder('Okei, Aku mengerti sekarang. Pertanyaan lain dong!');
-												$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+												$resp = $bot->pushMessage($trainerid,$imgBuilder);
 											}
 										}
 									}

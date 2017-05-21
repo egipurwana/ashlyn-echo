@@ -185,17 +185,14 @@ class Route
 								    $answerid = $row["idanswer"];
 							    }
 							}else{
-								$sql = "DELETE FROM 'trainer' WHERE iduser = '".$event->getUserId()."'";
+								$sql = "DELETE FROM trainer WHERE iduser = '".$event->getUserId()."'";
 								if ($conn->query($sql) === TRUE) {
-									$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
-	
-									$imgBuilder = new TextMessageBuilder('Oke, Ajukan pertanyaan buat aku dong!');
-									$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+									$resp = $bot->replyText($event->getReplyToken(), "Terima kasih udah ngajarin aku, semoga besok aku segera jadi lebih baik :*");
 								} else {
-									$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
+									$resp = $bot->replyText($event->getReplyToken(), "Aku belum mau pisah sama kamu, coba lebih keras lagi");
 								}						
 								
-								$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
+								//$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
 								$trainingmode = false;
 								$question = 1;
 							}
@@ -210,7 +207,7 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row["id"]);
+											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?");//.$row["id"]);
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);
@@ -231,7 +228,7 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row["id"]);
+											$resp = $bot->replyText($event->getReplyToken(),"Okei, Aku mengerti sekarang. Pertanyaan lain dong");//.$row["id"]);
 
 											$sqlxxy = "UPDATE trainer SET training_mode = 1, idanswer= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);

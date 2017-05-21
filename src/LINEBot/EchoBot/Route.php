@@ -126,11 +126,11 @@ class Route
             $session = $this->session;
 			$conn = $this->db;
 			
-			if (!isset($session->training)){
+			/*if ($session->training){
 				$session->training = 0;
 				$session->trainerid = 0;
 				$session->ask = 0;
-			}
+			}*/
 			
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
             if (empty($signature)) {
@@ -225,7 +225,7 @@ class Route
 																if ($resp->isSucceeded()) {
 																    $profile = $resp->getJSONDecodedBody();
 																    $kata = str_replace("|name|",$profile['displayName'],$row2["phrase"]);   
-																    $resp = $bot->replyText($event->getReplyToken(), $kata." ".$event->getType());
+																    $resp = $bot->replyText($event->getReplyToken(), $kata);
 																}
 															}else{
 																$kata2 = str_replace("|name|",'kamu',$row2["phrase"]);   
@@ -245,7 +245,7 @@ class Route
 									}
 							    }
 							} else {
-								$resp = $bot->replyText($event->getReplyToken(),$session->training);
+								//$resp = $bot->replyText($event->getReplyToken(),$session->training);
 								//not found
 							}
 						}

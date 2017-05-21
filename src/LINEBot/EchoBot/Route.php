@@ -166,7 +166,6 @@ class Route
 							$logger->info("Error: " . $sqlxxx);
 						}
 						
-						//leave group
 						if ($event->getText() == "keluar kamu ashlyn"){
 							if($event->getType()=='group'){
 								$resp = $bot->leaveGroup($event->getGroupId());								
@@ -245,7 +244,7 @@ class Route
 									}
 							    }
 							} else {
-								//$resp = $bot->replyText($event->getReplyToken(),$session->training);
+								$resp = $bot->replyText($event->getReplyToken(),$session->training);
 								//not found
 							}
 						}

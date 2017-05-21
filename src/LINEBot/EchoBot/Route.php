@@ -159,7 +159,7 @@ class Route
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						
-				    	$sqlxxx = "INSERT INTO message (text) VALUES ('".mysqli_real_escape_string($event->getText())."')";
+				    	$sqlxxx = "INSERT INTO message (text) VALUES ('".$event->getText()."')";
 						if ($conn->query($sqlxxx) === TRUE) {
 							$logger->info('New record created successfully');
 						} else {
@@ -201,9 +201,9 @@ class Route
 						
 						if($trainingmode == true){
 							if($question == 1){
-								$sqlxxx = "INSERT IGNORE INTO phrase (phrase) VALUES ('".mysqli_real_escape_string($event->getText())."')";
+								$sqlxxx = "INSERT IGNORE INTO phrase (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
-									$sqltrain = "SELECT * FROM phrase where phrase = '".mysqli_real_escape_string($event->getText())."'";
+									$sqltrain = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
@@ -222,9 +222,9 @@ class Route
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk ".$sqlxxx);
 								}
 							}else if($question == 0){
-								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".mysqli_real_escape_string($event->getText())."')";
+								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
-									$sqltrain = "SELECT * FROM answer where phrase = '".mysqli_real_escape_string($event->getText())."'";
+									$sqltrain = "SELECT * FROM answer where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {

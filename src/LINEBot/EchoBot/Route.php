@@ -51,8 +51,7 @@ use ReflectionClass;
 class Route
 {
     public function register(\Slim\App $app)
-    {
-	    
+    { 
 	    /*
 		// Check if variable exists
 		$exists = $session->exists('my_key');
@@ -217,7 +216,8 @@ class Route
 											    while($row2 = $result2->fetch_assoc()) {
 												    if($row2["phrase"] != '|time|'){
 														if (strpos($row2["phrase"], '|name|') == false) {
-															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]);
+															$my_value = $session->color;
+															$resp = $bot->replyText($event->getReplyToken(), $row2["phrase"]." ".$my_value);
 														}
 														else{
 															if($event->getType() == "user"){

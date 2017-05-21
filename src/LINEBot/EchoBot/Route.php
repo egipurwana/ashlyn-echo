@@ -191,15 +191,18 @@ class Route
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
+									if ($result->num_rows > 0) {
+										while($row = $result->fetch_assoc()) {
+											$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row["id"]);
+									
+											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
+											$result = $conn->query($sqlxxy);
+											
+											$imgBuilder = new TextMessageBuilder('Terus Jawabannya Apaan?');
+											$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);		
+										}
+									}
 									$row = $result->fetch_row();
-									
-									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row["id"]);
-									
-								$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
-								$result = $conn->query($sqlxxx);
-								
-									$imgBuilder = new TextMessageBuilder('Terus Jawabannya Apaan?');
-									$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
 									
 								} else {
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk ".$sqlxxx);
@@ -209,17 +212,19 @@ class Route
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT * FROM answer where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
-									$row = $result->fetch_row();
-									
-									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row["id"]);
+									if ($result->num_rows > 0) {
+										while($row = $result->fetch_assoc()) {
+											$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row["id"]);
 
-								$sqlxxy = "UPDATE trainer SET training_mode = 1, idanswer= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
-								$result = $conn->query($sqlxxy);
-
-									$sqlxxxx = "INSERT INTO relation (idphrase,idanswer) VALUES (".$questionid.",".$row['id'].")";
-									if ($conn->query($sqlxxxx) === TRUE) {
-										$imgBuilder = new TextMessageBuilder('Okei, Aku mengerti sekarang. Pertanyaan lain dong!');
-										$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+											$sqlxxy = "UPDATE trainer SET training_mode = 1, idanswer= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
+											$result = $conn->query($sqlxxy);
+		
+											$sqlxxxx = "INSERT INTO relation (idphrase,idanswer) VALUES (".$questionid.",".$row['id'].")";
+											if ($conn->query($sqlxxxx) === TRUE) {
+												$imgBuilder = new TextMessageBuilder('Okei, Aku mengerti sekarang. Pertanyaan lain dong!');
+												$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+											}
+										}
 									}
 								} else {
 									$resp = $bot->replyText($event->getReplyToken(),"Jawaban enggak masuk ".$sqlxxx);
@@ -278,6 +283,9 @@ class Route
 							$sql = "DELETE FROM 'trainer' WHERE iduser = '".$event->getUserId()."'";
 							if ($conn->query($sql) === TRUE) {
 								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
+
+								$imgBuilder = new TextMessageBuilder('Oke, Ajukan pertanyaan buat aku dong!');
+								$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}						

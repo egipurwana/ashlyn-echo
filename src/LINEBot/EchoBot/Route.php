@@ -173,31 +173,56 @@ class Route
 							}
 						}
 						
-						if($session->training == 1){
-							if($session->ask == 1){
+						$sql = "SELECT * FROM trainer where iduser = '".$event->getUserId()."'";
+						$result = $conn->query($sql);						
+						if ($result->num_rows > 0) {
+						    while($row = $result->fetch_assoc()) {
+							    $trainingmode = true;
+							    $question = $row["training_mode"];
+							    $trainerid = $row["iduser"];
+							    $questionid = $row["idquestion"];
+							    $answerid = $row["idanswer"];
+						    }
+						}
+						
+						if($trainingmode == true){
+							if($question == 1){
 								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
-									$sqltrain = "SELECT COUNT(*) FROM phrase";
+									$sqltrain = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
 									$row = $result->fetch_row();
 									
-									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row[0]);
+									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan masuk, idnya : ".$row["id"]);
 									
-									$session->ask = 0;
+								$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
+								$result = $conn->query($sqlxxx);
+								
+									$imgBuilder = new TextMessageBuilder('Terus Jawabannya Apaan?');
+									$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+									
 								} else {
-									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk, idnya ".$sqlxxx);
-									//$logger->info("Error: " . $sqlxxx);
+									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk ".$sqlxxx);
 								}
-							}else if($session->ask == 0){
+							}else if($question == 0){
 								$sqlxxx = "INSERT INTO answer (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
-									$sqltrain = "SELECT COUNT(*) FROM answer";
+									$sqltrain = "SELECT * FROM answer where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
 									$row = $result->fetch_row();
-									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row[0]);
-									$session->ask = 1;
+									
+									$resp = $bot->replyText($event->getReplyToken(),"Jawaban masuk, idnya : ".$row["id"]);
+
+								$sqlxxy = "UPDATE trainer SET training_mode = 1, idanswer= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
+								$result = $conn->query($sqlxxy);
+
+									$sqlxxxx = "INSERT INTO relation (idphrase,idanswer) VALUES (".$questionid.",".$row['id'].")";
+									if ($conn->query($sqlxxxx) === TRUE) {
+										$imgBuilder = new TextMessageBuilder('Okei, Aku mengerti sekarang. Pertanyaan lain dong!');
+										$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+									}
 								} else {
-									$logger->info("Error: " . $sqlxxx);
+									$resp = $bot->replyText($event->getReplyToken(),"Jawaban enggak masuk ".$sqlxxx);
 								}
 							}
 						}else{
@@ -249,26 +274,18 @@ class Route
 							}
 						}
 						
-						if ($event->getText() == "training start"){
-							$session->trainerid = $event->getUserId();
-							$session->training = 1;
-							$session->ask = 1;
-							
-							$resp = $bot->replyText($event->getReplyToken(), "KAMU SEDANG ADA DI MODE TRAINING ".$session->training);
-						}else if ($event->getText() == "training end"){
-							$session->training = 0;
-							$session->ask = 0;
-
-							$session->delete('ask');
-							unset($session->ask);
-							$session->delete('training');
-							unset($session->training);
-							$session->delete('trainerid');
-							unset($session->trainerid);							
-							$session::destroy();							
+						if ($event->getText() == "training end"){							
+							$sql = "DELETE FROM 'trainer' WHERE iduser = '".$event->getUserId()."'";
+							if ($conn->query($sql) === TRUE) {
+								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
+							} else {
+								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
+							}						
 							
 							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
-						}else if ($event->getText() == "join trainer"){
+							$trainingmode = false;
+							$question = 1;
+						}else if ($event->getText() == "training start"){
 							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
 							if ($conn->query($sql) === TRUE) {
 								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");

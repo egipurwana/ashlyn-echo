@@ -296,7 +296,7 @@ class Route
 						if ($event->getText() == "training start"){
 							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
 							if ($conn->query($sql) === TRUE) {
-								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
+								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku mas, ayo mulai dengan pertanyaan pertama!");
 							} else {
 								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 							}

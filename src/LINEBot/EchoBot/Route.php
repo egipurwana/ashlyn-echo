@@ -204,7 +204,7 @@ class Route
 						
 						if($trainingmode == true){
 							if($question == 1){
-								$sqlxxx = "INSERT INTO phrase (phrase) VALUES ('".$event->getText()."')";
+								$sqlxxx = "INSERT IGNORE INTO phrase (phrase) VALUES ('".$event->getText()."')";
 								if ($conn->query($sqlxxx) === TRUE) {
 									$sqltrain = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);

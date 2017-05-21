@@ -176,13 +176,30 @@ class Route
 						$sql = "SELECT * FROM trainer where iduser = '".$event->getUserId()."'";
 						$result = $conn->query($sql);						
 						if ($result->num_rows > 0) {
-						    while($row = $result->fetch_assoc()) {
-							    $trainingmode = true;
-							    $question = $row["training_mode"];
-							    $trainerid = $row["iduser"];
-							    $questionid = $row["idquestion"];
-							    $answerid = $row["idanswer"];
-						    }
+							if ($event->getText() != "training end"){							
+								while($row = $result->fetch_assoc()) {
+								    $trainingmode = true;
+								    $question = $row["training_mode"];
+								    $trainerid = $row["iduser"];
+								    $questionid = $row["idquestion"];
+								    $answerid = $row["idanswer"];
+							    }
+							}else{
+								$sql = "DELETE FROM 'trainer' WHERE iduser = '".$event->getUserId()."'";
+								if ($conn->query($sql) === TRUE) {
+									$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
+	
+									$imgBuilder = new TextMessageBuilder('Oke, Ajukan pertanyaan buat aku dong!');
+									$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
+								} else {
+									$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
+								}						
+								
+								$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
+								$trainingmode = false;
+								$question = 1;
+							}
+						    
 						}
 						
 						if($trainingmode == true){
@@ -279,21 +296,7 @@ class Route
 							}
 						}
 						
-						if ($event->getText() == "training end"){							
-							$sql = "DELETE FROM 'trainer' WHERE iduser = '".$event->getUserId()."'";
-							if ($conn->query($sql) === TRUE) {
-								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");
-
-								$imgBuilder = new TextMessageBuilder('Oke, Ajukan pertanyaan buat aku dong!');
-								$resp = $bot->pushMessage($event->getUserId(),$imgBuilder);
-							} else {
-								$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
-							}						
-							
-							$resp = $bot->replyText($event->getReplyToken(), "MODE TRAINING SUDAH BERAKHIR, TERIMA KASIH!");
-							$trainingmode = false;
-							$question = 1;
-						}else if ($event->getText() == "training start"){
+						if ($event->getText() == "training start"){
 							$sql = "INSERT INTO trainer (iduser) VALUES ('".$event->getUserId()."')";
 							if ($conn->query($sql) === TRUE) {
 								$resp = $bot->replyText($event->getReplyToken(), "Terima kasih sudah mau jadi trainer aku :*");

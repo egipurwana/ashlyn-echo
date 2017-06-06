@@ -172,13 +172,13 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid);//.$row["id"]);
+											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid." xx ".$event->getUserId());//.$row["id"]);
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);
 											
-											$imgBuilder = new TextMessageBuilder('Terus Jawabannya Apaan?');
-											$resp = $bot->pushMessage($trainerid,$imgBuilder);		
+											$textBuilderResp = new TextMessageBuilder('Terus Jawabannya Apaan?');
+											$resp = $bot->pushMessage($trainerid,$textBuilderResp);		
 										}
 									}
 									$row = $result->fetch_row();

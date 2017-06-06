@@ -172,8 +172,8 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											$textBuilderResp = new TextMessageBuilder('Terus Jawabannya Apaan Bos?');
-											$resp = $bot->pushMessage($event->getUserId(),$textBuilderResp);
+											$textBuilderResp = new TextMessageBuilder('Hmm');
+											$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
 											
 											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid." xx ".$event->getUserId());//.$row["id"]);
 									

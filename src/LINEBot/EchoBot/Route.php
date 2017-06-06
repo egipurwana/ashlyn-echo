@@ -51,35 +51,7 @@ use ReflectionClass;
 class Route
 {
     public function register(\Slim\App $app)
-    { 
-	    /*
-		// Check if variable exists
-		$exists = $session->exists('my_key');
-		$exists = isset($session->my_key);
-		$exists = isset($session['my_key']);
-		
-		// Get variable value
-		$my_value = $session->get('my_key', 'default');
-		$my_value = $session->my_key;
-		$my_value = $session['my_key'];
-		
-		// Set variable value
-		$app->session->set('my_key', 'my_value');
-		$session->my_key = 'my_value';
-		$session['my_key'] = 'my_value';
-		
-		// Delete variable
-		$session->delete('my_key');
-		unset($session->my_key);
-		unset($session['my_key']);
-		
-		// Destroy session
-		$session::destroy();
-		
-		// Get session id
-		$id = $this->session::id();
-		*/
-		
+    { 	
 		/*
 		if(!empty($_POST))
 		{
@@ -126,18 +98,11 @@ class Route
             $session = $this->session;
 			$conn = $this->db;
 			
-			/*if ($session->training){
-				$session->training = 0;
-				$session->trainerid = 0;
-				$session->ask = 0;
-			}*/
-			
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
             if (empty($signature)) {
                 return $res->withStatus(400, 'Bad Request');
             }
 
-            // Check request with signature and parse request
             try {
                 $events = $bot->parseEventRequest($req->getBody(), $signature[0]);
             } catch (InvalidSignatureException $e) {
@@ -207,7 +172,7 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?");//.$row["id"]);
+											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid);//.$row["id"]);
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);
@@ -328,7 +293,7 @@ class Route
 	                $replyText = "Thanks udah follow!"; ;                
 					$resp = $bot->replyText($event->getReplyToken(), $replyText);
                 } elseif ($event instanceof JoinEvent) {
-	                $replyText = "Thanks udah join!";               
+	                $replyText = "Hai apa kabar?";               
 					$resp = $bot->replyText($event->getReplyToken(), $replyText);
                 } elseif ($event instanceof LeaveEvent) {
 	                $replyText = "Kok Leave sih?";               

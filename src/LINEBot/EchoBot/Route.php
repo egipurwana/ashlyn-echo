@@ -234,8 +234,13 @@ class Route
 										        $post[] = $row;
 										    }*/
 											
+											while($row = $result1->fetch_array())
+											{
+												$rows[] = $row;
+											}
+											
 											//$rowwww = mysqli_fetch_array($result1,MYSQLI_NUM);
-											$srcs = print_r($result1, true);
+											$srcs = print_r($rows, true);
 											
 											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$srcs);
 										    /*while($row1 = $result1->fetch_assoc()) {

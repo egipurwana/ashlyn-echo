@@ -227,9 +227,17 @@ class Route
 								        $sql1 = "SELECT 'idanswer' FROM relation where idphrase = '".$row["id"]."'";
 										$result1 = $conn->query($sql1);						
 										if ($result1->num_rows > 0) {
-											$rowwww = mysqli_fetch_array($result1,MYSQLI_NUM);
-											$srcs = print_r($rowwww, true);
-											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$srcs);
+											
+											$post = array();
+										    while($row = mysql_fetch_assoc($result1))
+										    {
+										        $post[] = $row;
+										    }
+											
+											//$rowwww = mysqli_fetch_array($result1,MYSQLI_NUM);
+											//$srcs = print_r($rowwww, true);
+											
+											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$post[$result1->num_rows]);
 										    /*while($row1 = $result1->fetch_assoc()) {
 										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
 												$result2 = $conn->query($sql2);						

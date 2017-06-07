@@ -228,16 +228,16 @@ class Route
 										$result1 = $conn->query($sql1);						
 										if ($result1->num_rows > 0) {
 											
-											$post = array();
+											/*$post = array();
 										    while($row = mysql_fetch_assoc($result1))
 										    {
 										        $post[] = $row;
-										    }
+										    }*/
 											
 											//$rowwww = mysqli_fetch_array($result1,MYSQLI_NUM);
-											$srcs = print_r($post, true);
+											//$srcs = print_r($result1, true);
 											
-											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$srcs);
+											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban ');
 										    /*while($row1 = $result1->fetch_assoc()) {
 										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
 												$result2 = $conn->query($sql2);						

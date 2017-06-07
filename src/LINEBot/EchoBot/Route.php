@@ -172,14 +172,14 @@ class Route
 										while($row = $result->fetch_assoc()) {
 											
 											$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-											$response = $bot->pushMessage('<to>', $textMessageBuilder);
+											$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											
 											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 											
 											//$textBuilderResp = new TextMessageBuilder('Hmm');
 											//$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
 											
-											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid." xx ".$event->getUserId())." xx ".$response->getHTTPStatus() . " " . $response->getRawBody();//.$row["id"]);
+											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas? ".$trainerid." xx ".$event->getUserId())." xx ".$response->getHTTPStatus() . " " . $response->getRawBody();//.$row["id"]);
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);		

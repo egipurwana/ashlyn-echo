@@ -226,18 +226,9 @@ class Route
 								    while($row = $result->fetch_assoc()) {
 								        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
 										$result1 = $conn->query($sql1);						
-										if ($result1->num_rows > 0) {
-
-											/*
-											while($row = $result1->fetch_array())
-											{$rows[] = $row;}
-											$intran = rand(0,$result1->num_rows - 1);
-											$idsx = $rows[$intran]['idanswer'];
-											//$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$rows[$intran]['idanswer']);
-											*/
-											
+										if ($result1->num_rows > 0) {											
 										    while($row1 = $result1->fetch_assoc()) {
-										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";//$row1["idanswer"]
+										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
 												$result2 = $conn->query($sql2);						
 												if ($result2->num_rows > 0) {
 												    while($row2 = $result2->fetch_assoc()) {
@@ -267,6 +258,7 @@ class Route
 												}
 										    }
 										} else {
+											$resp = $bot->replyText($event->getReplyToken(), "Jawabnya apa sih? aku lupa");
 											//not found
 										}
 								    }

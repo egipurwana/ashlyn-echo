@@ -48,6 +48,7 @@ use LINE\LINEBot\Exception\UnknownEventTypeException;
 use LINE\LINEBot\Exception\UnknownMessageTypeException;
 use ReflectionClass;
 
+
 class Route
 {
     public function register(\Slim\App $app)
@@ -116,11 +117,8 @@ class Route
             }
 
 			//$src = print_r($events,true);
-
-            foreach ($events as $event) {
-	            
-	            //$src = print_r($event,true);
-	            
+            foreach ($events as $event) {	            
+	            //$src = print_r($event,true);	            
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						
@@ -172,10 +170,16 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											$textBuilderResp = new TextMessageBuilder('Hmm');
-											$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
 											
-											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid." xx ".$event->getUserId());//.$row["id"]);
+											$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+											$response = $bot->pushMessage('<to>', $textMessageBuilder);
+											
+											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+											
+											//$textBuilderResp = new TextMessageBuilder('Hmm');
+											//$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
+											
+											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas?".$trainerid." xx ".$event->getUserId())." xx ".$response->getHTTPStatus() . " " . $response->getRawBody();//.$row["id"]);
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);		

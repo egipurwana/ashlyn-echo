@@ -236,7 +236,7 @@ class Route
 											
 											//$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$rows[0]['idanswer']);
 										    while($row1 = $result1->fetch_assoc()) {
-										        $sql2 = "SELECT * FROM answer where id = '".$intran."'";//$row1["idanswer"]
+										        $sql2 = "SELECT * FROM answer where id = '".$rows[$intran]['idanswer']."'";//$row1["idanswer"]
 												$result2 = $conn->query($sql2);						
 												if ($result2->num_rows > 0) {
 												    while($row2 = $result2->fetch_assoc()) {

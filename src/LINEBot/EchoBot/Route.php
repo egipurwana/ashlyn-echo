@@ -171,8 +171,8 @@ class Route
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
 
-											//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-											$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
+											$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+											//$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
 											$textMessageBuilder = $ref->newInstanceArgs("hahahah aduh ini teh gimana cara pakenya sih?");											
 											$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											

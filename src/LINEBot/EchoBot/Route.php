@@ -224,7 +224,7 @@ class Route
 								$result = $conn->query($sql);						
 								if ($result->num_rows > 0) {
 								    while($row = $result->fetch_assoc()) {
-								        $sql1 = "SELECT 'idanswer' FROM relation where idphrase = '".$row["id"]."'";
+								        $sql1 = "SELECT idanswer FROM relation where idphrase = '".$row["id"]."'";
 										$result1 = $conn->query($sql1);						
 										if ($result1->num_rows > 0) {
 											

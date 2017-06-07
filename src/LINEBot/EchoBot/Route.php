@@ -232,7 +232,7 @@ class Route
 											{
 												$rows[] = $row;
 											}
-											$intran = mt_rand(0,$result1->num_rows);
+											$intran = mt_rand(0,count($rows));
 											
 											//$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$rows[0]['idanswer']);
 										    while($row1 = $result1->fetch_assoc()) {

@@ -171,10 +171,10 @@ class Route
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
 
-											$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+											//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
 											//$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
 											//$textMessageBuilder = $ref->newInstanceArgs("hahahah aduh ini teh gimana cara pakenya sih?");											
-											$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
+											//$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											
 											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();											
 											//$textBuilderResp = new TextMessageBuilder('Hmm');
@@ -183,11 +183,10 @@ class Route
 											$resp = $bot->replyText($event->getReplyToken(),"Hmms, aku harus jawab apa mas? ".$trainerid." xx ".$event->getUserId());
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
-											$result = $conn->query($sqlxxy);		
+											$result = $conn->query($sqlxxy);
 										}
 									}
-									$row = $result->fetch_row();
-									
+									$row = $result->fetch_row();									
 								} else {
 									$resp = $bot->replyText($event->getReplyToken(),"Pertanyaan enggak masuk ".$sqlxxx);
 								}

@@ -174,15 +174,14 @@ class Route
 											//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
 											$text = "hahahah aduh ini teh gimana cara pakenya sih?";
 											$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
-											$textMessageBuilder = $ref->newInstanceArgs(array_merge([$text], null));											
+											$textMessageBuilder = $ref->newInstanceArgs(array_merge([$text]));											
 											$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											
-											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-											
+											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();											
 											//$textBuilderResp = new TextMessageBuilder('Hmm');
 											//$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
 											
-$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas? ".$trainerid." xx ".$event->getUserId())." xx ".$response->getHTTPStatus();
+											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas? ".$trainerid." xx ".$event->getUserId());
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);		

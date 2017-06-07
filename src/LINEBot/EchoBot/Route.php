@@ -177,11 +177,15 @@ class Route
 											//$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											
 											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();											
-											$textBuilderResp = new TextMessageBuilder('Hmm');
-											$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
 											
-											$resp = $bot->replyText($event->getReplyToken(),"Hmms, aku harus jawab apa mas? ".$event->getUserId()." xx ".$resp->getRawBody());
-									
+											try {
+												$textBuilderResp = new TextMessageBuilder('Hmm');
+												$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
+												$resp = $bot->replyText($event->getReplyToken(),"Hmms, aku harus jawab apa mas? ".$event->getUserId()." xx ".$resp->getRawBody());
+											} catch (Exception $e) {
+												$resp = $bot->replyText($event->getReplyToken(),$e->getMessage());
+											} 
+											
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);
 										}

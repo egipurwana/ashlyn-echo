@@ -224,10 +224,12 @@ class Route
 								$result = $conn->query($sql);						
 								if ($result->num_rows > 0) {
 								    while($row = $result->fetch_assoc()) {
-								        $sql1 = "SELECT * FROM relation where idphrase = '".$row["id"]."'";
+								        $sql1 = "SELECT 'idanswer' FROM relation where idphrase = '".$row["id"]."'";
 										$result1 = $conn->query($sql1);						
 										if ($result1->num_rows > 0) {
-										    while($row1 = $result1->fetch_assoc()) {
+											$rowwww = mysqli_fetch_array($result);
+											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban'.$rowwww[0]);
+										    /*while($row1 = $result1->fetch_assoc()) {
 										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
 												$result2 = $conn->query($sql2);						
 												if ($result2->num_rows > 0) {
@@ -257,7 +259,7 @@ class Route
 												} else {
 													//not found
 												}
-										    }
+										    }*/
 										} else {
 											//not found
 										}

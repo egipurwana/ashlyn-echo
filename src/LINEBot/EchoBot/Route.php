@@ -232,10 +232,10 @@ class Route
 											{
 												$rows[] = $row;
 											}
-											$intran = mt_rand(0,count($rows));
+											$intran = mt_rand(0,$result1->num_rows);
 											
-											//$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$rows[0]['idanswer']);
-										    while($row1 = $result1->fetch_assoc()) {
+											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$rows[$intran]['idanswer']);
+										    /*while($row1 = $result1->fetch_assoc()) {
 										        $sql2 = "SELECT * FROM answer where id = '".$rows[$intran]['idanswer']."'";//$row1["idanswer"]
 												$result2 = $conn->query($sql2);						
 												if ($result2->num_rows > 0) {
@@ -265,7 +265,7 @@ class Route
 												} else {
 													//not found
 												}
-										    }
+										    }*/
 										} else {
 											//not found
 										}

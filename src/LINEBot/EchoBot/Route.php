@@ -237,7 +237,7 @@ class Route
 											//$rowwww = mysqli_fetch_array($result1,MYSQLI_NUM);
 											//$srcs = print_r($rowwww, true);
 											
-											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$post[$result1->num_rows]);
+											$resp = $bot->replyText($event->getReplyToken(),'terdapat '.$result1->num_rows.' jawaban '.$post[$result1->num_rows]['idanswer']);
 										    /*while($row1 = $result1->fetch_assoc()) {
 										        $sql2 = "SELECT * FROM answer where id = '".$row1["idanswer"]."'";
 												$result2 = $conn->query($sql2);						

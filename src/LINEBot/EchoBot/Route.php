@@ -181,7 +181,8 @@ class Route
 											try {
 												$textBuilderResp = new TextMessageBuilder('Hmm');
 												$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
-												$resp = $bot->replyText($event->getReplyToken(),"Hmms, aku harus jawab apa mas? ".$event->getUserId()." xx ".$resp->getRawBody());
+												$deb = print_r($response->getRawBody(),true);
+												$resp = $bot->replyText($event->getReplyToken(),"Hmms, aku harus jawab apa mas? ".$event->getUserId()." xx ".$deb);
 											} catch (Exception $e) {
 												$resp = $bot->replyText($event->getReplyToken(),$e->getMessage());
 											} 

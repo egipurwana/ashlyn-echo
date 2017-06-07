@@ -173,7 +173,7 @@ class Route
 
 											$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
 											//$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
-											$textMessageBuilder = $ref->newInstanceArgs("hahahah aduh ini teh gimana cara pakenya sih?");											
+											//$textMessageBuilder = $ref->newInstanceArgs("hahahah aduh ini teh gimana cara pakenya sih?");											
 											$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											
 											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();											

@@ -170,8 +170,11 @@ class Route
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
 										while($row = $result->fetch_assoc()) {
-											
-											$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+
+											//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+											$text = "hahahah aduh ini teh gimana cara pakenya sih?";
+											$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
+											$textMessageBuilder = $ref->newInstanceArgs(array_merge([$text], null));											
 											$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
 											
 											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
@@ -179,7 +182,7 @@ class Route
 											//$textBuilderResp = new TextMessageBuilder('Hmm');
 											//$response = $bot->pushMessage($event->getUserId(),$textBuilderResp);
 											
-											$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas? ".$trainerid." xx ".$event->getUserId())." xx ".$response->getHTTPStatus() . " " . $response->getRawBody();//.$row["id"]);
+$resp = $bot->replyText($event->getReplyToken(),"Hmm, aku harus jawab apa mas? ".$trainerid." xx ".$event->getUserId())." xx ".$response->getHTTPStatus();
 									
 											$sqlxxy = "UPDATE trainer SET training_mode = 0, idquestion= ".$row['id']." WHERE iduser = '".$event->getUserId()."'";
 											$result = $conn->query($sqlxxy);		

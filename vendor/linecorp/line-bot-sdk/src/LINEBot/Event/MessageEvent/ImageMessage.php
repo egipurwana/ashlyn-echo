@@ -36,4 +36,9 @@ class ImageMessage extends MessageEvent
     {
         parent::__construct($event);
     }
+    
+    public function getId()
+    {
+        return $this->message['id'];
+    }
 }

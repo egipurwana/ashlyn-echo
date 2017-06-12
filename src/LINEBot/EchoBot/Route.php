@@ -323,10 +323,19 @@ class Route
 		                //$resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
 		                //$imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
-
-						$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-		                //$data = array('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
-		                $response = $this->CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/", $data);
+						//$resp = $bot->replyMessage($event->getReplyToken(),$response);
+						
+						
+						
+						$response = $bot->getMessageContent($event->getId());
+						if ($response->isSucceeded()) {
+						    $tempfile = tmpfile();
+						    fwrite($tempfile, $response->getRawBody());
+						} else {
+						    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+						}
+						
+						$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 						$resp = $bot->replyMessage($event->getReplyToken(),$response);
 						
                     } elseif ($event instanceof AudioMessage) {

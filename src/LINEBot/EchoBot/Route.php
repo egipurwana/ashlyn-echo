@@ -52,7 +52,7 @@ use ReflectionClass;
 class Route
 {
 	
-	function CallAPI($method, $url, $data = false)
+	public function CallAPI($method, $url, $data = false)
 	{
 	    $curl = curl_init();
 	

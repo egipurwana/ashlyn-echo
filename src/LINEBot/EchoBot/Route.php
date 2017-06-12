@@ -323,7 +323,7 @@ class Route
 		                $resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
 		                
-		                $vidBuilder = new ImageMessageBuilder('https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg','https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg');
+		                $vidBuilder = new ImageMessageBuilder('https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg','https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg');
 						$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {

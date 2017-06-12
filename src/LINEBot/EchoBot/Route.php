@@ -328,8 +328,8 @@ class Route
 		                
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
- 						    //$tempfile = tmpfile();
- 						    //fwrite($tempfile, $response->getRawBody());
+ 						    $tempfile = tmpfile();
+ 						    fwrite($tempfile, $response->getRawBody());
  						    $responsex = 'berhasil';
  						} else {
  						    $responsex = 'error';

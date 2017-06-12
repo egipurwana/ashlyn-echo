@@ -317,20 +317,21 @@ class Route
 						}	
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());
-		                //$resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);
+		                $resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);
                     } elseif ($event instanceof LocationMessage) {
 		                $locBuilder = new LocationMessageBuilder('DenganSenangHati HQ', 'Jl. Bojong Wetan', '-6.891063', '107.632794');
-		                //$resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
+		                $resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
 		                
-						$resp = $bot->replyMessage($event->getReplyToken(), 'hahay ');//.$event->getPackageId()
+		                $vidBuilder = new ImageMessageBuilder('https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg','https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg');
+						$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);
-						//$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);
+						$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);
                     } elseif ($event instanceof VideoMessage) {
 		                $vidBuilder = new VideoMessageBuilder('https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4','https://s-media-cache-ak0.pinimg.com/originals/5c/21/ad/5c21ad4c0d9ef944369b01030119bfd7.jpg');
-						//$resp = $bot->replyMessage($event->getReplyToken(),$vidBuilder);
+						$resp = $bot->replyMessage($event->getReplyToken(),$vidBuilder);
                     } else {
                         $logger->info('Unknown message type has come');
                         continue;

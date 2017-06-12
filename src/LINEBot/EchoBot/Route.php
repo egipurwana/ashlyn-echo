@@ -325,8 +325,9 @@ class Route
 		                //$imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						//$resp = $bot->replyMessage($event->getReplyToken(),$response);
 						
+						$resp = $bot->replyMessage($event->getReplyToken(), $event->getId());
 						
-						
+						/*
 						$response = $bot->getMessageContent($event->getId());
 						if ($response->isSucceeded()) {
 						    $tempfile = tmpfile();
@@ -337,7 +338,7 @@ class Route
 						
 						$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 						$resp = $bot->replyMessage($event->getReplyToken(),$response);
-						
+						*/
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);
 						//$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);

@@ -118,13 +118,17 @@ class Route
 		    $session->color = 'blue';
 		    
 		    $data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-            $response = CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/", $data);
+            $response = $this->CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/", $data);
 		    echo $response;
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $session = $this->session;
 		    $my_value = $session->color;
-		    echo $my_value;
+		    //echo $my_value;
+		    
+		    $data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
+            $response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/", $data);
+		    echo $response;
 		    
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			
 	    });

@@ -85,6 +85,7 @@ class Route
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $session = $this->session;
 		    $session->color = 'blue';
+	    	    echo 'Hae Yudha';
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    $session = $this->session;

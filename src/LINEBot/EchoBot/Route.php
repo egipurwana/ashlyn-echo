@@ -325,7 +325,8 @@ class Route
 		                //$imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						//$resp = $bot->replyMessage($event->getReplyToken(),$response);
 						
-						$resp = $bot->replyMessage($event->getReplyToken(), $event->getMessageId());
+						$src = print_r($events,true);						
+						$resp = $bot->replyMessage($event->getReplyToken(), $src);
 						
 						/*
 						$response = $bot->getMessageContent($event->getId());

@@ -322,24 +322,10 @@ class Route
 		                $locBuilder = new LocationMessageBuilder('DenganSenangHati HQ', 'Jl. Bojong Wetan', '-6.891063', '107.632794');
 		                //$resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
-		                //$imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
-						//$resp = $bot->replyMessage($event->getReplyToken(),$response);
-						
+		                
 						$src = print_r($events,true);						
 						$resp = $bot->replyMessage($event->getReplyToken(), $src);
 						
-						/*
-						$response = $bot->getMessageContent($event->getId());
-						if ($response->isSucceeded()) {
-						    $tempfile = tmpfile();
-						    fwrite($tempfile, $response->getRawBody());
-						} else {
-						    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
-						}
-						
-						$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-						$resp = $bot->replyMessage($event->getReplyToken(),$response);
-						*/
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);
 						//$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);

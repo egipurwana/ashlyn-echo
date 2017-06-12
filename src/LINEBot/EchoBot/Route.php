@@ -348,9 +348,6 @@ class Route
  						}else{
 							$resp = $bot->replyText($event->getReplyToken(),  "gambar apa itu?");
  						}
-
- 						
-						
 						
 						//.$event->getPackageId()
 						

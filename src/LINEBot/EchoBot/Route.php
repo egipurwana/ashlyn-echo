@@ -25,6 +25,7 @@ use LINE\LINEBot\Event\FollowEvent;
 use LINE\LINEBot\Event\JoinEvent;
 use LINE\LINEBot\Event\LeaveEvent;
 use LINE\LINEBot\Event\MessageEvent;
+
 use LINE\LINEBot\Event\MessageEvent\AudioMessage;
 use LINE\LINEBot\Event\MessageEvent\ImageMessage;
 use LINE\LINEBot\Event\MessageEvent\LocationMessage;
@@ -313,8 +314,7 @@ class Route
 									$resp = $bot->replyText($event->getReplyToken(), "Maaf gagal, coba lagi");
 								}
 							}
-						}
-						
+						}	
                     } elseif ($event instanceof StickerMessage) {
 	                    $stickerBuilder = new StickerMessageBuilder($event->getPackageId(), $event->getStickerId());
 		                //$resp = $bot->replyMessage($event->getReplyToken(),$stickerBuilder);
@@ -325,7 +325,7 @@ class Route
 		                //$imgBuilder = new ImageMessageBuilder('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg','https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
 						//$resp = $bot->replyMessage($event->getReplyToken(),$response);
 						
-						$resp = $bot->replyMessage($event->getReplyToken(), $event->getId());
+						$resp = $bot->replyMessage($event->getReplyToken(), $event->getMessageId());
 						
 						/*
 						$response = $bot->getMessageContent($event->getId());

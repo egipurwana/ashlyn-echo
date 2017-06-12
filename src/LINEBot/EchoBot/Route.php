@@ -336,9 +336,8 @@ class Route
  						
  						$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 
-		                //$src = print_r($event,true);
-		                //$event->getPackageId();
-						$resp = $bot->replyText($event->getReplyToken(),  $response);//.$event->getPackageId()
+ 						$ismatch = json_decode($response);
+						$resp = $bot->replyText($event->getReplyToken(),  $ismatch->{'is matched'});//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

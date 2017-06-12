@@ -326,8 +326,19 @@ class Route
 						//$vidBuilder = new ImageMessageBuilder('https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg','https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg');
 						//$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);//.$event->getPackageId()
 		                
-		                $src = print_r($event,true);
-						$resp = $bot->replyText($event->getReplyToken(),  $src);//.$event->getPackageId()
+                    	$response = $bot->getMessageContent($event->getPackageId());
+ 						if ($response->isSucceeded()) {
+ 						    $tempfile = tmpfile();
+ 						    fwrite($tempfile, $response->getRawBody());
+ 						} else {
+ 						    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+ 						}
+ 						
+ 						$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
+
+		                //$src = print_r($event,true);
+		                //$event->getPackageId();
+						$resp = $bot->replyText($event->getReplyToken(),  $response);//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

@@ -329,10 +329,10 @@ class Route
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
  							$data = base64_decode($response);
-							file_put_contents('/tmp/image.png', $data);
+							file_put_contents('image.png', $data);
  						    //$tempfile = tmpfile();
  						    //fwrite($tempfile, $response->getRawBody());
- 						    $responsex = 'berhasil';
+ 						    $responsex = 'berhasil '.$response->getRawBody();
  						} else {
  						    $responsex = 'error';
  						}

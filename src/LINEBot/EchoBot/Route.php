@@ -322,7 +322,7 @@ class Route
 
 						$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 		                //$data = array('https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg');
-		                $response = CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/", $data);
+		                $response = $this->CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/", $data);
 						$resp = $bot->replyMessage($event->getReplyToken(),$response);
 						
                     } elseif ($event instanceof AudioMessage) {

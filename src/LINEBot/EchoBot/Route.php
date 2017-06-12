@@ -323,7 +323,7 @@ class Route
 		                //$resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
 		                
-						$src = print_r($events,true);						
+						$src = print_r($event,true);						
 						$resp = $bot->replyMessage($event->getReplyToken(), $src);
 						
                     } elseif ($event instanceof AudioMessage) {

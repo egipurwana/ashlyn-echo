@@ -2,8 +2,9 @@
   "license": "Apache License, Version 2.0",
   "scripts": {
     "compile": [
-      "chmod -R 777 app/",
-      "chmod 755 app/"
+      "chmod -R 777 public/",
+      "chmod -R 777 src/",
+      "chmod -R 777 logs/"
     ]
   },
   "authors": [

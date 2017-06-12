@@ -328,21 +328,17 @@ class Route
 		                
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
- 							$data = base64_decode($response);
-							file_put_contents('image.png', $data);
  						    //$tempfile = tmpfile();
  						    //fwrite($tempfile, $response->getRawBody());
- 						    $responsex = 'berhasil ';
+ 						    $responsex = 'berhasil';
  						} else {
  						    $responsex = 'error';
  						}
  						
- 						$src = print_r($response,true);
- 						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 
  						$ismatch = json_decode($responses);
-						$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'}." ".$event->getPackageId()." ".$responsex." ".$src );
+						$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'}." ".$event->getPackageId()." ".$response->getRawBody());
 						//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {

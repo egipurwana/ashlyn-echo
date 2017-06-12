@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f659643ddfb580595e7c6cd47e11b144",
     "content-hash": "97cd1cb4edc70e98dda2c62ac81c2867",
     "packages": [
         {
             "name": "bryanjhv/slim-session",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bryanjhv/slim-session.git",
-                "reference": "e4864c1b8d92b2c6d5f472f7004f8301f770fcb1"
+                "reference": "d2bb057593be8fe015b86f2a4283f9af2231f6b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/e4864c1b8d92b2c6d5f472f7004f8301f770fcb1",
-                "reference": "e4864c1b8d92b2c6d5f472f7004f8301f770fcb1",
+                "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/d2bb057593be8fe015b86f2a4283f9af2231f6b9",
+                "reference": "d2bb057593be8fe015b86f2a4283f9af2231f6b9",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +53,7 @@
                 "session",
                 "slim"
             ],
-            "time": "2017-05-08 15:01:54"
+            "time": "2017-06-05T14:49:58+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -85,7 +84,7 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
-            "time": "2017-02-14 19:40:03"
+            "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "linecorp/line-bot-sdk",
@@ -138,7 +137,7 @@
                 "line",
                 "sdk"
             ],
-            "time": "2017-02-21 03:45:21"
+            "time": "2017-02-21T03:45:21+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -216,7 +215,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-03-13 07:08:03"
+            "time": "2017-03-13T07:08:03+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -259,7 +258,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2017-01-19 11:35:12"
+            "time": "2017-01-19T11:35:12+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -305,7 +304,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2015-09-11 15:10:35"
+            "time": "2015-09-11T15:10:35+00:00"
         },
         {
             "name": "psr/container",
@@ -354,7 +353,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14 16:28:37"
+            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "psr/http-message",
@@ -404,7 +403,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06 14:39:51"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/log",
@@ -451,7 +450,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "slim/slim",
@@ -522,7 +521,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2017-03-19 17:55:20"
+            "time": "2017-03-19T17:55:20+00:00"
         }
     ],
     "packages-dev": [],

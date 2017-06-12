@@ -335,10 +335,23 @@ class Route
  						    $responsex = 'error';
  						}
  						
- 						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
- 						$ismatch = json_decode($responses);
+ 						$i = rand(0, 3);
+ 						
+ 						if($i == 0){
+ 							$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
+ 							$ismatch = json_decode($responses);
+ 							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'});
+ 						}else if($i == 1){
+ 							$responses = self::CallAPI("GET", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/18893233_1294410987340091_1098680323151022777_n.jpg?oh=07a2b76a6894ecba440f9e618ffbc16a&oe=59E84857");
+ 							$ismatch = json_decode($responses);
+ 							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'});
+ 						}else{
+							$resp = $bot->replyText($event->getReplyToken(),  "gambar apa itu?");
+ 						}
 
-						$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'});
+ 						
+						
+						
 						//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {

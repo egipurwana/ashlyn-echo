@@ -323,7 +323,7 @@ class Route
 		                //$resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
 		                
-						$resp = $bot->replyMessage($event->getReplyToken(), $event->getPackageId());
+						$resp = $bot->replyMessage($event->getReplyToken(), 'hahay '.$event->getPackageId());
 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

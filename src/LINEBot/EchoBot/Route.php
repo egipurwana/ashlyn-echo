@@ -126,8 +126,8 @@ class Route
 		    $my_value = $session->color;
 		    //echo $my_value;
 		    
-		    $data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-            $response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=", $data);
+		    //$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
+            $response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 		    echo $response;
 		    
 			//require_once(__DIR__ . '/../../../public/datatrain.php');			

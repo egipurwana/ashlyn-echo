@@ -13,6 +13,7 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Symfony\\Component\\EventDispatcher\\' => 34,
             'Slim\\' => 5,
         ),
         'P' => 
@@ -40,6 +41,10 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\EventDispatcher\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+        ),
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
@@ -85,6 +90,24 @@ class ComposerStaticInit78742abb76263d5f338bfe87a28169a8
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
+            ),
+        ),
+        'G' => 
+        array (
+            'Guzzle\\Tests' => 
+            array (
+                0 => __DIR__ . '/..' . '/guzzle/guzzle/tests',
+            ),
+            'Guzzle' => 
+            array (
+                0 => __DIR__ . '/..' . '/guzzle/guzzle/src',
+            ),
+        ),
+        'A' => 
+        array (
+            'Aws' => 
+            array (
+                0 => __DIR__ . '/..' . '/aws/aws-sdk-php/src',
             ),
         ),
     );

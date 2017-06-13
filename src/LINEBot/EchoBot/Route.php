@@ -298,10 +298,16 @@ class Route
 						//$vidBuilder = new ImageMessageBuilder('https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg','https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg');
 						//$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);//.$event->getPackageId()
 		                
+		                $s3 = Aws\S3\S3Client::factory();
+						$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+		                //$upload = $s3->upload($bucket, $_FILES['userfile']['name'], fopen($_FILES['userfile']['tmp_name'], 'rb'), 'public-read');
+						//$upload->get('ObjectURL')
+						
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
- 						    $tempfile = tmpfile();
- 						    fwrite($tempfile, $response->getRawBody());
+ 						    echo $response->getRawBody();
+ 						    //$tempfile = tmpfile();
+ 						    //fwrite($tempfile, $response->getRawBody());
  						    $responsex = 'berhasil';
  						} else {
  						    $responsex = 'error';

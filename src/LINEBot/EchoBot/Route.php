@@ -288,14 +288,13 @@ class Route
  						    $responsex = 'error';
  						} 						
  						
- 						$vidBuilder = new ImageMessageBuilder($responsex, $responsex);
- 						$response = $bot->pushMessage($event->getUserId(),$vidBuilder);
- 						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
  						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){
- 							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'}." harga : ".$ismatch->{'price'});
- 							//$resp = $bot->replyText($event->getReplyToken(),$responses);
+	 						$vidBuilder = new ImageMessageBuilder($responsex, $ismatch->{'closest-match'});
+	 						$response = $bot->pushMessage($event->getUserId(),$vidBuilder);
+	 						
+ 							$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? nama produknya : ".$ismatch->{'name'}." harga : ".$ismatch->{'price'});
  						}else{
 	 						$resp = $bot->replyText($event->getReplyToken(), "Gambar apaan tuh?");
  						}

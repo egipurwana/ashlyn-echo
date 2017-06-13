@@ -17,6 +17,7 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Aws\S3;
 use Aws\S3\S3Client;
 
 use LINE\LINEBot;
@@ -94,7 +95,9 @@ class Route
             //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg", $data);
 		    //echo $response;
 		    
-		    echo 'hai';
+			$s3 = Aws\S3\S3Client::factory();
+			$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+			
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 		    //$session = $this->session;
@@ -104,8 +107,9 @@ class Route
             //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
 		    //echo $response;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
-				
-			echo 'cantik';
+			
+			$s3 = Aws\S3\S3Client::factory();
+			$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

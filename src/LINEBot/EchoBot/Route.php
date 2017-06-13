@@ -17,6 +17,8 @@
 
 namespace LINE\LINEBot\EchoBot;
 
+use Aws\S3\S3Client;
+
 use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;
 

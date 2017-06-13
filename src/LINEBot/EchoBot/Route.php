@@ -86,23 +86,24 @@ class Route
     public function register(\Slim\App $app)
     { 		
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $session = $this->session;
-		    $session->color = 'blue';
-		    
+		    //$session = $this->session;
+		    //$session->color = 'blue';
 		    //$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-            $response = new self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg", $data);
-		    echo $response;
+            //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg", $data);
+		    //echo $response;
+		    
+		    echo 'hai';
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    $session = $this->session;
-		    $my_value = $session->color;
+		    //$session = $this->session;
+		    //$my_value = $session->color;
 		    //echo $my_value;
-		    
 		    //$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-            $response = new self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-		    echo $response;
-		    
-			//require_once(__DIR__ . '/../../../public/datatrain.php');			
+            //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
+		    //echo $response;
+			//require_once(__DIR__ . '/../../../public/datatrain.php');
+				
+			echo 'cantik';
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

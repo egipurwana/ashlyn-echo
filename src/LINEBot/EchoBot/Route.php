@@ -281,7 +281,8 @@ class Route
 						
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
- 						    $upload = $s3->upload('ashlyn', $event->getUserId().'-gambar.jpg', $response->getRawBody(), 'public-read');
+ 						    $date = date("YGi");
+ 						    $upload = $s3->upload('ashlyn', $event->getUserId().'-gambar-'.$date.'.jpg', $response->getRawBody(), 'public-read');
  						    $responsex = $upload->get('ObjectURL');
  						} else {
  						    $responsex = 'error';
@@ -292,7 +293,7 @@ class Route
  						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
- 						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} !== false){
+ 						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){
  							//$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'}." harga : ".$ismatch->{'price'});
  							$resp = $bot->replyText($event->getReplyToken(),$responses);
  						}else{

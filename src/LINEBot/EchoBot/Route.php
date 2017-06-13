@@ -307,19 +307,17 @@ class Route
 						
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
- 						    //echo $response->getRawBody();
- 						    $upload = $s3->upload('ashlyn', 'nama', $response->getRawBody(), 'public-read');
- 						    //$upload = $s3->putObject($response->getRawBody(), 'ashlyn', 'huhuy', S3::ACL_PUBLIC_READ);
- 						    
- 						    //$tempfile = tmpfile();
- 						    //fwrite($tempfile, $response->getRawBody());
+ 						    $upload = $s3->upload('ashlyn', $event->getUserId().'-gambar.jpg', $response->getRawBody(), 'public-read');
  						    $responsex = $upload->get('ObjectURL');
  						} else {
  						    $responsex = 'error';
- 						}
+ 						} 						
  						
- 						$resp = $bot->replyText($event->getReplyToken(),  $responsex);
+ 						$responses = self::CallAPI("GET", $responsex);
+ 						$ismatch = json_decode($responses);
+ 						$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'});
  						
+ 						//$resp = $bot->replyText($event->getReplyToken(),  $responsex);
  						/*$i = rand(0, 3);
  						if($i == 0){
  							$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
@@ -332,8 +330,6 @@ class Route
  						}else{
 							$resp = $bot->replyText($event->getReplyToken(),  "gambar apa itu?");
  						}*/
-						
-						//.$event->getPackageId()
 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

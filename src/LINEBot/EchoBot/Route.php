@@ -292,7 +292,7 @@ class Route
  						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
- 						if (isset($ismatch->{'is_matched'})){
+ 						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} !== false){
  							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'}." harga : ".$ismatch->{'price'});
  						}else{
 	 						$resp = $bot->replyText($event->getReplyToken(), "Gambar apaan tuh?");

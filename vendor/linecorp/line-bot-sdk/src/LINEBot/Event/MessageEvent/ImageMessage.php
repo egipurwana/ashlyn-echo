@@ -44,6 +44,12 @@ class ImageMessage extends MessageEvent
     
     public function getUserId()
     {
-        return $this->event['source']['userId'];
+	    if($this->event['source']['type'] == 'group'){
+        	return $this->event['source']['groupId'];
+        }else if($this->event['source']['type'] == 'room'){
+	        return $this->event['source']['roomId'];
+        }else{
+	        return $this->event['source']['userId'];
+        }
     }
 }

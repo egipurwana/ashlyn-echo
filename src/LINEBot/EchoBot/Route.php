@@ -288,7 +288,7 @@ class Route
  						} 						
  						
  						$vidBuilder = new ImageMessageBuilder($responsex, $responsex);
-						$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);
+ 						$response = $bot->pushMessage($event->getUserId(),$vidBuilder);
  						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);

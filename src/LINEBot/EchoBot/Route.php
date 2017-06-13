@@ -92,8 +92,9 @@ class Route
             //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg", $data);
 		    //echo $response;
 		    
-			$s3 = new Aws\S3\S3Client::factory();
-			//$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+		    $s3 = Aws\S3\S3Client::factory();
+			$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+		    
 			echo 'huhuy';
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){

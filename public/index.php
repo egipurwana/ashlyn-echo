@@ -16,6 +16,8 @@
  * under the License.
  */
  
+ini_set('upload_tmp_dir','images/'); 
+ 
 date_default_timezone_set('Asia/Jakarta');
  
 use LINE\LINEBot\EchoBot\Dependency;

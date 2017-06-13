@@ -313,7 +313,7 @@ class Route
  						    $responsex = 'error';
  						} 						
  						
- 						$responses = self::CallAPI("GET", $responsex);
+ 						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
  						$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'});
  						

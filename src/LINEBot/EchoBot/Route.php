@@ -86,24 +86,9 @@ class Route
     public function register(\Slim\App $app)
     { 		
 	    $app->get('/',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    //$session = $this->session;
-		    //$session->color = 'blue';
-		    //$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-            //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg", $data);
-		    //echo $response;
-		    
-		    $s3 = \Aws\S3\S3Client::factory();
-			$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
-		    
-			echo 'huhuy';
+			echo 'Welcome to ashlyn :)';
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
-		    //$session = $this->session;
-		    //$my_value = $session->color;
-		    //echo $my_value;
-		    //$data = array("url" => "https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-            //$response = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
-		    //echo $response;
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
@@ -130,8 +115,7 @@ class Route
             }
 
 			//$src = print_r($events,true);
-            foreach ($events as $event) {	            
-	            //$src = print_r($event,true);	            
+            foreach ($events as $event) {       
 	            if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
 						
@@ -182,14 +166,7 @@ class Route
 									$sqltrain = "SELECT * FROM phrase where phrase = '".$event->getText()."'";
 									$result = $conn->query($sqltrain);
 									if ($result->num_rows > 0) {
-										while($row = $result->fetch_assoc()) {
-
-											//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-											//$ref = new ReflectionClass('LINE\LINEBot\MessageBuilder\TextMessageBuilder');
-											//$textMessageBuilder = $ref->newInstanceArgs("hahahah aduh ini teh gimana cara pakenya sih?");											
-											//$response = $bot->pushMessage($event->getUserId(), $textMessageBuilder);
-											
-											//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();											
+										while($row = $result->fetch_assoc()) {									
 											
 											try {
 												$textBuilderResp = new TextMessageBuilder('Hmm');
@@ -296,9 +273,6 @@ class Route
 		                $resp = $bot->replyMessage($event->getReplyToken(),$locBuilder);
                     } elseif ($event instanceof ImageMessage) {
 		                
-						//$vidBuilder = new ImageMessageBuilder('https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg','https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg');
-						//$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);//.$event->getPackageId()
-		                
 		                $s3 = \Aws\S3\S3Client::factory();
 						$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
 		                //$upload = $s3->upload($bucket, $_FILES['userfile']['name'], fopen($_FILES['userfile']['tmp_name'], 'rb'), 'public-read');
@@ -313,24 +287,17 @@ class Route
  						    $responsex = 'error';
  						} 						
  						
+ 						$vidBuilder = new ImageMessageBuilder($responsex, $responsex);
+						$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);
+ 						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
- 						$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'});
- 						
- 						//$resp = $bot->replyText($event->getReplyToken(),  $responsex);
- 						/*$i = rand(0, 3);
- 						if($i == 0){
- 							$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
- 							$ismatch = json_decode($responses);
- 							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'});
- 						}else if($i == 1){
- 							$responses = self::CallAPI("GET", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/18893233_1294410987340091_1098680323151022777_n.jpg?oh=07a2b76a6894ecba440f9e618ffbc16a&oe=59E84857");
- 							$ismatch = json_decode($responses);
- 							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'});
+ 						if ($ismatch->{'is_matched'} == 1){
+ 							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is_matched'}." nama : ".$ismatch->{'name'});
  						}else{
-							$resp = $bot->replyText($event->getReplyToken(),  "gambar apa itu?");
- 						}*/
-						
+	 						$resp = $bot->replyText($event->getReplyToken(), "Gambar apaan tuh?");
+ 						}
+ 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);
 						$resp = $bot->replyMessage($event->getReplyToken(),$audioBuilder);

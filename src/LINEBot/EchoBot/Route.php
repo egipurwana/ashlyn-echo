@@ -291,7 +291,7 @@ class Route
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
  						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){
-	 						$vidBuilder = new ImageMessageBuilder($responsex, $ismatch->{'closest-match'});
+	 						$vidBuilder = new ImageMessageBuilder($responsex, $ismatch->{'closest_match'});
 	 						$response = $bot->pushMessage($event->getUserId(),$vidBuilder);
 	 						
  							$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? nama produknya : ".$ismatch->{'name'}." harga : ".$ismatch->{'price'});

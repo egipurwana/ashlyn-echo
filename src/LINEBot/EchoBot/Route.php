@@ -299,23 +299,27 @@ class Route
 						//$vidBuilder = new ImageMessageBuilder('https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg','https://www.theplace2.ru/archive/gal_gadot/img/28i.jpg');
 						//$resp = $bot->replyMessage($event->getReplyToken(),  $vidBuilder);//.$event->getPackageId()
 		                
-		                $s3 = Aws\S3\S3Client::factory();
+		                $s3 = \Aws\S3\S3Client::factory();
 						$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
 		                //$upload = $s3->upload($bucket, $_FILES['userfile']['name'], fopen($_FILES['userfile']['tmp_name'], 'rb'), 'public-read');
+		                //$upload = $s3->putObject($string, $bucketName, $uploadName, S3::ACL_PUBLIC_READ);
 						//$upload->get('ObjectURL')
 						
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
- 						    echo $response->getRawBody();
+ 						    //echo $response->getRawBody();
+ 						    $upload = $s3->putObject($response->getRawBody(), 'ashlyn', 'huhuy', S3::ACL_PUBLIC_READ);
+ 						    
  						    //$tempfile = tmpfile();
  						    //fwrite($tempfile, $response->getRawBody());
- 						    $responsex = 'berhasil';
+ 						    $responsex = $upload->get('ObjectURL');
  						} else {
  						    $responsex = 'error';
  						}
  						
- 						$i = rand(0, 3);
+ 						$resp = $bot->replyText($event->getReplyToken(),  $responsex);
  						
+ 						/*$i = rand(0, 3);
  						if($i == 0){
  							$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://g-search4.alicdn.com/bao/uploaded/i3/TB1ygnzHVXXXXcoXFXXXXXXXXXX_!!0-item_pic.jpg_240x240.jpg");
  							$ismatch = json_decode($responses);
@@ -326,7 +330,7 @@ class Route
  							$resp = $bot->replyText($event->getReplyToken(),  "match : ".$ismatch->{'is matched'}." nama : ".$ismatch->{'name'});
  						}else{
 							$resp = $bot->replyText($event->getReplyToken(),  "gambar apa itu?");
- 						}
+ 						}*/
 						
 						//.$event->getPackageId()
 						

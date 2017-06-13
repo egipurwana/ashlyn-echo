@@ -307,15 +307,13 @@ class Route
 						
                     	$response = $bot->getMessageContent($event->getPackageId());
  						if ($response->isSucceeded()) {
-	 						$tempfile = tmpfile();
-	 						
  						    //echo $response->getRawBody();
- 						    $upload = $s3->upload('ashlyn', 'nama', $tempfile, 'rb'), 'public-read');
+ 						    $upload = $s3->upload('ashlyn', 'nama', $response->getRawBody(), 'public-read');
  						    //$upload = $s3->putObject($response->getRawBody(), 'ashlyn', 'huhuy', S3::ACL_PUBLIC_READ);
  						    
  						    //$tempfile = tmpfile();
  						    //fwrite($tempfile, $response->getRawBody());
- 						    $responsex = '';
+ 						    $responsex = $upload->get('ObjectURL');
  						} else {
  						    $responsex = 'error';
  						}

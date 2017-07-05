@@ -94,7 +94,7 @@ class Route
 			$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://s3-ap-southeast-1.amazonaws.com/ashlyn/Uda336c76d0bab90d19e2fd3ae4313e3d-gambar-2017255.jpg");
 			$ismatch = json_decode($responses);
 						
-			$result = $ismatch->{'matches'}.length()+" ";
+			$result = count($ismatch->{'matches'})+" ";
 			$result += $ismatch->{'matches'}->{'match0'}+" ";
 			$result += $ismatch->{'matches'}->{'match0'}->{'name'}+" ";
 			$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" ";

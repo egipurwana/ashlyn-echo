@@ -104,6 +104,7 @@ class Route
 			echo '<br>';
 			echo '<br>';
 			
+			echo count($array['matches']);
 			echo $array['matches']['match0']['name'];
 			echo $array['matches']['match1']['name'];
 			

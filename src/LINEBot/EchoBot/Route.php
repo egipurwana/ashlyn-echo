@@ -336,7 +336,7 @@ class Route
 								
 								$abuilder = new UriTemplateActionBuilder('Beli','http://www.lazada.co.id');
 								$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
-								$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $array['matches']['match'.$i]['image_path'], Array($abuilder, $abuilder1));
+								$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $array['matches']['match'.$i]['image_path'], array($abuilder, $abuilder1));
 								$response = $bot->pushMessage($event->getUserId(),$buttonBuilder);
 							}
 						}

@@ -104,15 +104,15 @@ class Route
 			echo '<br>';
 			echo '<br>';
 			
-			echo $array['matches'][0]['name'];
-			echo $array['matches'][1]['name'];
+			echo $array['matches']['match0']['name'];
+			echo $array['matches']['match1']['name'];
 			
 			/*echo count($ismatch->{'matches'});
 			echo $ismatch->{'matches'}->{'match0'};
 			echo $ismatch->{'matches'}->{'match0'}->{'name'};
 			echo $ismatch->{'matches'}->{'match0'}->{'price'};
 			echo count($ismatch);*/
-						
+			
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

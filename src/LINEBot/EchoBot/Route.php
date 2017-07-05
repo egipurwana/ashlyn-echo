@@ -295,9 +295,9 @@ class Route
  						//$resp = $bot->replyText($event->getReplyToken(), $src);
  						
  						$result = $ismatch->{'matches'}.length()+" ";
- 						$result += $ismatch->{'matches'}->{'match0'}+" ";
+ 						/*$result += $ismatch->{'matches'}->{'match0'}+" ";
  						$result += $ismatch->{'matches'}->{'match0'}->{'name'}+" ";
- 						$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" "; 						
+ 						$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" ";*/
  						
  						$resp = $bot->replyText($event->getReplyToken(), $result);
  						

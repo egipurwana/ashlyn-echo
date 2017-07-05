@@ -93,22 +93,25 @@ class Route
 			
 			$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://s3-ap-southeast-1.amazonaws.com/ashlyn/Uda336c76d0bab90d19e2fd3ae4313e3d-gambar-2017255.jpg");
 			$ismatch = json_decode($responses);
-			print_r($ismatch);
 			
-			echo '<br>';
-			echo '<br>';
+			//print_r($ismatch);
+			//echo '<br>';
+			//echo '<br>';
 			
 			$array = json_decode(json_encode($ismatch),true);
-			print_r($array);		
+			print_r($array);
 			
 			echo '<br>';
 			echo '<br>';
 			
-			echo count($ismatch->{'matches'});
+			echo $array['matches'][0]['name'];
+			echo $array['matches'][1]['name'];
+			
+			/*echo count($ismatch->{'matches'});
 			echo $ismatch->{'matches'}->{'match0'};
 			echo $ismatch->{'matches'}->{'match0'}->{'name'};
 			echo $ismatch->{'matches'}->{'match0'}->{'price'};
-			echo count($ismatch);
+			echo count($ismatch);*/
 						
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {

@@ -99,6 +99,8 @@ class Route
 			$result += $ismatch->{'matches'}->{'match0'}->{'name'}+" ";
 			$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" ";
 			
+			echo $result;
+			
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

@@ -290,6 +290,18 @@ class Route
  						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
+ 						
+ 						//$src = print_r($ismatch,true);
+ 						//$resp = $bot->replyText($event->getReplyToken(), $src);
+ 						
+ 						$result = $ismatch->{'matches'}.length()+" ";
+ 						$result += $ismatch->{'matches'}->{'match0'}+" ";
+ 						$result += $ismatch->{'matches'}->{'match0'}->{'name'}+" ";
+ 						$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" "; 						
+ 						
+ 						$resp = $bot->replyText($event->getReplyToken(), $result);
+ 						
+ 						/*
  						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){
 	 						//$vidBuilder = new ImageMessageBuilder($responsex, $ismatch->{'closest_match'});
 	 						//$response = $bot->pushMessage($event->getUserId(),$vidBuilder);
@@ -298,6 +310,7 @@ class Route
  						}else{
 	 						$resp = $bot->replyText($event->getReplyToken(), "Gambar apaan tuh?");
  						}
+ 						*/
  						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

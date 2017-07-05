@@ -25,6 +25,8 @@ use LINE\LINEBot\Event\FollowEvent;
 use LINE\LINEBot\Event\JoinEvent;
 use LINE\LINEBot\Event\LeaveEvent;
 use LINE\LINEBot\Event\MessageEvent;
+use LINE\LINEBot\Event\PostbackEvent;
+use LINE\LINEBot\Event\UnfollowEvent;
 
 use LINE\LINEBot\Event\MessageEvent\AudioMessage;
 use LINE\LINEBot\Event\MessageEvent\ImageMessage;
@@ -32,8 +34,16 @@ use LINE\LINEBot\Event\MessageEvent\LocationMessage;
 use LINE\LINEBot\Event\MessageEvent\StickerMessage;
 use LINE\LINEBot\Event\MessageEvent\TextMessage;
 use LINE\LINEBot\Event\MessageEvent\VideoMessage;
-use LINE\LINEBot\Event\PostbackEvent;
-use LINE\LINEBot\Event\UnfollowEvent;
+
+use LINE\LINEBot\TemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
+
+use LINE\LINEBot\MessageBuilder\TemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
 
 use LINE\LINEBot\MessageBuilder;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
@@ -322,9 +332,12 @@ class Route
 							if($array['matches']['match'.$i]['score'] < 1){
 								$adayangmatch = 1;
 								
-								$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n ".$array['matches']['match'.$i]['SKU']." \n nama produknya : ".$array['matches']['match'.$i]['name']." \n harga : ".$array['matches']['match'.$i]['price']." \n deskripsi : ".$array['matches']['match'.$i]['description']);
+								$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								//action beli
+								$abuilder = new UriTemplateActionBuilder('Beli','http://www.lazada.co.id');
+								$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
+								$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $array['matches']['match'.$i]['image_path'], Array($abuilder, $abuilder1));
+								$response = $bot->pushMessage($event->getUserId(),$buttonBuilder);
 							}
 						}
 						

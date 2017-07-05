@@ -52,6 +52,7 @@ use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
 use LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
 use LINE\LINEBot\MessageBuilder\LocationMessageBuilder;
 use LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 
 use LINE\LINEBot\Exception\InvalidEventRequestException;
 use LINE\LINEBot\Exception\InvalidSignatureException;
@@ -336,8 +337,9 @@ class Route
 								
 								$abuilder = new UriTemplateActionBuilder('Beli','http://www.lazada.co.id');
 								$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
-								$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $array['matches']['match'.$i]['image_path'], array($abuilder, $abuilder1));
-								$response = $bot->pushMessage($event->getUserId(),$buttonBuilder);
+								$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
+								$templatebutton = new TemplateMessageBuilder("Items Found", $buttonBuilder);
+								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
 							}
 						}
 						

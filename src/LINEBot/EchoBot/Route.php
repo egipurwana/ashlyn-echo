@@ -291,15 +291,15 @@ class Route
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
  						
- 						//$src = print_r($ismatch,true);
- 						//$resp = $bot->replyText($event->getReplyToken(), $src);
+ 						$src = print_r($ismatch,true);
+ 						$resp = $bot->replyText($event->getReplyToken(), $src);
  						
- 						$result = $ismatch->{'matches'}.length()+" ";
+ 						//$result = $ismatch->{'matches'}.length()+" ";
  						/*$result += $ismatch->{'matches'}->{'match0'}+" ";
  						$result += $ismatch->{'matches'}->{'match0'}->{'name'}+" ";
  						$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" ";*/
  						
- 						$resp = $bot->replyText($event->getReplyToken(), $result);
+ 						//$resp = $bot->replyText($event->getReplyToken(), $result);
  						
  						/*
  						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){

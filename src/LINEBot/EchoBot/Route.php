@@ -314,27 +314,36 @@ class Route
  						
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
+ 						$array = json_decode(json_encode($ismatch),true);
+
+						//echo count($array['matches']);
+						//echo $array['matches']['match0']['name'];
+						//echo $array['matches']['match1']['name'];
+						
+						$adayangmatch = 0;
+						
+						for($i = 0;$i<count($array['matches']);$i++){
+							if($array['matches']['match'.$i]['score'] < 1){
+								$adayangmatch = 1;
+								
+								$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? ".$array['matches']['match'.$i]['SKU']." \r nama produknya : ".$array['matches']['match'.$i]['name']." \n harga : ".$array['matches']['match'.$i]['price']." \r deskripsi : ".$array['matches']['match'.$i]['description']);
+																
+							}
+						}
+						
+						if($adayangmatch == 0){
+							$resp = $bot->replyText($event->getReplyToken(), "Aku belum bisa ngenalin gambar yang itu, maafin :(");
+						}
  						
- 						$src = print_r($ismatch,true);
- 						$resp = $bot->replyText($event->getReplyToken(), $src);
- 						
- 						//$result = $ismatch->{'matches'}.length()+" ";
- 						/*$result += $ismatch->{'matches'}->{'match0'}+" ";
- 						$result += $ismatch->{'matches'}->{'match0'}->{'name'}+" ";
- 						$result += $ismatch->{'matches'}->{'match0'}->{'price'}+" ";*/
- 						
- 						//$resp = $bot->replyText($event->getReplyToken(), $result);
- 						
- 						/*
- 						if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){
+ 						/*if (isset($ismatch->{'is_matched'}) && $ismatch->{'is_matched'} == 1){
 	 						//$vidBuilder = new ImageMessageBuilder($responsex, $ismatch->{'closest_match'});
 	 						//$response = $bot->pushMessage($event->getUserId(),$vidBuilder);
 	 						
  							$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? ".$ismatch->{'closest_match'}." nama produknya : ".$ismatch->{'name'}." harga : ".$ismatch->{'price'}." deskripsi : ".$ismatch->{'description'});
  						}else{
-	 						$resp = $bot->replyText($event->getReplyToken(), "Gambar apaan tuh?");
- 						}
- 						*/
+	 						//$resp = $bot->replyText($event->getReplyToken(), "Gambar apaan tuh?");
+ 						}*/
+ 						
  						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

@@ -336,7 +336,7 @@ class Route
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$resp = $bot->replyText($event->getReplyToken(), $wcproduct['name']."\n".$wcproduct['price_html']."\n".$instock."\n".$wcproduct['description']."\n");
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n"$wcproduct['name']."\n".$wcproduct['price_html']."\n".$instock."\n".$wcproduct['description']."\n");
 								
 								$abuilder = new UriTemplateActionBuilder('Beli',$wcproduct['permalink']);
 								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');

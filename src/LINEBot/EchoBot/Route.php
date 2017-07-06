@@ -104,9 +104,17 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 			$wcapi = $this->wcapi;
-			//print_r($wcapi);
-			
 			print_r($wcapi->get('products/464'));
+			
+			echo '<br><br><br><br>';
+			
+			$wcproduct = $wcapi->get('products/464');
+			echo $wcproduct['permalink'];
+			echo $wcproduct['name'];
+			echo $wcproduct['price'];
+			echo $wcproduct['in_stock'];
+			echo $wcproduct['images'][0]['src'];
+			
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

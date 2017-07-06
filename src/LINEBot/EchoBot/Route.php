@@ -104,7 +104,9 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 			$wcapi = $this->wcapi;
-			print_r($wcapi);
+			//print_r($wcapi);
+			
+			print_r($woocommerce->get('webhooks'));
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

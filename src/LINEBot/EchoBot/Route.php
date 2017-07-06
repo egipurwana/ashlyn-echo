@@ -323,7 +323,7 @@ class Route
 						$adayangmatch = 0;
 						
 						
-						$wcproduct = $wcapi->get('products?sku='.$array['matches']['match'.$i]['SKU']);
+						$wcproduct = $wcapi->get('products/'.$array['matches']['match'.$i]['SKU']);
 						if($wcproduct['in_stock'] == 1){
 							$instock = "In Stock";
 						}else{

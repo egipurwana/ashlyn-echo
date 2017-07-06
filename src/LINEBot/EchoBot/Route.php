@@ -106,7 +106,7 @@ class Route
 			$wcapi = $this->wcapi;
 			//print_r($wcapi);
 			
-			print_r($woocommerce->get('webhooks'));
+			print_r($wcapi->get('webhooks'));
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;

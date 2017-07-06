@@ -104,9 +104,9 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 			$wcapi = $this->wcapi;
-			$wcproduct = $wcapi->get('products/sku=jk-leather');
-			//print_r($wcproduct);
-			
+			$wcproduct = $wcapi->get('products?sku=jk-tnwp');
+			print_r($wcproduct);
+			/*
 			echo '<br><br><br><br>';
 			
 			echo $wcproduct['permalink'];
@@ -115,6 +115,7 @@ class Route
 			echo $wcproduct['in_stock'];
 			echo $wcproduct['description'];
 			echo $wcproduct['images'][0]['src'];
+			*/
 			
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {

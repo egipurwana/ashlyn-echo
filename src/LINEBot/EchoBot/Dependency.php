@@ -49,6 +49,7 @@ class Dependency
 			    [
 			        'wp_api' => true,
 			        'version' => 'wc/v1',
+			        'query_string_auth' => true 
 			    ]
 			);
 

@@ -20,6 +20,8 @@ namespace LINE\LINEBot\EchoBot;
 
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use Automattic\WooCommerce\Client;
+
 
 class Dependency
 {
@@ -37,6 +39,20 @@ class Dependency
         
 		$container['session'] = function ($c) {
 		  return new \SlimSession\Helper;
+		};
+		
+		$container['wcapi'] = function($c){
+			$woocommerce = new Client(
+			    'http://www.ecimol.com', 
+			    'ck_f1365694ff4885fcc2d7299352a5cdac7766148c', 
+			    'cs_289648a34305bbd59d9dedd5e1185ea3ecec7959',
+			    [
+			        'wp_api' => true,
+			        'version' => 'wc/v1',
+			    ]
+			);
+
+			return $woocommerce;
 		};
         
         $container['bot'] = function ($c) {

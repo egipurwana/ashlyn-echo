@@ -84,11 +84,13 @@ class Route
 	    }
 	
 	    // Optional Authentication:
+		//curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+
 	    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-	    //curl_setopt($curl, CURLOPT_USERPWD, "username:password");
 	    curl_setopt($curl, CURLOPT_URL, $url);
 	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	    $result = curl_exec($curl);
+	    
 	    curl_close($curl);
 	
 	    return $result;
@@ -101,36 +103,15 @@ class Route
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
-			
-			$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://s3-ap-southeast-1.amazonaws.com/ashlyn/Uda336c76d0bab90d19e2fd3ae4313e3d-gambar-2017255.jpg");
-			$ismatch = json_decode($responses);
-			
-			//print_r($ismatch);
-			//echo '<br>';
-			//echo '<br>';
-			
-			$array = json_decode(json_encode($ismatch),true);
-			print_r($array);
-			
-			echo '<br>';
-			echo '<br>';
-			
-			echo count($array['matches']);
-			echo $array['matches']['match0']['name'];
-			echo $array['matches']['match1']['name'];
-			
-			/*echo count($ismatch->{'matches'});
-			echo $ismatch->{'matches'}->{'match0'};
-			echo $ismatch->{'matches'}->{'match0'}->{'name'};
-			echo $ismatch->{'matches'}->{'match0'}->{'price'};
-			echo count($ismatch);*/
-			
+			$wcapi = $this->wcapi;
+			print_r($wcapi);
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
             $bot = $this->bot;
             $logger = $this->logger;
             $session = $this->session;
 			$conn = $this->db;
+			$wcapi = $this->wcapi;
 			
             $signature = $req->getHeader(HTTPHeader::LINE_SIGNATURE);
             if (empty($signature)) {
@@ -310,6 +291,7 @@ class Route
 		                
 		                $s3 = \Aws\S3\S3Client::factory();
 						$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+						
 		                //$upload = $s3->upload($bucket, $_FILES['userfile']['name'], fopen($_FILES['userfile']['tmp_name'], 'rb'), 'public-read');
 		                //$upload = $s3->putObject($string, $bucketName, $uploadName, S3::ACL_PUBLIC_READ);
 						//$upload->get('ObjectURL')

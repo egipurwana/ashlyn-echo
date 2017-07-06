@@ -15,5 +15,6 @@ return array(
     'LINE\\' => array($baseDir . '/src', $vendorDir . '/linecorp/line-bot-sdk/src'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
+    'Automattic\\WooCommerce\\' => array($vendorDir . '/automattic/woocommerce/src/WooCommerce'),
     '' => array($vendorDir . '/bryanjhv/slim-session/src'),
 );

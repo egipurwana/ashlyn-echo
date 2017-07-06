@@ -104,8 +104,8 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 			$wcapi = $this->wcapi;
-			$wcproduct = $wcapi->get('products/464');
-			print_r($wcproduct);
+			$wcproduct = $wcapi->get('products?sku=jk-tnwp');
+			//print_r($wcproduct);
 			
 			echo '<br><br><br><br>';
 			
@@ -319,19 +319,29 @@ class Route
  						$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=".$responsex);
  						$ismatch = json_decode($responses);
  						$array = json_decode(json_encode($ismatch),true);
-						
 						$adayangmatch = 0;
+						
+						
+						$wcproduct = $wcapi->get('products?sku='.$array['matches']['match'.$i]['SKU']);
+						if($wcproduct['in_stock'] == 1){
+							$instock = "In Stock";
+						}else{
+							$instock = "Out Of Stock";
+						}
 						
 						for($i = 0;$i<count($array['matches']);$i++){
 							if($array['matches']['match'.$i]['score'] < 1){
 								$adayangmatch = 1;
 								
-								$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
+								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$abuilder = new UriTemplateActionBuilder('Beli','http://www.lazada.co.id');
-								$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
-								$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
-								$templatebutton = new TemplateMessageBuilder("Items Found", $buttonBuilder);
+								$resp = $bot->replyText($event->getReplyToken(), $wcproduct['name']."\n".$wcproduct['price_html']."\n".$instock."\n".$wcproduct['description']."\n");
+								
+								$abuilder = new UriTemplateActionBuilder('Beli',$wcproduct['permalink']);
+								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
+								$buttonBuilder = new ButtonTemplateBuilder($wcproduct['name'], $wcproduct['description'], $responsex, array($abuilder));
+								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
+								$templatebutton = new TemplateMessageBuilder($wcproduct['name'], $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
 							}
 						}

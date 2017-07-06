@@ -327,8 +327,12 @@ class Route
 						if($wcproduct['in_stock'] == "1"){
 							$instock = "In Stock";
 						}else{
-							$instock = "Out Of Stock";
+							$instock = "Out of Stock";
 						}
+						$wpname = $wcproduct['name'];
+						$wpprice = $wcproduct['price_html'];
+						$wplink = $wcproduct['permalink'];
+						$wpdes = $wcproduct['description'];
 						
 						for($i = 0;$i<count($array['matches']);$i++){
 							if($array['matches']['match'.$i]['score'] < 1){
@@ -336,13 +340,13 @@ class Route
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wcproduct['name']."\n".$wcproduct['price_html']."\n".$instock."\n".$wcproduct['description']."\n");
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n");
 								
-								$abuilder = new UriTemplateActionBuilder('Beli',$wcproduct['permalink']);
+								$abuilder = new UriTemplateActionBuilder('Beli',$wplink);
 								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
-								$buttonBuilder = new ButtonTemplateBuilder($wcproduct['name'], $wcproduct['description'], $responsex, array($abuilder));
+								$buttonBuilder = new ButtonTemplateBuilder($wpname, $wpdes, $responsex, array($abuilder));
 								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
-								$templatebutton = new TemplateMessageBuilder($wcproduct['name'], $buttonBuilder);
+								$templatebutton = new TemplateMessageBuilder($wpname, $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
 							}
 						}

@@ -48,7 +48,7 @@ class Dependency
 			    'cs_289648a34305bbd59d9dedd5e1185ea3ecec7959',
 			    [
 			        'wp_api' => true,
-			        'version' => 'wc/v1',
+			        'version' => 'wc/v2',
 			        'query_string_auth' => true 
 			    ]
 			);

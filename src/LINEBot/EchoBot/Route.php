@@ -336,14 +336,13 @@ class Route
 									$instock = "Out of Stock";
 								}
 								$wpname = $wcproduct['name'];
-								$wpprice = $wcproduct['price_html'];
+								$wpprice = $wcproduct['price'];
 								$wplink = $wcproduct['permalink'];
-								$wpdes = $wcproduct['description'];
-								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n".$srcss);
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\nRp".$wpprice.",-\n".$instock."\n".$array['matches']['match'.$i]['description']."\n".$wplink);
 								
 								$abuilder = new UriTemplateActionBuilder('Beli',$wplink);
-								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
-								$buttonBuilder = new ButtonTemplateBuilder($wpname, $wpdes, $responsex, array($abuilder));
+								$abuilder1 = new UriTemplateActionBuilder('Lebih lengkap','http://www.ecimol.com');
+								$buttonBuilder = new ButtonTemplateBuilder($wpname, $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
 								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
 								$templatebutton = new TemplateMessageBuilder($wpname, $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);

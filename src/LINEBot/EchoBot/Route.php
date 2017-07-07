@@ -118,7 +118,7 @@ class Route
 			*/
 			
 	    });
-        $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) {
+        $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app) {
             $bot = $this->bot;
             $logger = $this->logger;
             $session = $this->session;
@@ -340,7 +340,7 @@ class Route
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n");
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n".$wcproduct);
 								
 								$abuilder = new UriTemplateActionBuilder('Beli',$wplink);
 								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');

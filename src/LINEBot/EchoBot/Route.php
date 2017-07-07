@@ -334,13 +334,15 @@ class Route
 						$wplink = $wcproduct['permalink'];
 						$wpdes = $wcproduct['description'];
 						
+						$srcss = print_r($wcproduct,true);
+						
 						for($i = 0;$i<count($array['matches']);$i++){
 							if($array['matches']['match'.$i]['score'] < 1){
 								$adayangmatch = 1;
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n".$wcproduct);
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n".$srcss);
 								
 								$abuilder = new UriTemplateActionBuilder('Beli',$wplink);
 								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');

@@ -323,26 +323,23 @@ class Route
 						$adayangmatch = 0;
 						
 						
-						$wcproduct = $wcapi->get('products/'.$array['matches']['match'.$i]['SKU']);
-						if($wcproduct['in_stock'] == "1"){
-							$instock = "In Stock";
-						}else{
-							$instock = "Out of Stock";
-						}
-						$wpname = $wcproduct['name'];
-						$wpprice = $wcproduct['price_html'];
-						$wplink = $wcproduct['permalink'];
-						$wpdes = $wcproduct['description'];
-						
-						$srcss = print_r($wcproduct,true);
-						
 						for($i = 0;$i<count($array['matches']);$i++){
 							if($array['matches']['match'.$i]['score'] < 1){
 								$adayangmatch = 1;
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$resp = $bot->replyText($event->getReplyToken(), $srcss);//$array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n".$srcss);
+								$wcproduct = $wcapi->get('products/'.$array['matches']['match'.$i]['SKU']);
+								if($wcproduct['in_stock'] == "1"){
+									$instock = "In Stock";
+								}else{
+									$instock = "Out of Stock";
+								}
+								$wpname = $wcproduct['name'];
+								$wpprice = $wcproduct['price_html'];
+								$wplink = $wcproduct['permalink'];
+								$wpdes = $wcproduct['description'];
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\n".$wpprice."\n".$instock."\n".$wpdes."\n".$srcss);
 								
 								$abuilder = new UriTemplateActionBuilder('Beli',$wplink);
 								//$abuilder1 = new UriTemplateActionBuilder('Jual','http://www.olx.co.id');
@@ -350,8 +347,6 @@ class Route
 								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
 								$templatebutton = new TemplateMessageBuilder($wpname, $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
-							}else{
-								$resp = $bot->replyText($event->getReplyToken(), "Ga ada yang match tapi yang mirip banyak.");
 							}
 						}
 						

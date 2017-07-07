@@ -350,6 +350,8 @@ class Route
 								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
 								$templatebutton = new TemplateMessageBuilder($wpname, $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
+							}else{
+								$resp = $bot->replyText($event->getReplyToken(), "Ga ada yang match tapi yang mirip banyak.");
 							}
 						}
 						

@@ -323,13 +323,13 @@ class Route
 						$adayangmatch = 0;
 						
 						
-						for($i = 0;$i<count($array['matches']);$i++){
-							if($array['matches']['match'.$i]['score'] < 1){
+						//for($i = 0;$i<count($array['matches']);$i++){
+							if($array['matches']['match0']['score'] < 1){
 								$adayangmatch = 1;
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);
 								
-								$wcproduct = $wcapi->get('products/'.$array['matches']['match'.$i]['SKU']);
+								$wcproduct = $wcapi->get('products/'.$array['matches']['match0']['SKU']);
 								if($wcproduct['in_stock'] == "1"){
 									$instock = "In Stock";
 								}else{
@@ -338,16 +338,17 @@ class Route
 								$wpname = $wcproduct['name'];
 								$wpprice = $wcproduct['price'];
 								$wplink = $wcproduct['permalink'];
-								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match'.$i]['SKU']."\n".$wpname."\nRp".$wpprice.",-\n".$instock."\n".$array['matches']['match'.$i]['description']."\n".$wplink);
+								
+								$resp = $bot->replyText($event->getReplyToken(), $array['matches']['match0']['SKU']."\n".$wpname."\nRp".$wpprice.",-\n".$instock."\n".$array['matches']['match0']['description']);
 								
 								$abuilder = new UriTemplateActionBuilder('Beli',$wplink);
 								$abuilder1 = new UriTemplateActionBuilder('Lebih lengkap','http://www.ecimol.com');
-								$buttonBuilder = new ButtonTemplateBuilder($wpname, $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
+								$buttonBuilder = new ButtonTemplateBuilder($wpname, $array['matches']['match0']['description'], $responsex, array($abuilder, $abuilder1));
 								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
 								$templatebutton = new TemplateMessageBuilder($wpname, $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
 							}
-						}
+						//}
 						
 						if($adayangmatch == 0){
 							$resp = $bot->replyText($event->getReplyToken(), "Aku belum bisa ngenalin gambar yang itu, maafin :(");

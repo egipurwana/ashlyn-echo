@@ -104,7 +104,7 @@ class Route
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 			$wcapi = $this->wcapi;
-			$wcproduct = $wcapi->get('products/470');
+			$wcproduct = $wcapi->get('products/47asdasds0');
 			print_r($wcproduct);
 			/*
 			echo '<br><br><br><br>';
@@ -347,12 +347,10 @@ class Route
 								//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
 								$templatebutton = new TemplateMessageBuilder($wpname, $buttonBuilder);
 								$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
+							}else {
+								$resp = $bot->replyText($event->getReplyToken(), "Aku belum bisa ngenalin gambar yang itu, maafin :(");								
 							}
 						//}
-						
-						if($adayangmatch == 0){
-							$resp = $bot->replyText($event->getReplyToken(), "Aku belum bisa ngenalin gambar yang itu, maafin :(");
-						}
 						
                     } elseif ($event instanceof AudioMessage) {
 		                $audioBuilder = new AudioMessageBuilder('https://ashlyn-bot.herokuapp.com/public/sample.m4a',10000);

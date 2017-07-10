@@ -130,6 +130,7 @@ class Route
 			$array = json_decode(json_encode($ismatch),true);
 			
 			print_r($array);
+			echo 'hahay';
 			
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app) {

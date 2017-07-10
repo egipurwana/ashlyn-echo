@@ -105,7 +105,11 @@ class Route
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
 			$wcapi = $this->wcapi;
 			$wcproduct = $wcapi->get('products/47asdasds0');
-			print_r($wcproduct);
+			if(isset($wcproduct)){
+				print_r($wcproduct);				
+			}else{
+				echo 'product not found';
+			}
 			/*
 			echo '<br><br><br><br>';
 			

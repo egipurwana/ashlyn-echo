@@ -60,6 +60,8 @@ use LINE\LINEBot\Exception\UnknownEventTypeException;
 use LINE\LINEBot\Exception\UnknownMessageTypeException;
 use ReflectionClass;
 
+use Automattic\WooCommerce\HttpClient\HttpClientException;
+
 
 class Route
 {
@@ -103,16 +105,17 @@ class Route
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
-			$wcapi = $this->wcapi;
-			$wcproduct = $wcapi->get('products/47asdasds0');
-			if(isset($wcproduct)){
-				print_r($wcproduct);				
-			}else{
-				echo 'product not found';
+			$wcapi = $this->wcapi;			
+			
+			try {
+				$wcproduct = $wcapi->get('products/47asdasds0');
+			} catch(HttpClientException $e) {
+			    print_r($e->getMessage());
+			    echo 'product not found';
 			}
+
 			/*
 			echo '<br><br><br><br>';
-			
 			echo $wcproduct['permalink'];
 			echo $wcproduct['name'];
 			echo $wcproduct['price'];

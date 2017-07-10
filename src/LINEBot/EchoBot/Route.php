@@ -105,6 +105,7 @@ class Route
 	    });
 	    $app->get('/training',function(\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app){
 			//require_once(__DIR__ . '/../../../public/datatrain.php');
+			/*
 			$wcapi = $this->wcapi;			
 			
 			try {
@@ -112,7 +113,7 @@ class Route
 			} catch(HttpClientException $e) {
 			    print_r($e->getMessage());
 			    echo 'product not found';
-			}
+			}*/
 
 			/*
 			echo '<br><br><br><br>';
@@ -123,6 +124,12 @@ class Route
 			echo $wcproduct['description'];
 			echo $wcproduct['images'][0]['src'];
 			*/
+			
+			$responses = self::CallAPI("GET", "https://quark.timeshift.tech/imageSearch/imagesearch/api?url=https://s3-ap-southeast-1.amazonaws.com/ashlyn/Raf491dbef138d8481893da4b4bef3946-gambar-20171651.jpg");
+			$ismatch = json_decode($responses);
+			$array = json_decode(json_encode($ismatch),true);
+			
+			print_r($array);
 			
 	    });
         $app->post('/callback', function (\Slim\Http\Request $req, \Slim\Http\Response $res) use ($app) {

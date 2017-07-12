@@ -339,7 +339,7 @@ class Route
 						
 						
 						//for($i = 0;$i<count($array['matches']);$i++){
-							if($array['matches']['match0']['score'] < 1){
+							if($array['matches']['match0']['score'] < 2){
 								$adayangmatch = 1;
 								
 								//$resp = $bot->replyText($event->getReplyToken(),  "Yang ini bukan? \n".$array['matches']['match'.$i]['SKU']." \nNama produknya : ".$array['matches']['match'.$i]['name']." \nHarga : ".$array['matches']['match'.$i]['price']." \nDeskripsi : ".$array['matches']['match'.$i]['description']);

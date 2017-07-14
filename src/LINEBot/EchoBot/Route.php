@@ -373,8 +373,8 @@ class Route
 									
 									$abuilder = new UriTemplateActionBuilder('Beli',$array['matches']['match0']['permalink']);
 									$abuilder1 = new UriTemplateActionBuilder('Lebih lengkap','http://www.dengansenanghati.com');
-									$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match0']['name'], $array['matches']['match0']['description'], $responsex, $array($abuilder, $abuilder1));
-									//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match0']['name'], $array['matches']['match0']['description'], $responsex, array($abuilder, $abuilder1));
+									$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match0']['name'], $array['matches']['match0']['description'], $array['matches']['match0']['image_path'], array($abuilder, $abuilder1));
+									
 									$templatebutton = new TemplateMessageBuilder($array['matches']['match0']['name'], $buttonBuilder);
 									$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
 									

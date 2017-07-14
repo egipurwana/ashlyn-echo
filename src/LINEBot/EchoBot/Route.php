@@ -369,13 +369,13 @@ class Route
 									//$resp = $bot->replyText($event->getReplyToken(), "Aku belum bisa ngenalin gambar yang itu, maafin :(");
 								    //print_r($e->getMessage());
 								    
-								    $resp = $bot->replyText($event->getReplyToken(), $array['matches']['match0']['SKU']."\n".$array['matches']['match'.$i]['name']."\nRp".$array['matches']['match'.$i]['price'].",-\n".$array['matches']['match0']['description']);
+								    $resp = $bot->replyText($event->getReplyToken(), $array['matches']['match0']['SKU']."\n".$array['matches']['match0']['name']."\nRp".$array['matches']['match0']['price'].",-\n".$array['matches']['match0']['description']);
 									
 									$abuilder = new UriTemplateActionBuilder('Beli',$array['matches']['match0']['permalink']);
 									$abuilder1 = new UriTemplateActionBuilder('Lebih lengkap','http://www.dengansenanghati.com');
-									$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match0']['description'], $responsex, $array($abuilder, $abuilder1));
-									//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match'.$i]['name'], $array['matches']['match'.$i]['description'], $responsex, array($abuilder, $abuilder1));
-									$templatebutton = new TemplateMessageBuilder($array['matches']['match'.$i]['name'], $buttonBuilder);
+									$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match0']['name'], $array['matches']['match0']['description'], $responsex, $array($abuilder, $abuilder1));
+									//$buttonBuilder = new ButtonTemplateBuilder($array['matches']['match0']['name'], $array['matches']['match0']['description'], $responsex, array($abuilder, $abuilder1));
+									$templatebutton = new TemplateMessageBuilder($array['matches']['match0']['name'], $buttonBuilder);
 									$responsed = $bot->pushMessage($event->getUserId(),$templatebutton);
 									
 								}
